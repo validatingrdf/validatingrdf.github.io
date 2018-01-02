@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.23">
+<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<title>Data Quality</title>
+</head>
+<body>
+<a href="bookHtml009.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml011.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h1 class="chapter" id="sec26">Chapter 3  Data Quality</h1>
+<p>
+<a id="ch3"></a>
+<a id="ch030DataQuality"></a>
+<a id="hevea_default158"></a></p><p>People have been using computers to record and reason about data for many decades. 
+Typically, this <em>reasoning</em> is less esoteric than artificial intelligence tasks like classification. </p><p>A data modeler usually has some structure of the data that she is trying to model. 
+That structure must be explicitly defined and communicated using some technology that can at the same time be understood by other people and also be processed by automatic systems that can check and enforce it. 
+Using natural language for that is not enough as it can have ambiguities and is difficult to process by machines.
+On the other hand, enforcing that structure using some procedural programming language is difficult to maintain by other people. 
+The right balance is usually to have some declarative language that can be readable by humans but at the same time parsed and checked by machines. </p><p>Rigorous data validation is like a contract that offers advantages to several different parties. </p><ul class="itemize"><li class="li-itemize">Consumers have an easier time understanding the semantics of data.
+For instance, a data structure that requires either a full name or a given and family name has a simple intuition while one that has optional full, given and family names leaves the consumer unsure about the many combinations she may encounter in the data.</li><li class="li-itemize">Programmers have to do much less “defensive coding” when working with predictable data.
+A programmer need not write special cases for permutations like no name, a full name and a given name, etc.
+Introducing quality control into data workflows can reduce security exploits and catch systematic errors when they first occur rather than years later when someone stumbles across inconsistent data.
+For instance, a process may erroneously insert multiple primary addresses if no system enforces that a person should have no more than one primary address.</li><li class="li-itemize">Producers can precisely define and validate their output.
+This allows them to test consistency with business processes, perform quality control, and unambiguously communicate their assets to other parties.</li><li class="li-itemize">Queriers can tailor the sophistication of their queries to address a constrained set of possibilities.
+Queriers are a specific kind of consumers who are especially vulnerable to systematic data errors.
+Unexpected variations in data structures can result in missing query results.
+Possibly worse, a single accidental duplication of a record can result in it being counted many times, once for each combination of attributes in the original and duplicate record.</li></ul>
+<h2 class="section" id="sec27">3.1  Non-RDF Schema Languages</h2>
+<p>
+<a id="ch3.sec1"></a></p><p>While RDF is a relative newcomer to the data scene, most widely-used structured data languages have a way to describe and enforce some form of data consistency.
+<a id="hevea_default159"></a> <a id="hevea_default160"></a> <a id="hevea_default161"></a> <a id="hevea_default162"></a> <a id="hevea_default163"></a>
+Examining UML, SQL, XML, JSON, and CSV allows us to set expectations for RDF validation.</p><p><a id="hevea_default164"></a>
+</p>
+<h3 class="subsection" id="sec28">3.1.1  UML</h3>
+<p>
+<a id="ch3.sec1.1"></a></p><p><a id="hevea_default165"></a> 
+The Unified Modeling Language (UML) is a general-purpose visual modeling language that can be used to provide a standard way to visualize the design of a system [<a href="bookHtml019.html#Rumbaugh2004">85</a>]. 
+<a id="hevea_default166"></a> <a id="hevea_default167"></a> <a id="hevea_default168"></a> <a id="hevea_default169"></a>
+In 2005, the Object Management Group (OMG) published UML 2, a revision largely based on the same diagram notations,
+but using a modeling infrastructure specified using Meta-Object Facility (MOF).
+UML contains 14 types of diagrams, which are classified in three categories: structure, behavior and interaction. 
+<a id="hevea_default170"></a>
+The most popular diagram is the UML class diagram, which defines the logical structure of a system in terms of 
+classes and relationships between them.
+Given the Object Oriented tradition of UML, classes are usually defined in terms of sets of attributes and operations. </p><p>UML class diagrams are employed to visually represent data models. </p><div class="example"><div class="theorem"><span class="c013">Example 11</span>  <em>UML Class diagram</em><p><em>Figure </em><a href="#ch030.UMLClassDiagram"><em>11</em></a><em> represents an example of a UML class diagram.
+In this case, there are two classes, </em><em>
+</em><code><em>User</em></code><em> and </em><em>
+</em><code><em>Course</em></code><em> with several attributes and two relationships.
+The relation </em><em>
+</em><code><em>enrolledIn</em></code><em> establishes that a user can be enrolled in a course. 
+The cardinalities </em><em>
+</em><code><em>0..*</em></code><em> means that a user may be enrolled in several courses while a cardinality </em><em>
+</em><code><em>1..*</em></code><em> means that a course must have at least one user enrolled. 
+The other relationship is </em><em>
+</em><code><em>instructor</em></code><em> which means that a course must have one instructor (cardinality </em><em>
+</em><code><em>1</em></code><em>) while a user can be the instructor of 0 or several courses. 
+There is another relationship (</em><em>
+</em><code><em>knows</em></code><em>) between users.</em></p><blockquote class="figure"><div class="center"><hr class="c021"></div><em> 
+</em><div class="center"><em>
+<img src="UMLClassDiagram.png">
+</em></div><em>
+
+</em><a id="ch030.UMLClassDiagram"></a><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Figure 3.1: Example of UML class diagram.</em></td></tr>
+</table></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div><p>UML diagrams are typically not refined enough to provide all the relevant aspects of a specification. 
+There is, among other things, a need to describe additional constraints about the objects in the model. 
+<a id="hevea_default171"></a> <a id="hevea_default172"></a>
+OCL (Object Constraint Language)<sup><a id="text3" href="#note3">1</a></sup> has been proposed as a declarative language to define this kind of constraints. 
+It can also be used to define well-formedness rules, pre- and post-conditions, model transformations, etc.</p><p>OCL contains a repertoire of primitive types (Integer, Real, Boolean, String) and several constructs to define compound datatypes like tuples, ordered sets, sequences, bag and sets.</p><p><a id="hevea_default173"></a>
+</p><div class="example"><div class="theorem"><span class="c013">Example 12</span>  <em>OCL constraints</em><em>
+</em><a id="ch030.OCLConstraints"></a><p><em>The following code represents some constraints in OCL: 
+that the gender must be </em><em>
+</em><code><em>'</em></code><code><em>Male</em></code><code><em>'</em></code><em> or </em><em>
+</em><code><em>'</em></code><code><em>Female</em></code><code><em>'</em></code><em>,
+that a user does not know itself and
+that the start date of a course must be bigger that the end date. 
+Notice that we are using a hypothetical operator </em><em>
+</em><code><em>&lt;</em></code><em> to compare dates while in OCL dates are not primitive types.</em></p><p><em>,
+</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">course</span></em><em><span class="c011"> </span></em><em><span class="c011">User</span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">inv</span></span></em><em><span class="c011">:</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">self</span></em><em><span class="c011">.</span></em><em><span class="c011">gender</span></em><em><span class="c011">-&gt;</span></em><em><span class="c011"><span class="c013">forAll</span></span></em><em><span class="c011">(</span></em><em><span class="c011">g</span></em><em><span class="c011"> | </span></em><em><span class="c011"><span class="c013">Set</span></span></em><em><span class="c011">{</span></em><em><span class="c011"><em><span class="c011">'Male'</span></em></span></em><em><span class="c011">,</span></em><em><span class="c011"><em><span class="c011">'Female'</span></em></span></em><em><span class="c011">}-&gt;</span></em><em><span class="c011"><span class="c013">includes</span></span></em><em><span class="c011">(</span></em><em><span class="c011">g</span></em><em><span class="c011">) )</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">self</span></em><em><span class="c011">.</span></em><em><span class="c011">knows</span></em><em><span class="c011">-&gt;</span></em><em><span class="c011"><span class="c013">forAll</span></span></em><em><span class="c011">(</span></em><em><span class="c011">k</span></em><em><span class="c011"> | </span></em><em><span class="c011">k</span></em><em><span class="c011"> &lt;&gt; </span></em><em><span class="c011">self</span></em><em><span class="c011">)</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">context</span></span></em><em><span class="c011"> </span></em><em><span class="c011">Course</span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">inv</span></span></em><em><span class="c011">:</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">self</span></em><em><span class="c011">.</span></em><em><span class="c011">startDate</span></em><em><span class="c011"> &lt; </span></em><em><span class="c011">self</span></em><em><span class="c011">.</span></em><em><span class="c011">endDate</span></em></td></tr>
+</table></div></div>
+<h3 class="subsection" id="sec29">3.1.2  SQL and Relational Databases</h3>
+<p>
+<a id="ch3.sec1.2"></a></p><p><a id="hevea_default174"></a> 
+<a id="hevea_default175"></a> 
+<a id="hevea_default176"></a>
+Probably the largest deployment of machine-actionable data is in relational databases, and certainly the most popular access to relational data is by Structured Query Language (SQL).
+One challenge in describing SQL is the difference between the ISO standard and deployed implementations.</p><p>SQL is designed to capture tabular data, with some implementations enforcing referential integrity constraints for consistent linking between tables.
+<a id="hevea_default177"></a> <a id="hevea_default178"></a>
+SQL’s Data Definition Language (DDL) is used to lay out a table structure; 
+SQL is used to populate and query those tables.
+The SQL implementations that do enforce integrity constraints do so when data is inserted into tables.</p><p><a id="hevea_default179"></a> 
+The concept of DDL was introduced in the Codasyl database model to write the schema of a database describing the records, 
+fields and sets of the user data model. 
+<a id="hevea_default180"></a>
+It was later used to refer to a subset of SQL for creating tables and constraints. 
+DDL statements list the properties in a particular table, their associated primitive datatypes, and list uniqueness and referential constraints.</p><div class="example"><div class="theorem"><span class="c013">Example 13</span>  <em>DDL</em><em> 
+</em><a id="ch030.ExampleDDL"></a><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">CREATE</span></em><em><span class="c011"> </span></em><em><span class="c011">TABLE</span></em><em><span class="c011"> </span></em><em><span class="c011">User</span></em><em><span class="c011"> (</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">id</span></em><em><span class="c011">            </span></em><em><span class="c011">INTEGER</span></em><em><span class="c011">       </span></em><em><span class="c011">PRIMARY</span></em><em><span class="c011"> </span></em><em><span class="c011">KEY</span></em><em><span class="c011"> </span></em><em><span class="c011">NOT</span></em><em><span class="c011"> </span></em><em><span class="c011">NULL</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">name</span></em><em><span class="c011">          </span></em><em><span class="c011">VARCHAR</span></em><em><span class="c011">(40)   </span></em><em><span class="c011">NOT</span></em><em><span class="c011"> </span></em><em><span class="c011">NULL</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">birthDate</span></em><em><span class="c011">     </span></em><em><span class="c011">DATE</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">birthPlace</span></em><em><span class="c011">    </span></em><em><span class="c011">VARCHAR</span></em><em><span class="c011">(50),</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">gender</span></em><em><span class="c011">        </span></em><em><span class="c011">ENUM</span></em><em><span class="c011">(</span></em><em><span class="c011"><em><span class="c011">'male'</span></em></span></em><em><span class="c011">,</span></em><em><span class="c011"><em><span class="c011">'female'</span></em></span></em><em><span class="c011">)</span></em><em><span class="c011">
+</span></em><em><span class="c011">);</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">CREATE</span></em><em><span class="c011"> </span></em><em><span class="c011">TABLE</span></em><em><span class="c011"> </span></em><em><span class="c011">Course</span></em><em><span class="c011"> (</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">id</span></em><em><span class="c011">           </span></em><em><span class="c011">INTEGER</span></em><em><span class="c011"> </span></em><em><span class="c011">PRIMARY</span></em><em><span class="c011"> </span></em><em><span class="c011">KEY</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">StartDate</span></em><em><span class="c011">    </span></em><em><span class="c011">DATE</span></em><em><span class="c011"> </span></em><em><span class="c011">not</span></em><em><span class="c011"> </span></em><em><span class="c011">null</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">EndDate</span></em><em><span class="c011">      </span></em><em><span class="c011">DATE</span></em><em><span class="c011"> </span></em><em><span class="c011">not</span></em><em><span class="c011"> </span></em><em><span class="c011">null</span></em><em><span class="c011">,</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">Instructor</span></em><em><span class="c011">   </span></em><em><span class="c011">INTEGER</span></em><em><span class="c011"> </span></em><em><span class="c011">FOREIGN</span></em><em><span class="c011"> </span></em><em><span class="c011">KEY</span></em><em><span class="c011"> </span></em><em><span class="c011">REFERENCES</span></em><em><span class="c011"> </span></em><em><span class="c011">User</span></em><em><span class="c011">(</span></em><em><span class="c011">id</span></em><em><span class="c011">)</span></em><em><span class="c011">
+</span></em><em><span class="c011">)</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">CREATE</span></em><em><span class="c011"> </span></em><em><span class="c011">TABLE</span></em><em><span class="c011"> </span></em><em><span class="c011">EnrolledIn</span></em><em><span class="c011"> (</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">studendId</span></em><em><span class="c011"> </span></em><em><span class="c011">INTEGER</span></em><em><span class="c011"> </span></em><em><span class="c011">FOREIGN</span></em><em><span class="c011"> </span></em><em><span class="c011">KEY</span></em><em><span class="c011"> </span></em><em><span class="c011">REFERENCES</span></em><em><span class="c011"> </span></em><em><span class="c011">User</span></em><em><span class="c011">(</span></em><em><span class="c011">id</span></em><em><span class="c011">),</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">courseId</span></em><em><span class="c011">  </span></em><em><span class="c011">INTEGER</span></em><em><span class="c011"> </span></em><em><span class="c011">FOREIGN</span></em><em><span class="c011"> </span></em><em><span class="c011">KEY</span></em><em><span class="c011"> </span></em><em><span class="c011">REFERENCES</span></em><em><span class="c011"> </span></em><em><span class="c011">Course</span></em><em><span class="c011">(</span></em><em><span class="c011">id</span></em><em><span class="c011">),</span></em><em><span class="c011">
+</span></em><em><span class="c011">)</span></em></td></tr>
+</table></div></div><p>While implementation support for constraints and datatypes varies, 
+popular datatypes include numerics like various precisions of integer or float, characters, dates and strings.</p><p><a id="hevea_default181"></a> <a id="hevea_default182"></a>
+Two popular constraints in DDL are for primary and foreign keys. 
+In SQL and DDL, attribute values are primitive types, which is to say that a user’s course is not a course record, 
+but instead typically an integer that is unique in some table of courses.</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+<div class="center">
+<img src="SQLTables.png">
+</div>
+
+<a id="ch030.SQLTables"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 3.2: Example of two tables.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote><p>Because RDF is a graph, one would typically bypass this reference convention and create a graph where a user’s course is a course instead of a reference.</p>
+<h3 class="subsection" id="sec30">3.1.3  XML</h3>
+<p> 
+<a id="hevea_default183"></a> <a id="XML"></a>
+<a id="ch3.sec1.3"></a></p><p>XML was proposed by the W3C as an extensible markup language for the Web around 1996 [<a href="bookHtml019.html#XML10">97</a>]. 
+<a id="hevea_default184"></a> <a id="hevea_default185"></a>
+XML derives from SGML [<a href="bookHtml019.html#SGML90">42</a>], a meta-language that provides a common syntax for textual markup systems and from which the first versions of HTML were also derived. 
+Given its origins in typesetting, the XML model is adapted to represent textual information that contains mixed text and markup elements.</p><p><a id="hevea_default186"></a>
+The XML model is known as the XML Information Set (XML InfoSet) 
+and consists of a tree structure, where each node of the tree is defined to be an information item of a particular type. 
+Each item has a set of type-specific properties associated with it.
+At the root there is a document item, which has exactly one element as its child.
+<a id="hevea_default187"></a> <a id="hevea_default188"></a>
+An element has a set of attribute items and a list of 
+child elements or text nodes. 
+Attribute items may contain character items or they may contain typed data such as name tokens, identifiers and references.
+Element identifiers and references may be used to connect nodes transforming the underlying tree into a graph.</p><div class="example"><div class="theorem"><span class="c013">Example 14</span>  <em>XML example</em><em>
+</em><a id="ch030.ExampleXML"></a><p><em>An example of a course representation in XML can be:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Algebra</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">alice</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Alice</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Female</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">comments</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Friend</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">of</span></span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">person</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">ref</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">bob</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011"><span class="c007">Robert</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">person</span></span></em><em><span class="c011">&gt;&lt;/</span></em><em><span class="c011"><span class="c007">comments</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">bob</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Robert</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Male</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">birthDate</span></span></em><em><span class="c011">&gt;1981-09-24&lt;/</span></em><em><span class="c011"><span class="c007">birthDate</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011">&gt;</span></em></td></tr>
+</table><blockquote class="figure"><div class="center"><hr class="c021"></div><em> 
+</em><div class="center"><em>
+<img src="XMLTree.png">
+</em></div><em>
+
+</em><a id="ch030.XMLTree"></a><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Figure 3.3: Tree structure of an XML document.</em></td></tr>
+</table></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div><p>XML became very popular in industry and a lot of technologies were developed to query and transform XML.
+Among them, XPath was a simple language to select parts of XML documents that was embedded in other technologies like XSLT or XQuery.</p><p>The next XPath snippet finds the names of all students whose gender is 
+<code>"</code><code>Female</code><code>"</code>: </p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">//</span><span class="c011"><span class="c007">student</span></span><span class="c011">[</span><span class="c011"><span class="c007">gender</span></span><span class="c011"> = "</span><span class="c011"><span class="c007">Female</span></span><span class="c011">"]/</span><span class="c011"><span class="c007">name</span></span></td></tr>
+</table><p>XML defines the notion of well-formed documents and valid documents. 
+Well-formed documents are XML documents with a correct syntax while 
+valid documents are documents that in addition of being well-formed, conform to some schema definition.</p><p>If one decides to define a schema, there are several possibilities.</p><ul class="itemize"><li class="li-itemize">
+Document Type Definition (DTD). The XML specification [<a href="bookHtml019.html#XML10">97</a>] declares a basic mechanism to define the schema of XML documents, which was inherited from SGML and is called DTD. It allows to define the structure of a family of XML documents <div class="example"><div class="theorem"><span class="c013">Example 15</span>  <em>DTD example</em><em>
+</em><a id="ch030.ExampleDTD"></a><p><em>A DTD to validate the XML file in Example </em><a href="#ch030.ExampleXML"><em>14</em></a><em> could be:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ELEMENT</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011"> (</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">*)&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ELEMENT</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> (</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">,</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">,</span></em><em><span class="c011"><span class="c007">birthDate</span></span></em><em><span class="c011">?)&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ELEMENT</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011"> (#</span></em><em><span class="c011"><span class="c007">PCDATA</span></span></em><em><span class="c011">)&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ELEMENT</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011"> (#</span></em><em><span class="c011"><span class="c007">PCDATA</span></span></em><em><span class="c011">)&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ELEMENT</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">birthDate</span></span></em><em><span class="c011"> (#</span></em><em><span class="c011"><span class="c007">PCDATA</span></span></em><em><span class="c011">)&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ATTLIST</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">ID</span></span></em><em><span class="c011"> #</span></em><em><span class="c011"><span class="c007">REQUIRED</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;!</span></em><em><span class="c011"><span class="c007">ATTLIST</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">CDATA</span></span></em><em><span class="c011"> #</span></em><em><span class="c011"><span class="c007">IMPLIED</span></span></em><em><span class="c011">&gt;</span></em></td></tr>
+</table></div></div><p>DTD defines the structure of XML using a basic form of regular expressions.
+However, DTDs have a limited support for datatypes.
+For example, it is not possible to validate that the birth date of a student has the shape of a date.</p></li><li class="li-itemize">XML Schema. This specification was divided in two parts.
+The first part specifies the structure of XML documents [<a href="bookHtml019.html#XMLSchema11Structures">89</a>] 
+and the second part a repertoire of XML Schema datatypes [<a href="bookHtml019.html#XMLSchemaDatatypes">9</a>].<div class="example"><div class="theorem"><span class="c013">Example 16</span>  <em>XML Schema example</em><em>
+</em><a id="ch030.ExampleXMLSchema"></a><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">schema</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">xmlns</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">='</span></em><em><span class="c011"><span class="c007">http</span></span></em><em><span class="c011">://</span></em><em><span class="c011"><span class="c007">www</span></span></em><em><span class="c011">.</span></em><em><span class="c011"><span class="c007">w3</span></span></em><em><span class="c011">.</span></em><em><span class="c011"><span class="c007">org</span></span></em><em><span class="c011">/2001/</span></em><em><span class="c011"><span class="c007">XMLSchema</span></span></em><em><span class="c011">'&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">complexType</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">sequence</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">minOccurs</span></span></em><em><span class="c011">='1' </span></em><em><span class="c011"><span class="c007">maxOccurs</span></span></em><em><span class="c011">='100'</span></em><em><span class="c011">
+</span></em><em><span class="c011">                     </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Student</span></span></em><em><span class="c011">"/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">sequence</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">attribute</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">string</span></span></em><em><span class="c011">" /&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">complexType</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">complexType</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Student</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">sequence</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">string</span></span></em><em><span class="c011">" /&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">gender</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Gender</span></span></em><em><span class="c011">" /&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">element</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">birthDate</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">date</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">minOccurs</span></span></em><em><span class="c011">='0'/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">sequence</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">attribute</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">type</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">ID</span></span></em><em><span class="c011">" </span></em><em><span class="c011"><span class="c007">use</span></span></em><em><span class="c011">='</span></em><em><span class="c011"><span class="c007">required</span></span></em><em><span class="c011">'/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">complexType</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">simpleType</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Gender</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">restriction</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">base</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">token</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">enumeration</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">value</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Male</span></span></em><em><span class="c011">"/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">enumeration</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">value</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Female</span></span></em><em><span class="c011">"/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">restriction</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">simpleType</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">xs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">schema</span></span></em><em><span class="c011">&gt;</span></em></td></tr>
+</table></div></div><p><a id="hevea_default189"></a>
+<a id="hevea_default190"></a>
+<a id="hevea_default191"></a> <a id="ch030PSVI"></a>
+An XML Schema validator decorates each structure of the XML document with additional information called the Post-Schema Validation Infoset, or PSVI. This structure contains information about the validation process that can be later employed by other XML tools. </p><p><a id="hevea_default192"></a> <a id="hevea_default193"></a>
+</p></li><li class="li-itemize">RelaxNG [<a href="bookHtml019.html#RelaxNGSpec">20</a>] was developed within the Organization for the Advancement of Structured Information Standards
+(OASIS) as an alternative for XML Schema. 
+RelaxNG has two syntaxes: an XML-based one and a compact one.
+RelaxNG is grammar based and its semantics is formally defined by means of axioms and inference rules. <div class="example"><div class="theorem"><span class="c013">Example 17</span>  <em>RelaxNG example</em><p><em>The following code contains a RelaxNG schema to validate Example </em><a href="#ch030.ExampleXML"><em>14</em></a><em> using the RelaxNG compact syntax.
+</em><a id="ch030.ExampleRelaxNG"></a></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c003">element</span></em><em> </em><em>course</em><em> {</em><em>
+</em><em>  </em><em><span class="c003">element</span></em><em> </em><em>student</em><em> {</em><em>
+</em><em>     </em><em><span class="c003">element</span></em><em> </em><em>name</em><em> { </em><em>xsd</em><em>:</em><em>string</em><em> },</em><em>
+</em><em>     </em><em><span class="c003">element</span></em><em> </em><em>gender</em><em> { </em><span class="c005"><em>"Male"</em></span><em> | </em><span class="c005"><em>"Female"</em></span><em> },</em><em>
+</em><em>     </em><em><span class="c003">element</span></em><em> </em><em>birthDate</em><em> { </em><em>xsd</em><em>:</em><em>date</em><em> }?,</em><em>
+</em><em>            </em><em><span class="c003">attribute</span></em><em> </em><em>id</em><em> { </em><em>xsd</em><em>:</em><em>ID</em><em> }</em><em>
+</em><em>  }* ,</em><em>
+</em><em>  </em><em><span class="c003">attribute</span></em><em> </em><em>name</em><em> { </em><em>xsd</em><em>:</em><em>string</em><em> }</em><em>
+</em><em>}</em></td></tr>
+</table></div></div><p>The same example can be expressed in XML as:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;</span><span class="c011"><span class="c007">element</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">course</span></span><span class="c011">"</span><span class="c011">
+</span><span class="c011">   </span><span class="c011"><span class="c007">xmlns</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">relaxng</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/</span><span class="c011"><span class="c007">ns</span></span><span class="c011">/</span><span class="c011"><span class="c007">structure</span></span><span class="c011">/1.0"</span><span class="c011">
+</span><span class="c011">   </span><span class="c011"><span class="c007">datatypeLibrary</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">www</span></span><span class="c011">.</span><span class="c011"><span class="c007">w3</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/2001/</span><span class="c011"><span class="c007">XMLSchema</span></span><span class="c011">-</span><span class="c011"><span class="c007">datatypes</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">  &lt;</span><span class="c011"><span class="c007">zeroOrMore</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">    &lt;</span><span class="c011"><span class="c007">element</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">student</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">      &lt;</span><span class="c011"><span class="c007">element</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">name</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">        &lt;</span><span class="c011"><span class="c007">data</span></span><span class="c011"> </span><span class="c011"><span class="c007">type</span></span><span class="c011">="</span><span class="c011"><span class="c007">string</span></span><span class="c011">"/&gt;</span><span class="c011">
+</span><span class="c011">      &lt;/</span><span class="c011"><span class="c007">element</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">      &lt;</span><span class="c011"><span class="c007">element</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">gender</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">        &lt;</span><span class="c011"><span class="c007">choice</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">          &lt;</span><span class="c011"><span class="c007">value</span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">Female</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">value</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">          &lt;</span><span class="c011"><span class="c007">value</span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">Male</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">value</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">        &lt;/</span><span class="c011"><span class="c007">choice</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">      &lt;/</span><span class="c011"><span class="c007">element</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">      &lt;</span><span class="c011"><span class="c007">optional</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">        &lt;</span><span class="c011"><span class="c007">element</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">birthDate</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">          &lt;</span><span class="c011"><span class="c007">data</span></span><span class="c011"> </span><span class="c011"><span class="c007">type</span></span><span class="c011">="</span><span class="c011"><span class="c007">date</span></span><span class="c011">"/&gt;</span><span class="c011">
+</span><span class="c011">        &lt;/</span><span class="c011"><span class="c007">element</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">      &lt;/</span><span class="c011"><span class="c007">optional</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">      &lt;</span><span class="c011"><span class="c007">attribute</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">id</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">        &lt;</span><span class="c011"><span class="c007">data</span></span><span class="c011"> </span><span class="c011"><span class="c007">type</span></span><span class="c011">="</span><span class="c011"><span class="c007">ID</span></span><span class="c011">"/&gt;</span><span class="c011">
+</span><span class="c011">      &lt;/</span><span class="c011"><span class="c007">attribute</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">    &lt;/</span><span class="c011"><span class="c007">element</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">  &lt;/</span><span class="c011"><span class="c007">zeroOrMore</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">  &lt;</span><span class="c011"><span class="c007">attribute</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">name</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011">    &lt;</span><span class="c011"><span class="c007">data</span></span><span class="c011"> </span><span class="c011"><span class="c007">type</span></span><span class="c011">="</span><span class="c011"><span class="c007">string</span></span><span class="c011">"/&gt;</span><span class="c011">
+</span><span class="c011">  &lt;/</span><span class="c011"><span class="c007">attribute</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">element</span></span><span class="c011">&gt;</span></td></tr>
+</table><p><a id="hevea_default194"></a>
+<a id="hevea_default195"></a>
+</p></li><li class="li-itemize">Schematron [<a href="bookHtml019.html#Schematron">50</a>] is a rule-based language based on patterns, rules, and assertions.
+An assertion contains an XPath expression and an error message. 
+The error message is displayed when the XPath expression fails.
+A rule groups various assertions together and defines a context in which assertions are evaluated using an XPath expression.
+Finally, patterns group various rules together.<p>Schematron has more expressive power than other schema languages like DTDs, RelaxNG or XML Schema as 
+it can express complex constraints that are impossible with them.
+In fact, it is often used to define business rules.</p><p>Although Schematron can be used as a stand-alone, it is commonly used in cooperation with other schema languages which define the document structure.</p><div class="example"><div class="theorem"><span class="c013">Example 18</span>  <em>Schematron example</em><em> 
+</em><a id="ch030SchematronExample"></a><p><em>If we have XML documents containing course grades like the following:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Algebra</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">S234</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Alice</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">&gt;8&lt;/</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">id</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">B476</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011"><span class="c007">Robert</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">&gt;5&lt;/</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">average</span></span></em><em><span class="c011">&gt;9&lt;/</span></em><em><span class="c011"><span class="c007">average</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">course</span></span></em><em><span class="c011">&gt;</span></em></td></tr>
+</table><p><em>We can define the following Schematron file to validate.</em></p><ul class="itemize"><li class="li-itemize"><em>That student IDs start by </em><em>
+</em><code><em>S</em></code><em> (lines 4–8).</em></li><li class="li-itemize"><em>That the value of </em><em>
+</em><code><em>&lt;</em></code><code><em>average</em></code><code><em>&gt;</em></code><em> is the mean of the grades. </em></li></ul><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">&lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">schema</span></span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c007">xmlns</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">http</span></span></em><em><span class="c011">://</span></em><em><span class="c011"><span class="c007">purl</span></span></em><em><span class="c011">.</span></em><em><span class="c011"><span class="c007">oclc</span></span></em><em><span class="c011">.</span></em><em><span class="c011"><span class="c007">org</span></span></em><em><span class="c011">/</span></em><em><span class="c011"><span class="c007">dsdl</span></span></em><em><span class="c011">/</span></em><em><span class="c011"><span class="c007">schematron</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">pattern</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Check</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">Ids</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">rule</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">context</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">assert</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">test</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">starts</span></span></em><em><span class="c011">-</span></em><em><span class="c011"><span class="c007">with</span></span></em><em><span class="c011">(</span></em><em><span class="c011"><span class="c007">@id</span></span></em><em><span class="c011">,'</span></em><em><span class="c011"><span class="c007">S</span></span></em><em><span class="c011">')"</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &gt;</span></em><em><span class="c011"><span class="c007">IDs</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">must</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">start</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">by</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">S</span></span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">assert</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">rule</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">pattern</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">pattern</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">Check</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">mean</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">rule</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">context</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">average</span></span></em><em><span class="c011">"&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">    &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">assert</span></span></em><em><span class="c011">
+</span></em><em><span class="c011">      </span></em><em><span class="c011"><span class="c007">test</span></span></em><em><span class="c011">="</span></em><em><span class="c011"><span class="c007">sum</span></span></em><em><span class="c011">(//</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">/</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">) </span></em><em><span class="c011"><span class="c007">div</span></span></em><em><span class="c011">
+</span></em><em><span class="c011">                </span></em><em><span class="c011"><span class="c007">count</span></span></em><em><span class="c011">(//</span></em><em><span class="c011"><span class="c007">student</span></span></em><em><span class="c011">/</span></em><em><span class="c011"><span class="c007">grade</span></span></em><em><span class="c011">) = ."</span></em><em><span class="c011">
+</span></em><em><span class="c011">          &gt;</span></em><em><span class="c011"><span class="c007">Value</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">of</span></span></em><em><span class="c011"> &lt;</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">name</span></span></em><em><span class="c011">/&gt; </span></em><em><span class="c011"><span class="c007">does</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">not</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">match</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c007">mean</span></span></em><em><span class="c011">
+</span></em><em><span class="c011">     &lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">assert</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">   &lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">rule</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> &lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">pattern</span></span></em><em><span class="c011">&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">&lt;/</span></em><em><span class="c011"><span class="c007">sch</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c007">schema</span></span></em><em><span class="c011">&gt;</span></em></td></tr>
+</table></div></div><p>Schematron is more expressive than other schema languages like DTDs, XML Schema, or RelaxNG as it can define business rules and co-occurrence constraints at the same time that it can also define structural constraints like the other ones.
+Nevertheless, Schematron rules can become complex to define and debug. 
+A popular approach is to combine both approaches, defining the XML document structure 
+with a traditional schema language and 
+complementing it with schematron rules.</p></li><li class="li-itemize">Other schema languages for XML has been
+SchemaPath was proposed as a simple extension of XML Schema 
+with conditional constraints [<a href="bookHtml019.html#Coen2004">22</a>].
+Bonxai [<a href="bookHtml019.html#Martens2015">62</a>] has been recently proposed.
+It also contains a readable syntax inspired by RelaxNG.</li></ul>
+<h5 class="paragraph" id="sec31">Invoking validation in XML.</h5>
+<p>Different approaches have been proposed to indicate how an XML document has to be validated against a schema. 
+Some of those approaches are the following. </p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default196"></a>
+</p>Embedded schema.
+DTDs can directly be embedded in XML documents:<table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;!</span><span class="c011"><span class="c007">DOCTYPE</span></span><span class="c011"> </span><span class="c011"><span class="c007">course</span></span><span class="c011"> [</span><span class="c011">
+</span><span class="c011">  &lt;!</span><span class="c011"><span class="c007">ELEMENT</span></span><span class="c011"> </span><span class="c011"><span class="c007">course</span></span><span class="c011">   (</span><span class="c011"><span class="c007">student</span></span><span class="c011">*) &gt;</span><span class="c011">
+</span><span class="c011">  &lt;!</span><span class="c011"><span class="c007">ELEMENT</span></span><span class="c011"> </span><span class="c011"><span class="c007">student</span></span><span class="c011"> (</span><span class="c011"><span class="c007">name</span></span><span class="c011">,</span><span class="c011"><span class="c007">grade</span></span><span class="c011">)&gt;</span><span class="c011">
+</span><span class="c011">  &lt;!</span><span class="c011"><span class="c007">ATTLIST</span></span><span class="c011"> </span><span class="c011"><span class="c007">student</span></span><span class="c011"> </span><span class="c011"><span class="c007">id</span></span><span class="c011"> </span><span class="c011"><span class="c007">CDATA</span></span><span class="c011"> #</span><span class="c011"><span class="c007">REQUIRED</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">]&gt;</span><span class="c011">
+</span><span class="c011">&lt;</span><span class="c011"><span class="c007">course</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">Algebra</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011"> ...</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">course</span></span><span class="c011">&gt;</span></td></tr>
+</table><p><a id="hevea_default197"></a> 
+<a id="hevea_default198"></a> 
+</p></li><li class="li-itemize">Directly associate instance data with XML Schema.
+It can be done, for example, using the 
+
+<code>xsi</code><code>:</code><code>schemaLocation</code> or 
+<code>xsi</code><code>:</code><code>noNamespaceSchemaLocation</code> attributes. <p>For example, the following XML document directly declares that it follows the schema identified by 
+<code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>Course</code> which is located at 
+<code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>course</code><code>.</code><code>xsd</code>:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;</span><span class="c011"><span class="c007">course</span></span><span class="c011"> </span><span class="c011"><span class="c007">xmlns</span></span><span class="c011">:</span><span class="c011"><span class="c007">xsi</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">www</span></span><span class="c011">.</span><span class="c011"><span class="c007">w3</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/2001/</span><span class="c011"><span class="c007">XMLSchema</span></span><span class="c011">-</span><span class="c011"><span class="c007">instance</span></span><span class="c011">"</span><span class="c011">
+</span><span class="c011">        </span><span class="c011"><span class="c007">xsi</span></span><span class="c011">:</span><span class="c011"><span class="c007">schemaLocation</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">example</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/</span><span class="c011"><span class="c007">ns</span></span><span class="c011">/</span><span class="c011"><span class="c007">Course</span></span><span class="c011">
+</span><span class="c011">                            </span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">example</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/</span><span class="c011"><span class="c007">course</span></span><span class="c011">.</span><span class="c011"><span class="c007">xsd</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011"> ...</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">course</span></span><span class="c011">&gt;</span></td></tr>
+</table><p><a id="hevea_default199"></a>
+</p></li><li class="li-itemize">The XML processing instruction 
+<code>&lt;?</code><code>xml</code><code>-</code><code>model</code><code> ?&gt;</code> has been proposed to associate an XML document with a schema [<a href="bookHtml019.html#XMLModel">43</a>]. <table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;?</span><span class="c011"><span class="c007">xml</span></span><span class="c011">-</span><span class="c011"><span class="c007">model</span></span><span class="c011"> </span><span class="c011"><span class="c007">href</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">example</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/</span><span class="c011"><span class="c007">course</span></span><span class="c011">.</span><span class="c011"><span class="c007">rng</span></span><span class="c011">" ?&gt;</span><span class="c011">
+</span><span class="c011">&lt;?</span><span class="c011"><span class="c007">xml</span></span><span class="c011">-</span><span class="c011"><span class="c007">model</span></span><span class="c011"> </span><span class="c011"><span class="c007">href</span></span><span class="c011">="</span><span class="c011"><span class="c007">http</span></span><span class="c011">://</span><span class="c011"><span class="c007">example</span></span><span class="c011">.</span><span class="c011"><span class="c007">org</span></span><span class="c011">/</span><span class="c011"><span class="c007">course</span></span><span class="c011">.</span><span class="c011"><span class="c007">xsd</span></span><span class="c011">" ?&gt;</span><span class="c011">
+</span><span class="c011">&lt;</span><span class="c011"><span class="c007">course</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011">="</span><span class="c011"><span class="c007">Algebra</span></span><span class="c011">"&gt;</span><span class="c011">
+</span><span class="c011"> ...</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">course</span></span><span class="c011">&gt;</span></td></tr>
+</table><p>Note that the XML model processing instruction enables to use multiple schemas for the same document. </p><p><a id="hevea_default200"></a>
+</p></li><li class="li-itemize">In WSDL [<a href="bookHtml019.html#WSDL">19</a>] it is possible to associate documents or predetermined nodes in a document with arbitrary XML Schema types.</li></ul><p>As can be seen XML provides several ways to associate XML data with schemas for their validation. </p><p><a id="hevea_default201"></a>
+</p>
+<h3 class="subsection" id="sec32">3.1.4  JSON</h3>
+<p> 
+<a id="ch030:JSON"></a>
+<a id="ch3.sec1.4"></a></p><p><a id="hevea_default202"></a> <a id="hevea_default203"></a> 
+JSON was proposed by Douglas Crockford around 2001 as a subset of Javascript (the original acronym was Javascript Object Notation). 
+<a id="hevea_default204"></a>
+It has evolved as an independent data-interchange format with its own ECMA 
+specification [<a href="bookHtml019.html#JSON">35</a>].</p><p>A JSON value, or JSON document, can be defined recursively as follows. </p><ul class="itemize"><li class="li-itemize">
+<a id="hevea_default205"></a> 
+<a id="hevea_default206"></a> 
+
+<code>true</code>, 
+<code>false</code> and <span class="c007"><span class="c011"><span class="c010">null</span></span></span> are JSON values.<p><a id="hevea_default207"></a>
+</p></li><li class="li-itemize">Any decimal number is also a JSON value.<p><a id="hevea_default208"></a> <a id="hevea_default209"></a>
+</p></li><li class="li-itemize">Any string of Unicode characters enclosed by 
+<code>"</code> is also a JSON value, called a string value.<p><a id="hevea_default210"></a> 
+</p></li><li class="li-itemize">If <span class="c012">k</span><sub>1</sub>, <span class="c012">k</span><sub>2</sub>, …, <span class="c012">k</span><sub><span class="c012">n</span></sub> are distinct string values and <span class="c012">v</span><sub>1</sub>, <span class="c012">v</span><sub>2</sub>, …, <span class="c012">v</span><sub><span class="c012">n</span></sub> are JSON values, then {<span class="c012">k</span><sub>1</sub>: <span class="c012">v</span><sub>1</sub>, <span class="c012">k</span><sub>2</sub>: <span class="c012">v</span><sub>2</sub>, …, <span class="c012">k</span><sub><span class="c012">n</span></sub>: <span class="c012">v</span><sub><span class="c012">n</span></sub>} are JSON values, called objects. 
+In this case, each <span class="c012">k</span><sub><span class="c012">i</span></sub>: <span class="c012">v</span><sub><span class="c012">i</span></sub> is a key-value pair. 
+The order of the key-value pairs is not significant. <p><a id="hevea_default211"></a> 
+</p></li><li class="li-itemize">If <span class="c012">v</span><sub>1</sub>, <span class="c012">v</span><sub>2</sub>, …, <span class="c012">v</span><sub><span class="c012">n</span></sub> are JSON values, then [<span class="c012">v</span>1,<span class="c012">v</span>2,…,<span class="c012">v</span><sub><span class="c012">n</span></sub>] are JSON values, called arrays. 
+The order of the array elements is significant.</li></ul><p>Note that in the case of arrays and objects the values <span class="c012">v</span><sub><span class="c012">i</span></sub> can again be objects or arrays, thus allowing the documents
+an arbitrary level of nesting. 
+In this way, the JSON data model can be represented as a tree [<a href="bookHtml019.html#Bourhis2017">14</a>].</p><div class="example"><div class="theorem"><span class="c013">Example 19</span>  <em>JSON example</em><em>
+</em><a id="ch030.ExampleJSON"></a><p><em>The following example contains a JSON object with two keys: </em><em>
+</em><code><em>name</em></code><em> and </em><em>
+</em><code><em>students</em></code><em>. 
+The value of </em><em>
+</em><code><em>name</em></code><em> is a string while the value of </em><em>
+</em><code><em>students</em></code><em> is an array of two objects.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">{ "</span></em><em><span class="c011">name</span></em><em><span class="c011">": "</span></em><em><span class="c011">Algebra</span></em><em><span class="c011">" ,</span></em><em><span class="c011">
+</span></em><em><span class="c011">  "</span></em><em><span class="c011">students</span></em><em><span class="c011">": [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  { "</span></em><em><span class="c011">name</span></em><em><span class="c011">": "</span></em><em><span class="c011">Alice</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">gender</span></em><em><span class="c011">": "</span></em><em><span class="c011">Female</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">age</span></em><em><span class="c011">": 18</span></em><em><span class="c011">
+</span></em><em><span class="c011">   },</span></em><em><span class="c011">
+</span></em><em><span class="c011">  { "</span></em><em><span class="c011">name</span></em><em><span class="c011">": "</span></em><em><span class="c011">Robert</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">gender</span></em><em><span class="c011">": "</span></em><em><span class="c011">Male</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">birthDate</span></em><em><span class="c011">": "1981-09-24"</span></em><em><span class="c011">
+</span></em><em><span class="c011">   }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> ]</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table><p><em>Figure </em><a href="#ch030.JSONTree"><em>19</em></a><em> shows a tree representation of the previous JSON value.</em></p><blockquote class="figure"><div class="center"><hr class="c021"></div><em> 
+</em><div class="center"><em>
+<img src="JSON_Tree.png">
+</em></div><em>
+
+</em><a id="ch030.JSONTree"></a><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Figure 3.4: Tree structure of JSON.</em></td></tr>
+</table></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div><p>JSON Schema [<a href="bookHtml019.html#JSONSchema">100</a>] was proposed as an Schema language for JSON with a role similar to XML Schema for XML. 
+It is written itself using JSON syntax and is programming language agnostic. 
+It contains the following predefined datatypes: 
+null, Boolean, object, array, number and string, and allows to define constraints on each of them.</p><p>In JSON Schema, it is possible to have reusable definitions which can later be referenced. 
+Recursion is not allowed between references [<a href="bookHtml019.html#Pezoa2016">74</a>].</p><div class="example"><div class="theorem"><span class="c013">Example 20</span>  <em>JSON Schema example</em><em> 
+</em><a id="ch030.ExampleJSONSchema"></a><p><em>The following example contains a JSON schema that can be used to validate Example </em><a href="#ch030.ExampleJSON"><em>19</em></a><em>. 
+It declares </em><em>
+</em><code><em>student</em></code><em> as an object type with four properties: </em><em>
+</em><code><em>name</em></code><em>, </em><em>
+</em><code><em>gender</em></code><em>, </em><em>
+</em><code><em>birthDate</em></code><em> and </em><em>
+</em><code><em>age</em></code><em>. 
+The first two are required and some constraints can be added on their values.</em></p><p><em>The JSON value has type </em><em>
+</em><code><em>object</em></code><em> and contains two properties: </em><em>
+</em><code><em>name</em></code><em>, which must be a string value, 
+and </em><em>
+</em><code><em>students</em></code><em> which must be an array, whose items conform to the </em><em>
+</em><code><em>student</em></code><em> definition.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">{ "</span></em><em><span class="c011">$schema</span></em><em><span class="c011">": "</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">json</span></em><em><span class="c011">-</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">draft</span></em><em><span class="c011">-04/</span></em><em><span class="c011">schema</span></em><em><span class="c011">#",</span></em><em><span class="c011">
+</span></em><em><span class="c011">  "</span></em><em><span class="c011">definitions</span></em><em><span class="c011">": {</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">student</span></em><em><span class="c011">": { "</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">object</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">properties</span></em><em><span class="c011">": {</span></em><em><span class="c011">
+</span></em><em><span class="c011">      "</span></em><em><span class="c011">name</span></em><em><span class="c011">":      {"</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">string</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">      "</span></em><em><span class="c011">gender</span></em><em><span class="c011">":    {"</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">string</span></em><em><span class="c011">", "</span></em><em><span class="c011">enum</span></em><em><span class="c011">":["</span></em><em><span class="c011">Male</span></em><em><span class="c011">","</span></em><em><span class="c011">Female</span></em><em><span class="c011">"]},</span></em><em><span class="c011">
+</span></em><em><span class="c011">      "</span></em><em><span class="c011">birthDate</span></em><em><span class="c011">": {"</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">string</span></em><em><span class="c011">", "</span></em><em><span class="c011">format</span></em><em><span class="c011">": "</span></em><em><span class="c011">date</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">      "</span></em><em><span class="c011">age</span></em><em><span class="c011">":       {"</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">integer</span></em><em><span class="c011">","</span></em><em><span class="c011">minimum</span></em><em><span class="c011">": 1 }</span></em><em><span class="c011">
+</span></em><em><span class="c011">     },</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">required</span></em><em><span class="c011">": ["</span></em><em><span class="c011">name</span></em><em><span class="c011">","</span></em><em><span class="c011">gender</span></em><em><span class="c011">"]</span></em><em><span class="c011">
+</span></em><em><span class="c011">   }</span></em><em><span class="c011">
+</span></em><em><span class="c011">  },</span></em><em><span class="c011">
+</span></em><em><span class="c011">  "</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">object</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">  "</span></em><em><span class="c011">properties</span></em><em><span class="c011">": {</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">name</span></em><em><span class="c011">":      { "</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">string</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">    "</span></em><em><span class="c011">students</span></em><em><span class="c011">" : { "</span></em><em><span class="c011">type</span></em><em><span class="c011">": "</span></em><em><span class="c011">array</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">      "</span></em><em><span class="c011">items</span></em><em><span class="c011">": { "</span></em><em><span class="c011">$ref</span></em><em><span class="c011">": "#/</span></em><em><span class="c011">definitions</span></em><em><span class="c011">/</span></em><em><span class="c011">student</span></em><em><span class="c011">" }</span></em><em><span class="c011">
+</span></em><em><span class="c011">     }</span></em><em><span class="c011">
+</span></em><em><span class="c011">  },</span></em><em><span class="c011">
+</span></em><em><span class="c011">  "</span></em><em><span class="c011">required</span></em><em><span class="c011">": ["</span></em><em><span class="c011">name</span></em><em><span class="c011">","</span></em><em><span class="c011">students</span></em><em><span class="c011">"]</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table></div></div><p><a id="hevea_default212"></a>
+</p>
+<h3 class="subsection" id="sec33">3.1.5  CSV</h3>
+<p>
+<a id="ch3.sec1.5"></a></p><p><a id="hevea_default213"></a> <a id="hevea_default214"></a> <a id="hevea_default215"></a> <a id="hevea_default216"></a>
+Comma-Separated Values (CSV) and Tab-Separated Values (TSV) files have historically had no format-specific schema language.
+<a id="hevea_default217"></a>
+A common use case for CSV (and TSV) is to import it into a relational database, where it is subject to the same integrity constraints as any other SQL data.
+However, wide-ranging practices for documenting table structure and semantics have historically made it hard for consumers of CSV to consume published CSV data 
+with confidence.
+Column headings and meanings may appear as rows in the CSV file, columns in an auxiliary CSV or flat file, or be omitted entirely.</p><p>Spreadsheets are another common generator and consumer of CSV data.
+Some spreadsheets may have hand-tooled integrity constraints but they offer no standard schema language.</p><p><a id="hevea_default218"></a> 
+While traditionally schema-less, a recent standard, CSV on the Web (CSVW) attempts to describe the majority of deployed CSV data.
+This includes semantics (e.g., mapping to an ontology), provenance, XML Schema length and numeric value facets (e.g., minimum length, max exclusive value), and format and structural constraints like foreign keys and datatypes.</p><p>CSVW describes a wide corpus of existing practice for publishing CSV documents.
+Because of it’s World Wide Web orientation, it includes internationalization and localization features not found in other schema languages.
+Where most data languages standardize the lexical representation of datatypes like dateTime or integer, CSVW describes a wide range of region or domain-specific datatypes.
+For instance, the following can all be representations of the same numeric value: 12345.67, 12,345.67, 12.345,67, 1,23,45.67.</p><p>CSVW is also unusual in that it can be used to describe denormalized data.
+Because of this, it includes separator specifiers to aid in micro-parsing individual data cells into sequences of atomic datatypes.</p><p>CSVW is a very new specification and applies to a domain with historically no standard schema language.
+<a id="hevea_default219"></a>
+Tools like CSVLint<sup><a id="text4" href="#note4">2</a></sup> are adopting CSVW as a way to offer interoperable schema declarations to enable data quality tests.</p>
+<h2 class="section" id="sec34">3.2  Understanding the RDF Validation Problem</h2>
+<p> 
+<a id="ch3.sec2"></a></p><p>As we can see in Table <a href="#ch030.DataValidationApproaches">3.1</a>, most data technologies have some description and validation technology which enables users to describe the desired schema of the data and to check if some existing data conforms with that schema. </p><p><a id="hevea_default220"></a> 
+<a id="hevea_default221"></a> 
+<a id="hevea_default222"></a> 
+<a id="hevea_default223"></a> 
+<a id="hevea_default224"></a> 
+<a id="hevea_default225"></a>
+<a id="hevea_default226"></a>
+</p><blockquote class="table"><div class="center"><hr class="c021"></div>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Table 3.1: Data validation approaches</td></tr>
+</table></div>
+<a id="ch030.DataValidationApproaches"></a>
+<div class="center">
+<table class="c000 cellpadding1" border=1><tr><td class="c017"> Data format</td><td class="c019">Validation technology 
+</td></tr>
+<tr><td class="c017"> Relational databases</td><td class="c019">DDL
+</td></tr>
+<tr><td class="c017"> XML</td><td class="c019">DTD, XML Schema, RelaxNG, Schematron
+</td></tr>
+<tr><td class="c017"> CSV</td><td class="c019">CSV on the Web
+</td></tr>
+<tr><td class="c017"> JSON</td><td class="c019">JSON Schema
+</td></tr>
+<tr><td class="c017"> RDF</td><td class="c019">ShEx/SHACL
+</td></tr>
+</table>
+</div>
+<div class="center"><hr class="c021"></div></blockquote><p>Although there have been several previous attempts to define RDF validation 
+technologies (see Section <a href="#ch030.PreviousRDFValidationApproaches">3.3</a>) this book focuses on ShEx and SHACL.</p><p>In this section we describe what are the particular concepts of RDF that have to be taken into account for its validation:</p>
+<h5 class="paragraph" id="sec35">Graph data model</h5>
+<p>RDF is composed of triples, which have arcs (predicates) between nodes.
+We can describe:</p><ul class="itemize"><li class="li-itemize">
+<a id="hevea_default227"></a>
+the form of a node (the mechanisms for doing this will be called 
+“node constraints”);</li><li class="li-itemize">the number of possible arcs incoming/outgoing from a node; and </li><li class="li-itemize">the possible values associated with those arcs.
+</li></ul><p>Figure <a href="#ch030.RDFShapes">3.2</a> presents an RDF node and its corresponding Shape.</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+<div class="center">
+<img src="RDFShapes.png">
+</div>
+
+<a id="ch030.RDFShapes"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 3.5: RDF node and its shape.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote>
+<h5 class="paragraph" id="sec36">Unordered arcs</h5>
+<p><a id="hevea_default228"></a> <a id="hevea_default229"></a>
+A difference between RDF and XML with regards to their data model is that while in RDF, the arcs are unordered, in XML, the sub-elements form an ordered sequence.
+RDF validation languages must not assume any order on how the arcs of a node will be treated, while in XML, the order of the elements affect the validation process. </p><p><a id="hevea_default230"></a> <a id="hevea_default231"></a>
+From a theoretical point of view, the arcs related with a node in RDF can be represented as a bag or multiset, i.e., a set which allows duplicate elements. </p>
+<h5 class="paragraph" id="sec37">RDF Validation ≠ Ontology ≠ Instance data</h5>
+<p>Notice that RDF validation is different from ontology definition and also different from instance data.</p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default232"></a> 
+<a id="hevea_default233"></a>
+</p>Ontologies are usually focused on real-world things or at least objects from some domain. 
+The semantic web community has put a lot of emphasis on defining ontologies for different domains and there are several vocabularies like OWL, RDFS, etc. that can be used to that end. 
+People concerned with this level are ontology engineers which must have skills to understand how to represent the knowledge of some domain.<p><a id="hevea_default234"></a>
+</p></li><li class="li-itemize">Instance data refers to the data of some situation or problem at any given point. 
+That data can be obtained from different sources and is materialized in some data representation language. 
+In our case, instance data refers to RDF graphs that are created by developers and programmers, or generated automatically from other sources like sensors. <p><a id="hevea_default235"></a>
+</p></li><li class="li-itemize">RDF validation is an intermediate process that can check if that instance data conforms to some desired schema. 
+In the case of RDF, it is focused on RDF graph features which are at a lower level than ontology features. 
+<a id="hevea_default236"></a>
+The people interested in RDF data description and validation are data engineers and have concerns that are different from those of ontology engineers. 
+<a id="hevea_default237"></a>
+Data engineers are more worried about how to model data so the developers 
+can effectively and efficiently produce or consume it.</li></ul><p>Figure <a href="#ch030.RDFValidationVsOntology">3.2</a> represents the difference between instance data, ontology definitions, and RDF validation.</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+<div class="center">
+<img src="RDFValidationVsOntology.png">
+</div>
+
+<a id="ch030.RDFValidationVsOntology"></a> 
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 3.6: RDF validation vs. ontology definition.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote>
+<h5 class="paragraph" id="sec38">Shapes ≠ Types</h5>
+<p> 
+<a id="ch030ShapesNotTypes"></a></p><p><a id="hevea_default238"></a>
+Given the open and flexible nature of RDF, nodes in RDF graphs can have zero, one or many 
+<code>rdf</code><code>:</code><code>type</code> arcs. </p><p>Some application can use nodes of type 
+<code>schema</code><code>:</code><code>Person</code> with some properties while another application can use nodes with the same type but different properties.
+For example, 
+<code>schema</code><code>:</code><code>Person</code> can represent friend, invitee, patient,...in different applications or even in different contexts of the same application.
+The same types can have different meanings and different structure depending on the context.</p><p>While from an ontology point of view a concept has a single meaning, applications that are using that same concept
+may select different properties and values and thus, 
+the corresponding representations may differ.</p><p>Nodes in RDF graphs are not necessarily annotated with fully discriminating types. 
+This implies that it is not possible to validate the shape of a node by just looking at its 
+<code>rdf</code><code>:</code><code>type</code> arc.</p><p>We should be able to define specific validation constraints in different contexts.</p><p><a id="hevea_default239"></a>
+</p>
+<h5 class="paragraph" id="sec39">Inference</h5>
+<p> 
+<a id="ch030Inference"></a></p><p>Validation can be performed before or after inference.
+Validation after inference (or validation on a backward-chaining store that does inference on the fly) checks the correctness of the implications.
+An inference testing service could use an input schema describing the contents of the input RDF graph and an output schema describing the contents of the expected inferred RDF graph.
+The service can check that instance data conforms to the input schema before inference and that after applying a reasoner, 
+the resulting RDF graph with inferred triples, conforms to the output schema.</p><div class="example"><div class="theorem"><span class="c013">Example 21</span>  <em>
+</em><a id="ch040:exampleInference"></a><em>
+Suppose we have a schema with two shapes, each with one requirement:</em><ul class="itemize"><li class="li-itemize"><em>
+</em><em>
+</em><code><em>PersonShape</em></code><em> requires an </em><em>
+</em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><em> of </em><em>
+</em><code><em>:</em></code><code><em>Person</em></code><em>
+</em></li><li class="li-itemize"><em>
+</em><code><em>TeacherShape</em></code><em> requires an </em><em>
+</em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><em> of </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em>
+</em></li></ul><p><em><em>If we validate the following RDF graph without inference, only </em></em><em><em>
+</em></em><code><em><em>:</em></em></code><code><em><em>alice</em></em></code><em><em> would match </em></em><em><em>
+</em></em><code><em><em>PersonShape</em></em></code><em><em>. 
+However, if we validate the RDF graph that results of applying RDF Schema inference, then both </em></em><em><em>
+</em></em><code><em><em>:</em></em></code><code><em><em>bob</em></em></code><em><em> and </em></em><em><em>
+</em></em><code><em><em>:</em></em></code><code><em><em>carol</em></em></code><em><em> would also match </em></em><em><em>
+</em></em><code><em><em>PersonShape</em></em></code><em><em>.</em></em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><em><span class="c011">:teaches</span></em></em><em><em><span class="c011">  </span></em></em><em><em><span class="c011">rdfs:domain</span></em></em><em><em><span class="c011">     </span></em></em><em><em><span class="c011">:Teacher</span></em></em><em><em><span class="c011"> .</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">:Teacher</span></em></em><em><em><span class="c011">  </span></em></em><em><em><span class="c011">rdfs:subClassOf</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">:Person</span></em></em><em><em><span class="c011">  .</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">:alice</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">a</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">:Person</span></em></em><em><em><span class="c011"> .</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">:bob</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">a</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">:Teacher</span></em></em><em><em><span class="c011"> .</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">
+</span></em></em><em><em><span class="c011">:carol</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">:teaches</span></em></em><em><em><span class="c011"> </span></em></em><em><em><span class="c011">:algebra</span></em></em><em><em><span class="c011"> .</span></em></em></td></tr>
+</table></div></div><p>Validation workflows will likely perform validation both before and after validation.
+Systems which perform possibly incomplete inference can use this to verify that their light-weight, partial inference is producing the required triples.</p>
+<h5 class="paragraph" id="sec40">RDF flexibility</h5>
+<p>RDF was born as a schema-less language, a feature which provided a series of advantages in terms of flexibility and adaptation of RDF data to different scenarios.</p><p>The same property, can have different types of values. 
+For example, a property like 
+<code>schema</code><code>:</code><code>creator</code> can have as value a string literal or a more complex resource.</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:angie</span><span class="c011"> </span><span class="c011">schema:creator</span><span class="c011"> </span><span class="c011"><span class="c011">"Keith Richards"</span></span><span class="c011"> </span><span class="c011">,</span><span class="c011">
+</span><span class="c011">                      [ </span><span class="c011">a</span><span class="c011"> </span><span class="c011">schema:Person</span><span class="c011"> ;</span><span class="c011">
+</span><span class="c011">                          </span><span class="c011">schema:givenName</span><span class="c011"> </span><span class="c011"><span class="c011">"Mick"</span></span><span class="c011"> ;</span><span class="c011">
+</span><span class="c011">                          </span><span class="c011">schema:familyName</span><span class="c011"> </span><span class="c011"><span class="c011">"Jagger"</span></span><span class="c011">
+</span><span class="c011">                      ] .</span></td></tr>
+</table>
+<h5 class="paragraph" id="sec41">Repeated properties</h5>
+<p>Sometimes, the same property is used for different purposes in the same data. 
+For example, a book can have two codes with different structure.</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:book</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011">      </span><span class="c011"><span class="c011">"Moby Dick"</span></span><span class="c011">;</span><span class="c011">
+</span><span class="c011">      </span><span class="c011">schema:productID</span><span class="c011"> </span><span class="c011"><span class="c011">"ISBN-10:1503280780"</span></span><span class="c011">;</span><span class="c011">
+</span><span class="c011">      </span><span class="c011">schema:productID</span><span class="c011"> </span><span class="c011"><span class="c011">"ISBN-13:978-1503280786"</span></span><span class="c011"> .</span></td></tr>
+</table><p>This is a natural consequence of the re-use of general properties,<sup><a id="text5" href="#note5">3</a></sup> 
+which is especially common in domains where many kinds of data are represented in the same structure.</p><div class="example"><div class="theorem"><span class="c013">Example 22</span>  <em>Repeated properties example in clinical records</em><p><em>Repeated properties which require different model for each value appear frequently in real-life scenarios. 
+For example, FHIR (see Section </em><a href="bookHtml013.html#ch060FHIR"><em>6.2</em></a><em> for a more detailed description) represents clinical records using a generic observation object.
+This means that a blood pressure measurement is recorded using the same data structure as a temperature.
+The challenge is that while a temperature observation has one 
+value:</em><sup><a id="text6" href="#note6"><em>4</em></a></sup><em> </em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:Obs1</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">code</span></em><em><span class="c011">          </span></em><em><span class="c011">fhir:LOINC8310</span></em><em><span class="c011">-5 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">valueQuantity</span></em><em><span class="c011"> 36.5 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">valueUnit</span></em><em><span class="c011">     </span></em><em><span class="c011"><em><span class="c011">"Cel"</span></em></span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><em>a blood pressure observation has two:</em><sup><a id="text7" href="#note7"><em>5</em></a></sup><em> </em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:Obs2</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">code</span></em><em><span class="c011">      </span></em><em><span class="c011">fhir:LOINC55284</span></em><em><span class="c011">-4 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011"> [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">code</span></em><em><span class="c011">          </span></em><em><span class="c011">fhir:LOINC8480</span></em><em><span class="c011">-6 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">valueQuantity</span></em><em><span class="c011"> 107 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">valueUnit</span></em><em><span class="c011">     </span></em><em><span class="c011"><em><span class="c011">"mm[Hg]"</span></em></span></em><em><span class="c011">
+</span></em><em><span class="c011"> ];</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011"> [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">code</span></em><em><span class="c011">          </span></em><em><span class="c011">fhir:LOINC8462</span></em><em><span class="c011">-4 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">valueQuantity</span></em><em><span class="c011"> 60 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">fhir:Observation</span></em><em><span class="c011">.</span></em><em><span class="c011">component</span></em><em><span class="c011">.</span></em><em><span class="c011">valueUnit</span></em><em><span class="c011">     </span></em><em><span class="c011"><em><span class="c011">"mm[Hg]"</span></em></span></em><em><span class="c011">
+</span></em><em><span class="c011"> ] .</span></em></td></tr>
+</table><p><em>We can see that a blood pressure observation must have two instances of the </em><em>
+</em><code><em>fhir</em></code><code><em>:</em></code><code><em>Observation</em></code><code><em>.</em></code><code><em>component</em></code><em> property, 
+one with a code for a systolic measurement and the other with a code for a diastolic measurement.</em></p><p><em>Treating these two constraints on the property </em><em>
+</em><code><em>fhir</em></code><code><em>:</em></code><code><em>Observation</em></code><code><em>.</em></code><code><em>component</em></code><em> individually would cause the systolic constraint to reject the diastolic measurement and the diastolic constraint to reject the systolic measurement—both constraints must be considered as being satisfied if one of the components satisfies one and the other component satisfies the other.
+</em></p></div></div><p><a id="hevea_default240"></a>
+</p>
+<h5 class="paragraph" id="sec42">Closed Shapes</h5>
+<p>The RDF dictum of <em>anyone can say anything about anything</em> is in tension with conventional data practices 
+which reject data with any assertions that are not recognized by the schema.
+<a id="hevea_default241"></a> <a id="hevea_default242"></a>
+For SQL schemas, this is enforced by the data storage itself; there’s simply no place to record assertions that does not correspond to some attribute in a table specified by the DDL.
+<a id="hevea_default243"></a>
+XML Schema offers some flexibility with constructs like 
+
+<code>&lt;</code><code>xs</code><code>:</code><code>any</code><code> </code><code>processContents</code><code>="</code><code>skip</code><code>"&gt;</code> 
+but these are rare in formats for the exchange of machine-processable data.
+Typically the edict is <em>if you pass me something I do not understand fully, I will reject it</em>.</p><p>For shapes-based schema languages, a shape is a collection of constraints to be applied to some node in an RDF graph and if it is 
+<code>closed</code>, every property attached to that node must be included in the shape.</p><p>Even if the receiver of the data permits extra triples, 
+it may not be able to store or return them.
+For instance, a Linked Data container may accept arbitrary data, search for sub-graph which it recognizes, and ignore the rest.
+A user expecting to put data in such a container and retrieve it will have a rude surprise when he gets back only a subset of the submitted data.
+Even if the receiver does not validate with closed shapes, the user may wish to pre-emptively validate their data against the receiver’s schema, flagging any triples not recognized by the schema.</p><p>Another value of closed shapes is that it can be used to detect spelling mistakes.
+If a shape in a schema includes an optional 
+<code>rdfs</code><code>:</code><code>label</code> and a user has accidentally included an 
+<code>rdf</code><code>:</code><code>label</code>, the schema has no way to detect that mistake unless all unknown properties are reported.</p><p>Like with <em>repeated properties</em>, the validation of closed shapes must consider property constraints as a whole, rather than examining each individually.</p>
+<h2 class="section" id="sec43">3.3  Previous RDF Validation Approaches</h2>
+<p> 
+<a id="ch030.PreviousRDFValidationApproaches"></a>
+<a id="ch3.sec3"></a></p><p>In this section we review some previous approaches that have already been proposed to validate RDF.</p>
+<h3 class="subsection" id="sec44">3.3.1  Query-based Validation</h3>
+<p>
+<a id="ch3.sec3.1"></a></p><p><a id="hevea_default244"></a> <a id="hevea_default245"></a> <a id="hevea_default246"></a> <a id="hevea_default247"></a>
+Query-based approaches use a query Language to express validation constraints. 
+One of the earliest attempts in this category was Schemarama [<a href="bookHtml019.html#Schemarama">63</a>], by Libby Miller and Dan Brickley, 
+which applied Schematron to RDF using the Squish query language. 
+<a id="hevea_default248"></a> 
+That approach was later adapted to use TreeHuger which reinterpreted XPath syntax to describe paths in the RDF model [<a href="bookHtml019.html#SteerMiller2004">94</a>].</p><p><a id="hevea_default249"></a>
+Once SPARQL appeared in scene, it was also adopted for RDF validation. 
+SPARQL has a lot of expressiveness and can be used to validate numerical and statistical computations [<a href="bookHtml019.html#Labra13">55</a>]. </p><div class="example"><div class="theorem"><span class="c013">Example 23</span>  <em>Using SPARQL to validate RDF</em><em>
+</em><a id="ch030.ValidatingWithSPARQL"></a><p><em>If we want to validate that an RDF node has a </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>name</em></code><em> property with a </em><em>
+</em><code><em>xsd</em></code><code><em>:</em></code><code><em>string</em></code><em> value and a </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>gender</em></code><em> property whose value must be one of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Male</em></code><em> or </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Female</em></code><em> in SPARQL, 
+we can do the following query:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">ASK</span></em><em><span class="c011"> {</span></em><em><span class="c011">
+</span></em><em><span class="c011"> { </span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> {</span></em><em><span class="c011">
+</span></em><em><span class="c011">   ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">name</span></em><em><span class="c011"> ?</span></em><em><span class="c011">o</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">   } </span></em><em><span class="c011">GROUP</span></em><em><span class="c011"> </span></em><em><span class="c011">BY</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">HAVING</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*)=1)</span></em><em><span class="c011">
+</span></em><em><span class="c011"> }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> { </span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> {</span></em><em><span class="c011">
+</span></em><em><span class="c011">    ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">name</span></em><em><span class="c011"> ?</span></em><em><span class="c011">o</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">   </span></em><em><span class="c011">FILTER</span></em><em><span class="c011"> ( </span></em><em><span class="c011">isLiteral</span></em><em><span class="c011">(?</span></em><em><span class="c011">o</span></em><em><span class="c011">) &amp;&amp;</span></em><em><span class="c011">
+</span></em><em><span class="c011">            </span></em><em><span class="c011">datatype</span></em><em><span class="c011">(?</span></em><em><span class="c011">o</span></em><em><span class="c011">) = </span></em><em><span class="c011">xsd</span></em><em><span class="c011">:</span></em><em><span class="c011">string</span></em><em><span class="c011"> )</span></em><em><span class="c011">
+</span></em><em><span class="c011">   } </span></em><em><span class="c011">GROUP</span></em><em><span class="c011"> </span></em><em><span class="c011">BY</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">HAVING</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*)=1)</span></em><em><span class="c011">
+</span></em><em><span class="c011"> }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> { </span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*) </span></em><em><span class="c011">AS</span></em><em><span class="c011"> ?</span></em><em><span class="c011">c1</span></em><em><span class="c011">) {</span></em><em><span class="c011">
+</span></em><em><span class="c011">    ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">gender</span></em><em><span class="c011"> ?</span></em><em><span class="c011">o</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">   } </span></em><em><span class="c011">GROUP</span></em><em><span class="c011"> </span></em><em><span class="c011">BY</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">HAVING</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*)=1)</span></em><em><span class="c011">
+</span></em><em><span class="c011"> }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> { </span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*) </span></em><em><span class="c011">AS</span></em><em><span class="c011"> ?</span></em><em><span class="c011">c2</span></em><em><span class="c011">) {</span></em><em><span class="c011">
+</span></em><em><span class="c011">    ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">gender</span></em><em><span class="c011"> ?</span></em><em><span class="c011">o</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">    </span></em><em><span class="c011">FILTER</span></em><em><span class="c011"> ((?</span></em><em><span class="c011">o</span></em><em><span class="c011"> = </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">Female</span></em><em><span class="c011"> || ?</span></em><em><span class="c011">o</span></em><em><span class="c011"> = </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">Male</span></em><em><span class="c011">))</span></em><em><span class="c011">
+</span></em><em><span class="c011">   } </span></em><em><span class="c011">GROUP</span></em><em><span class="c011"> </span></em><em><span class="c011">BY</span></em><em><span class="c011"> ?</span></em><em><span class="c011">Person</span></em><em><span class="c011"> </span></em><em><span class="c011">HAVING</span></em><em><span class="c011"> (</span></em><em><span class="c011">COUNT</span></em><em><span class="c011">(*)=1)</span></em><em><span class="c011">
+</span></em><em><span class="c011"> }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">FILTER</span></em><em><span class="c011"> (?</span></em><em><span class="c011">c1</span></em><em><span class="c011"> = ?</span></em><em><span class="c011">c2</span></em><em><span class="c011">)</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table></div></div><p>Using plain-SPARQL queries for RDF validation has the following benefits. </p><ul class="itemize"><li class="li-itemize">It is very expressive and can handle most RDF validation needs.
+</li><li class="li-itemize">SPARQL is ubiquitous: most of RDF products already have support for SPARQL.
+</li></ul><p>But it also has the following problems. </p><ul class="itemize"><li class="li-itemize">Being very expressive, it is also very verbose. 
+SPARQL queries can be difficult to write and debug by non-experts.</li><li class="li-itemize">It can be idiomatic in the sense that there can be more 
+than one way to encode the same constraint.</li><li class="li-itemize">For all but the simplest data structures, it is complex to 
+exhaustively write SPARQL queries which accept all valid permutations and reject all incorrect structures. 
+This exhaustive enumeration is essentially the job of the <a id="Structural Languages"></a> approaches described below.</li></ul><p><a id="hevea_default250"></a> <a id="hevea_default251"></a>
+SPARQL Inferencing Notation (SPIN)[<a href="bookHtml019.html#SPIN11">51</a>] was introduced by TopQuadrant as a mechanism 
+to attach SPARQL-based constraints and rules to classes. 
+SPIN also contained templates, user-defined functions and template libraries.
+SPIN rules are expressed as SPARQL ASK queries where 
+<code>true</code> indicates an error or 
+CONSTRUCT queries that produce violations. 
+SPIN uses the expressiveness of SPARQL plus the semantics of
+the variable 
+<code>?</code><code>this</code> standing for the current focus node (the subject being validated).</p><p><a id="hevea_default252"></a> 
+SPIN has heavily influenced the design of SHACL. 
+The Working Group has decided to offer a SPARQL based semantics and the second part of the 
+working draft also contains a SPIN-like mechanism for defining SPARQL native constraints, templates and user-defined functions. 
+There are some differences like the renaming of some terms and the addition of more core constraints like disjunction, negation or closed shapes.
+The following document describes how SHACL and SPIN relate 
+(<a href="http://spinrdf.org/spin-shacl.html"><span class="c010">http://spinrdf.org/spin-shacl.html</span></a>).</p><p><a id="hevea_default253"></a> <a id="hevea_default254"></a> 
+There have been other proposals using SPARQL combined with other technologies. 
+Fürber and Hepp [<a href="bookHtml019.html#FurberH10">39</a>] proposed a combination between SPARQL and SPIN as a semantic data quality framework,
+Simister and Brickley [<a href="bookHtml019.html#Simister13">90</a>] propose a combination between SPARQL queries and property paths which is used by Google and Kontokostas et al. [<a href="bookHtml019.html#kontokostasDatabugger">53</a>] proposed <em>RDFUnit</em> a Test-driven framework which employs SPARQL query templates that are instantiated into concrete quality test queries. </p>
+<h3 class="subsection" id="sec45">3.3.2  Inference-based Approaches</h3>
+<p>
+<a id="ch3.sec3.2"></a></p><p><a id="hevea_default255"></a> <a id="hevea_default256"></a>
+Inference based approaches adapt RDF Schema or OWL to express validation semantics. 
+The use of Open World and Non-unique name assumption limits the validation possibilities. 
+In fact, what triggers constraint violations in closed world systems leads to new inferences in standard OWL systems.
+Motik, Horrocks, and Sattler [<a href="bookHtml019.html#Motik07">64</a>] proposed the notion of <em>extended description logics</em> knowledge bases, in which a certain subset of axioms were designated as constraints. </p><p><a id="hevea_default257"></a>
+In [<a href="bookHtml019.html#Patel-Schneider2015">72</a>], Peter F. Pater-Schneider, separates the validation problem in two parts: 
+integrity constraint and closed-world recognition. 
+He shows that description logics can be implemented for both by translation to SPARQL queries. </p><p><a id="hevea_default258"></a> <a id="hevea_default259"></a>
+In 2010, Tao et al. [<a href="bookHtml019.html#Tiao10">95</a>] had already proposed the use of OWL expressions with 
+Closed World Assumption and a weak variant of Unique Name Assumption to express integrity constraints. </p><p><a id="hevea_default260"></a> <a id="hevea_default261"></a> <a id="hevea_default262"></a> <a id="hevea_default263"></a>
+Their work forms the bases of Stardog ICV [<a href="bookHtml019.html#ClarkSirin13">21</a>] (Integrity Constraint Validation), 
+which is part of the Stardog database. 
+It allows to write constraints using OWL syntax but with a different semantics based on a closed world and unique name assumption. 
+The constraints are translated to SPARQL queries. 
+As an example, a User could be specified as follows.</p><div class="example"><div class="theorem"><span class="c013">Example 24</span>  <em>Validation constraints using Stardog ICV</em><p><em>The following code declares several integrity constraints in Stardog ICV. 
+</em><a id="hevea_default264"></a><em>
+It declares that nodes that are instances of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em> must have at exactly one value of 
+</em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>name</em></code><em> (it is a functional property) which must be a </em><em>
+</em><code><em>xsd</em></code><code><em>:</em></code><code><em>string</em></code><em>,
+an optional value of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>gender</em></code><em> which must be either </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Male</em></code><em> or </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Female</em></code><em>, 
+and zero or more values of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>knows</em></code><em> which must be instances of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em>.</em></p><p><em>	
+</em><a id="StardogCountry"></a><em>
+</em><em>
+</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Person</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Class</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">subClassOf</span></span></em><em><span class="c011"> [ </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">onProperty</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">                   </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">minCardinality</span></span></em><em><span class="c011"> 1 ] ,</span></em><em><span class="c011">
+</span></em><em><span class="c011">                 [ </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">onProperty</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">gender</span></span></em><em><span class="c011">;</span></em><em><span class="c011">
+</span></em><em><span class="c011">                   </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">minCardinality</span></span></em><em><span class="c011"> 0 ]</span></em><em><span class="c011">
+</span></em><em><span class="c011">                 [ </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">onProperty</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">knows</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">                   </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">minCardinality</span></span></em><em><span class="c011"> 0</span></em><em><span class="c011">
+</span></em><em><span class="c011">                 ] .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011">           </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">DatatypeProperty</span></span></em><em><span class="c011"> ,</span></em><em><span class="c011">
+</span></em><em><span class="c011">                        </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">FunctionalProperty</span></span></em><em><span class="c011">;</span></em><em><span class="c011">
+</span></em><em><span class="c011">            </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">domain</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Person</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">            </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">range</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">xsd</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">string</span></span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">gender</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011">           </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">ObjectProperty</span></span></em><em><span class="c011"> ,</span></em><em><span class="c011">
+</span></em><em><span class="c011">                          </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">FunctionalProperty</span></span></em><em><span class="c011">;</span></em><em><span class="c011">
+</span></em><em><span class="c011">              </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">domain</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Person</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">              </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">range</span></span></em><em><span class="c011">  :</span></em><em><span class="c011"><span class="c006">Gender</span></span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">knows</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011">           </span></em><em><span class="c011"><span class="c006">owl</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">ObjectProperty</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">              </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">domain</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Person</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">              </span></em><em><span class="c011"><span class="c006">rdfs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">range</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Person</span></span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Female</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011"> :</span></em><em><span class="c011"><span class="c006">Gender</span></span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Male</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011"> :</span></em><em><span class="c011"><span class="c006">Gender</span></span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><em>Instance nodes are required to have an </em><em>
+</em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><em> declaration whose value is </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em>.</em></p></div></div>
+<h3 class="subsection" id="sec46">3.3.3  Structural Languages</h3>
+<p> 
+<a id="StructuralLanguages"></a>
+<a id="ch3.sec3.3"></a></p><p><a id="hevea_default265"></a> <a id="hevea_default266"></a>
+While SPARQL and OWL Closed World were existing languages which were applied to RDF validation, 
+some novel languages have been designed specifically to that task.</p><p><a id="hevea_default267"></a>
+OSLC Resource Shapes [<a href="bookHtml019.html#OSLCResourceShapes">86</a>] have been proposed as a high level and declarative description of the expected contents of an RDF graph expressing constraints on RDF terms. </p><div class="example"><div class="theorem"><span class="c013">Example 25</span>  <em>OSLC example</em><em>
+</em><a id="ch030.ValidatingWithOSLC"></a><p><em>Example </em><a href="#ch030.ValidatingWithSPARQL"><em>23</em></a><em> can be represented in OSLC as:</em></p><p><a id="ResoueceShapesUser"></a><em>
+</em><em>
+</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">user</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">a</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">ResourceShape</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">property</span></span></em><em><span class="c011"> [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006"><em><span class="c011">"name"</span></em></span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">propertyDefinition</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">valueType</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">xsd</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">string</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">occurs</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Exactly</span></span></em><em><span class="c011">-</span></em><em><span class="c011"><span class="c006">one</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">] ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">property</span></span></em><em><span class="c011"> [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006"><em><span class="c011">"gender"</span></em></span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">propertyDefinition</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">gender</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">allowedValue</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Male</span></span></em><em><span class="c011">, </span></em><em><span class="c011"><span class="c006">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Female</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">occurs</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c006">rs</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Zero</span></span></em><em><span class="c011">-</span></em><em><span class="c011"><span class="c006">or</span></span></em><em><span class="c011">-</span></em><em><span class="c011"><span class="c006">one</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">].</span></em></td></tr>
+</table></div></div><p><a id="hevea_default268"></a> 
+Dublin Core Application Profiles [<a href="bookHtml019.html#KarenCoyleTomBaker13">23</a>] also define a set of validation constraints using Description Templates</p><p>Fischer et al. [<a href="bookHtml019.html#FischerEtAl%3AEDBT%2FICDT-WS2015">38</a>] proposed RDF Data Descriptions as another domain specific language that is 
+compiled to SPARQL. 
+The validation is class based in the sense that RDF nodes are validated against a class 
+<code>C</code> 
+whenever they contain an 
+<code>rdf</code><code>:</code><code>type</code><code> </code><code>C</code> declaration. 
+This restriction enables the authors to handle the validation of large datasets and to define some optimization techniques which could be applied to shape implementations.</p>
+<h2 class="section" id="sec47">3.4  Validation Requirements</h2>
+<p> 
+<a id="ch030ValidationRequirements"></a>
+<a id="ch3.sec4"></a></p><p>In this section we collect the different validation requirements that we have identified for an RDF validation language. </p><p>Some of this requirements have been borrowed from the SHACL Use Cases and Requirements document [<a href="bookHtml019.html#SHACLUseCases">91</a>]. 
+Other collections of validation requirements have also been proposed [<a href="bookHtml019.html#Bosch2015">13</a>].</p>
+<h3 class="subsection" id="sec48">3.4.1  General Requirements</h3>
+<p>
+<a id="ch3.sec4.1"></a></p><ul class="itemize"><li class="li-itemize">
+<a id="VReqHighLevel"></a>VR 1. <em>High-level language</em>:
+
+The schema must be defined using a high-level language that uses concepts familiar to the users that intend to validate RDF. </li><li class="li-itemize">
+<a id="VReqConcise"></a>VR 2. <em>Concise</em>:
+ 
+Schemas must be easy to understand, read, and write by humans. 
+Verbose languages tend to be neglected by their users.</li><li class="li-itemize">
+<a id="VReqFormal"></a>VR 3. <em>Formal</em>:
+ 
+It must be based on a formal language that can be automatically processed by machines without ambiguity. 
+The schemas must be parsed and processed by automatic means and the semantics of the different terms must be defined in a non-ambiguous way.</li><li class="li-itemize">
+<a id="VReqImplemIndep"></a>VR 4. <em>Implementation independence</em>:
+ 
+The schema definition must be implementation independent so processors can be implemented using different programming languages and technologies</li><li class="li-itemize">
+<a id="VReqFeasibility"></a>VR 5. <em>Feasibility</em>:
+
+The validation algorithm that a schema processor has to implement must be feasibly computed. 
+It is necessary to check that suitable algorithms are available to check if RDF datasets comply with some schema. 
+Otherwise, if the validation requires too many computational resources, there will not be interest in its application in practical scenarios.</li><li class="li-itemize">
+<a id="VReqLeastPower"></a>VR 6. <em>Least power</em>:
+ 
+The schema language must be able to do its job well but no more than that. 
+Although one could use whole procedural languages like Java or Python to validate RDF, doing it in this way will be cumbersome as the validation rules will be interspersed with the code [<a href="bookHtml019.html#LeastPower">96</a>]. 
+This principle states that a declarative language should be preferred over a procedural one. </li></ul>
+<h3 class="subsection" id="sec49">3.4.2  Graph-based Requirements</h3>
+<p>
+<a id="ch3.sec4.2"></a></p><p>Given that the RDF data model is a graph model. 
+An RDF validation language must be able to describe graph structures. 
+The following set of requirements could be applied to any validation language related with graphs.</p><ul class="itemize"><li class="li-itemize">
+<a id="VReqFocusIdentification"></a>VR 7. <em>Focus identification</em>:
+ A validation process must identify the graph nodes that are expected match constraints.
+Unlike tree structures like XML or JSON, graphs like RDF have no “root” node.
+For RDF, the focii would be IRIs, literals and blank nodes which are subject to validation.</li><li class="li-itemize">
+<a id="VReqProperties"></a>VR 8. <em>Properties</em>:
+ A schema language must be able to describe which arcs relate with which nodes. 
+In the case of RDF, arcs between nodes are called properties or predicates and are IRIs. 
+The schema language must be able to describe the properties that depart from some nodes.</li><li class="li-itemize">
+<a id="VReqRepeatedProperties"></a>VR 9. <em>Repeated properties</em>:
+ 
+Some of the arcs that depart from a node may be repeated and the nodes that they point to could have different structure.
+The schema language must be able to declare that some properties can appear repeated but with different contents. </li><li class="li-itemize">
+<a id="VReqInverseProperties"></a>VR 10. <em>Inverse properties</em>:
+ 
+It must be possible to describe the incoming arcs of a node, which are also called inverse properties.</li><li class="li-itemize">
+<a id="VReqPaths"></a>VR 11. <em>Paths</em>:
+ 
+The schema language must be able to describe the paths that relate two given nodes in a graph. 
+SPARQL 1.1 contains a language to describe paths in an RDF graph. 
+For example, the transitive traversal of the 
+<code>rdfs</code><code>:</code><code>subClassOf</code> property can be expressed as 
+<code>rdfs</code><code>:</code><code>subClassOf</code><code>*</code>.</li></ul>
+<h3 class="subsection" id="sec50">3.4.3  RDF Data Model Requirements</h3>
+<p>
+<a id="ch3.sec4.3"></a></p><p>The schema language must be able to check the different types of contents that appear in the RDF data model.</p><ul class="itemize"><li class="li-itemize"> 
+<a id="VReqNodeKinds"></a>VR 12. <em>Node kinds</em>:
+ The RDF data model contains 
+three kinds of nodes: IRIs, Literals, and BNodes.
+The schema language must be able to describe the kind of some specific nodes
+</li><li class="li-itemize">
+<a id="VReqDatatypes"></a>VR 13. <em>Datatypes</em>:
+ The schema language must be able to describe which are the datatypes that some nodes have. 
+</li><li class="li-itemize">
+<a id="VReqFacets"></a>VR 14. <em>Datatype facets</em>:
+ The XML Schema datatypes are the most popular datatypes employed in RDF datasets.
+Those datatypes can be qualified with facets which constrain the possible values.
+For example, one can say that a value is an 
+<code>xsd</code><code>:</code><code>integer</code> between 10 and 20.
+</li><li class="li-itemize">
+<a id="VReqLanguageTags"></a>VR 15. <em>Language tags</em>:
+ The schema language can describe the language tag associated with literals of type 
+<code>rdf</code><code>:</code><code>langString</code>.</li></ul>
+<h3 class="subsection" id="sec51">3.4.4  Data-modeling-based Requirements</h3>
+<p>
+<a id="ch3.sec4.4"></a></p><p>This set of requirements are common to technologies that model data.</p><ul class="itemize"><li class="li-itemize">
+<a id="VReqand"></a>VR 16. <em>Conjunction</em>:
+ It must be possible to declare that some content must satisfy all the constraints in a set. </li><li class="li-itemize">
+<a id="VReqor"></a>VR 17. <em>Disjunction</em>:
+ It must be possible to declare that some content must satisfy some of the constraints in a set.</li><li class="li-itemize">
+<a id="VReqaddition"></a>VR 18. <em>Addition</em>:
+ It must be possible to declare that some content must be the addition of some content.
+In the case of RDF graphs, one may want to declare that a node must have some content and some other content.</li><li class="li-itemize">
+<a id="VReqregCardinality"></a>VR 19. <em>Regular cardinalities</em>:
+. The schema must support regular cardinalities like optional, zero or more, one or more.</li><li class="li-itemize">
+<a id="VReqnumericalCardinality"></a>VR 20. <em>Numerical cardinalities</em>:
+. The schema must support numerical cardinalities like repetitions between <span class="c012">m</span> and <span class="c012">n</span>, or at least <span class="c012">m</span> repetitions.</li><li class="li-itemize">
+<a id="VReqnot"></a>VR 21. <em>Negation</em>:
+ It must be possible to declare that some content must not satisfy some constraint.</li><li class="li-itemize">
+<a id="VReqrecursion"></a>VR 22. <em>Recursion</em>:
+ It must be possible to declare that some group of constraints that depend on another group in a recursive way.</li><li class="li-itemize">
+<a id="VReqoneOf"></a>VR 23. <em>OneOf</em>:
+ It must be possible to declare that some content can have one of several structures.
+For example, a person can have either a full name or a combination of first name and last name, but not both. </li><li class="li-itemize">
+<a id="VReqopenClosed"></a>VR 24. <em>Open/Closed models</em>:
+ The schema language must be able to define that some content is open and admits other features apart from the declared structure or closed and does not admit other features. </li><li class="li-itemize">
+<a id="VReqCoConstraints"></a>VR 25. <em>Co-occurrence constraints</em>:
+ The schema language must be able to declare that the appearance of some content affects other content. </li></ul>
+<h3 class="subsection" id="sec52">3.4.5  Expressiveness of Schema Language</h3>
+<p>
+<a id="ch3.sec4.5"></a></p><ul class="itemize"><li class="li-itemize">
+<a id="VReqComparisons"></a>VR 26. <em>Comparisons</em>:
+ 
+The schema language must describe comparisons between values like declaring that a value is less than or equal to another one.</li><li class="li-itemize">
+<a id="VReqArithmetic"></a>VR 27. <em>Arithmetic</em>:
+ 
+The schema language can perform arithmetic expressions for constraint checking. 
+For example, to describe the area of a rectangle as the product of its declared base by its declared height it must perform that multiplication.</li><li class="li-itemize">
+<a id="VReqComplex"></a>VR 28. <em>Expressions</em>:
+ 
+The schema language can define complex expressions to enable further constraint checking.
+This requirement can contradict VR<a href="#VReqHighLevel">1</a> so it is necessary to find a balance between both requirements.</li><li class="li-itemize">
+<a id="VReqcompose"></a>VR 29. <em>Composition</em>:
+ 
+The schema language provides mechanisms to define constraints that are composed of other constraints.</li><li class="li-itemize">
+<a id="VReqabstraction"></a>VR 30. <em>Abstraction</em>:
+ 
+The schema language provides mechanisms to define abstractions with parameters that can later be reused.
+This feature is usually implemented by functions, macros, or templates.</li><li class="li-itemize">
+<a id="VReqmodularity"></a>VR 31. <em>Modularity</em>:
+ 
+The schema definitions can be done in a modular way so they can be reused and imported from external sources.</li><li class="li-itemize">
+<a id="VReqspecialization"></a>VR 32. <em>Specialization</em>:
+ 
+The schema language can define a group of constraints that extends another group of constraints with some further refinements.</li></ul>
+<h3 class="subsection" id="sec53">3.4.6  Validation Invocation Requirements</h3>
+<p>
+<a id="ch3.sec4.6"></a></p><p>The following requirements refer to the relationship between schema and instance data, and to the mechanism by which the validation process is triggered.</p><ul class="itemize"><li class="li-itemize">
+<a id="VReqwholeDataset"></a>VR 33. <em>Whole dataset</em>:
+ 
+The schema language can define constraints that must be satisfied by a whole RDF dataset. </li><li class="li-itemize">
+<a id="VReqsingleNode"></a>VR 34. <em>Single node</em>:
+ 
+It must be possible to validate a single node in an RDF graph against a set of 
+constraints. </li><li class="li-itemize">
+<a id="VReqselection"></a>VR 35. <em>Selection</em>:
+ 
+There are mechanisms to select which nodes in an RDF graph are selected for validation against which sets of constraints. </li><li class="li-itemize">
+<a id="VReqReuse"></a>VR 36. <em>Reuse</em>:
+ 
+It should be possible to reuse a set of constraints in different contexts.</li></ul>
+<h3 class="subsection" id="sec54">3.4.7  Usability Requirements</h3>
+<p>
+<a id="ch3.sec4.7"></a></p><p>The following set of requirements refer to the usability of the schema language.</p><ul class="itemize"><li class="li-itemize">
+<a id="VReqerrorReporting"></a>VR 37. <em>Error reporting</em>:
+ 
+Validation processors complying to the schema language can generate
+a report of the different violation errors that appeared during validation.</li><li class="li-itemize">
+<a id="VReqvalidationReport"></a>VR 38. <em>Validation report</em>:
+ 
+The schema language can generate a report of the nodes that have been validated and the set of constraints they satisfy.</li><li class="li-itemize">
+<a id="VReqannotations"></a>VR 39. <em>Annotations</em>:
+
+It is possible to provide annotations with some extra information that does not affect validation but can be used for different purposes 
+such as searching, browsing, UI generation, etc.</li><li class="li-itemize">
+<a id="VReqFamiliarSyntax"></a>VR 40. <em>Familiar syntax</em>:
+ 
+The schema language supports a syntax that is familiar to its intended audience.
+In the case of RDF validation, a familiar syntax could be RDF.</li><li class="li-itemize">
+<a id="VReqprofiles"></a>VR 41. <em>Profiles</em>:
+
+The schema language can include the notion of profiles with different expressiveness so that certain processors implement 
+a subset of the validation functionalities.
+</li></ul>
+<h2 class="section" id="sec55">3.5  Summary</h2>
+<p>
+<a id="ch3.sec5"></a></p><p><a id="hevea_default269"></a> <a id="hevea_default270"></a> <a id="hevea_default271"></a> <a id="hevea_default272"></a> 
+In this chapter we learned which are the main motivations for validating RDF. We started describing what do other technologies do for validation with an overview of UML, SQL, XML, JSON, and so on.
+This section was aimed to present those technologies and to gather some list of validation requirements that are common to all of them.</p><p>We also described some of the previous RDF validation approaches and collected a list of validation requirements that a good schema language for RDF validation must fulfil.
+Notice that some of them contradict each other, so it is necessary to reach some compromise solution.</p>
+<h2 class="section" id="sec56">3.6  Suggested Reading</h2>
+<p>
+<a id="ch3.sec6"></a></p><p>Non-RDF schema languages</p><ul class="itemize"><li class="li-itemize">The following book contains a good overview of non-RDF validation approaches: <a href="bookHtml019.html#Abiteboul2011">Abiteboul, Manolescu, Rigaux, Rousset, and
+Senellart</a>,<a href="bookHtml019.html#Abiteboul2011">2012</a> [<a href="bookHtml019.html#Abiteboul2011">2</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Glushko2013discipline">Glushko</a>,<a href="bookHtml019.html#Glushko2013discipline">2013</a> [<a href="bookHtml019.html#Glushko2013discipline">41</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Murata2005">Murata, Lee, Mani, and Kawaguchi</a>,<a href="bookHtml019.html#Murata2005">2005</a> [<a href="bookHtml019.html#Murata2005">65</a>]
+</li><li class="li-itemize">Overview of JSON Schema: <a href="bookHtml019.html#Bourhis2017">Bourhis, Reutter, Suárez, and
+Vrgoč</a>,<a href="bookHtml019.html#Bourhis2017">2017</a> [<a href="bookHtml019.html#Bourhis2017">14</a>]
+</li></ul><p>RDF validation approaches</p><ul class="itemize"><li class="li-itemize">
+<a href="bookHtml019.html#Tiao10">Tao, Sirin, Bao, and McGuinness</a>,<a href="bookHtml019.html#Tiao10">2010</a> [<a href="bookHtml019.html#Tiao10">95</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Bosch2015">Bosch, Acar, Nolle, and Eckert</a>,<a href="bookHtml019.html#Bosch2015">2015</a> [<a href="bookHtml019.html#Bosch2015">13</a>] 
+</li><li class="li-itemize">SHACL use cases and requirements: <a href="bookHtml019.html#SHACLUseCases">Simon Steyskal and Karen Coyle</a>,<a href="bookHtml019.html#SHACLUseCases">2016</a> [<a href="bookHtml019.html#SHACLUseCases">91</a>]
+</li></ul>
+<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note3" href="#text3">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a ><span class="c010">#1</span></a></div></dd><dt class="dt-thefootnotes"><a id="note4" href="#text4">2</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a ><span class="c010">#1</span></a></div></dd><dt class="dt-thefootnotes"><a id="note5" href="#text5">3</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Those familiar with the Protégé Pizza Tutorial will recall that it uses a 
+
+<code>has</code><code> </code><code>topping</code> property rather than a 
+
+<code>has</code><code> </code><code>pizza</code><code> </code><code>topping</code> property.</div></dd><dt class="dt-thefootnotes"><a id="note6" href="#text6">4</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Simplified from <a href="http://build.fhir.org/observation-example-body-temperature.ttl.html"><span class="c010">http://build.fhir.org/observation-example-body-temperature.ttl.html</span></a>.</div></dd><dt class="dt-thefootnotes"><a id="note7" href="#text7">5</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Simplified from <a href="http://build.fhir.org/observation-example-bloodpressure.ttl.html"><span class="c010">http://build.fhir.org/observation-example-bloodpressure.ttl.html</span></a>.</div></dd></dl>
+<hr>
+<a href="bookHtml009.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml011.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>

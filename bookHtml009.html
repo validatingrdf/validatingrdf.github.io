@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.23">
+<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<title>The RDF Ecosystem</title>
+</head>
+<body>
+<a href="bookHtml008.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml010.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h1 class="chapter" id="sec14">Chapter 2  The RDF Ecosystem</h1>
+<p>
+<a id="ch2"></a>
+<a id="ch020RDF"></a></p><p><a id="hevea_default29"></a>This chapter includes a short overview of the RDF data model and the Turtle notation, as well as some technologies like SPARQL, RDF Schema, and OWL that form part of the RDF ecosystem.</p><p>Readers that are already familiar with these technologies may skip this chapter and jump into the next chapter that describes the RDF validation problem.</p>
+<h2 class="section" id="sec15">2.1  RDF History</h2>
+<p>
+<a id="ch2.sec1"></a></p><p><a id="hevea_default30"></a> <a id="hevea_default31"></a>
+The first draft of RDF was published in 1997 [<a href="bookHtml019.html#RDF1997">68</a>] and became a W3C recommendation in 1999 along with an XML syntax [<a href="bookHtml019.html#RDF10_99">69</a>]. </p><p>A class hierarchy which allows to describe a reasoning like <em>if Socrates is human and all humans are mortals, then Socrates is mortal</em> 
+and property domains and ranges followed a year later. 
+<a id="hevea_default32"></a> <a id="hevea_default33"></a> <a id="hevea_default34"></a> <a id="hevea_default35"></a> <a id="hevea_default36"></a>
+It is perhaps unfortunate that this came under the name RDF Schema (RDFS) as it didn’t offer any of the data constraints available in other schema languages like SQL’s DDL or W3C XML Schema. </p><p>In hindsight, this development path was clearly in tension with the priorities of everyday programmers and systems architects who care primarily about creating and accessing well-structured data, and perhaps secondarily about inference. 
+<a id="hevea_default37"></a> <a id="hevea_default38"></a>
+Four years after RDFS, OWL extended the facilities provided by RDFS into an expressive ontology language that could describe the information required for instances of classes. </p><p><a id="hevea_default39"></a>
+However, once again, the language was oriented toward a healthy, distributed information infrastructure and not that last mile which permits developers to confidently produce and consume data. 
+While OWL could detect errors when one used a literal with the wrong datatype, or infer a subclass relationship between two classes explicitly declared disjoint, it simply would not complain if one says that every vehicle registration has an owner’s first name and last name, and then fails to supply those values. 
+<a id="hevea_default40"></a>
+OWL is designed for an <em>open world</em> semantics, which means that it won’t conclude anything (e.g., signaling missing data) based on the absence of provided data. 
+The absence of evidence is not evidence of absence.</p><p><a id="hevea_default41"></a>
+Another four years later in 2008, the RDF community assembled to deliver a query language (SPARQL) to meet the most elementary of application needs, accessing data. 
+The language met immediately with overwhelming acceptance and adoption. 
+This ability to query led to the development of many new applications, as well as databases and libraries designed to facilitate application development. 
+This energy led to the expansion of SPARQL 1.1 into update (analogous to SQL DDL) and HTTP protocol. 
+It did not, however, elegantly solve the problem of RDF data description and verification. </p>
+<h2 class="section" id="sec16">2.2  RDF Data Model</h2>
+<p> 
+<a id="ch020RDFDataModel"></a>
+<a id="ch2.sec2"></a></p><p><a id="hevea_default42"></a>
+When RDF was created in 1997, XML was quickly becoming a popular format. 
+It had a strong influence on the RDF syntax which was called RDF/XML. 
+That format is quite verbose and there appeared several proposals to have a more human-readable syntax for RDF.</p><p><a id="hevea_default43"></a>
+<a id="hevea_default44"></a>
+<a id="hevea_default45"></a>
+<a id="hevea_default46"></a>
+<a id="hevea_default47"></a>
+<a id="hevea_default48"></a>
+<a id="hevea_default49"></a>
+In 2014, RDF 1.1 [<a href="bookHtml019.html#RDF11">25</a>] was published as a revised version which maintained most of the data model and added support for other serialization formats like Turtle [<a href="bookHtml019.html#Turtle">78</a>], Trig [<a href="bookHtml019.html#Trig">18</a>], or JSON-LD [<a href="bookHtml019.html#JSONLD">5</a>].</p><p>In this section we give a short overview of the RDF data model following the RDF 1.1 definitions and using Turtle as the serialization format. </p><p><a id="hevea_default50"></a> 
+<a id="hevea_default51"></a> 
+<a id="hevea_default52"></a> 
+<a id="hevea_default53"></a> 
+<a id="hevea_default54"></a> 
+<a id="hevea_default55"></a> 
+<a id="hevea_default56"></a>
+The RDF data model is based on the concept of triples. 
+Each triple consists of a subject, a predicate and an object. 
+RDF triples are usually depicted as a directed arc connecting two nodes (subject and object) by an edge (predicate) (see Figure <a href="#ch020.RDFTriple">2.2</a>). </p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+
+<div class="center">
+<img src="RDFTriple1.png">
+</div>
+
+<a id="ch020.RDFTriple"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 2.1: Example of RDF triple.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote><p><a id="hevea_default57"></a>
+An RDF triple asserted means that some relationship, indicated by the predicate, holds between the resources denoted by the subject and object. 
+This is known as an RDF statement. 
+The predicate is an IRI that denotes a property. 
+An RDF statement can be thought of as a binary relation identified by the property between the subject and object.</p><p>There can be three kinds of nodes: IRIs, literals, and blank nodes. </p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default58"></a> <a id="hevea_default59"></a> <a id="hevea_default60"></a>
+</p>An IRI (Internationalized Resource Identifier) [<a href="bookHtml019.html#IRIs">34</a>] refers to a resource (the referent). 
+A resource can be any thing. 
+IRIs can appear as subjects, predicates and objects. 
+In Turtle, IRIs are enclosed by 
+<code>&lt;</code> and 
+<code>&gt;</code>. 
+For example, an IRI can be 
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>john</code><code>&gt;</code>. <p>	
+<a id="hevea_default61"></a> <a id="hevea_default62"></a> <a id="hevea_default63"></a> <a id="hevea_default64"></a>
+Most RDF formats include some mechanism called prefix declaration which enables to simplify writing long IRIs declaring prefix labels. 
+A prefix label associates an alias with an IRI and enables the definition of prefixed names. 
+A prefixed name contains a prefix label and a local part separated by 
+<code>:</code> and 
+represents the IRI formed by concatenating the IRI associated with the prefix label and the local part.
+For example, if 
+<code>ex</code> is declared as a prefix label to represent 
+
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code>, 
+then 
+<code>ex</code><code>:</code><code>alice</code> is a prefixed name that represents 
+
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>alice</code><code>&gt;</code> (see Figure <a href="#ch020.PrefixDeclaration">2.2</a>).</p><p>	
+</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+
+<div class="center">
+<img src="PrefixDeclaration.png">
+</div>
+
+<a id="ch020.PrefixDeclaration"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 2.2: Example of prefix declaration.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote><p><a id="hevea_default65"></a> 
+<a id="hevea_default66"></a> 
+<a id="hevea_default67"></a> 
+<a id="hevea_default68"></a> 
+<a id="hevea_default69"></a>
+There are some popular namespace aliases like 
+<code>rdf</code>, 
+<code>xsd</code>, 
+<code>rdfs</code>, 
+<code>owl</code>, etc. 
+The <a href="http://prefix.cc"><span class="c010">http://prefix.cc</span></a> service can be used to lookup the IRI associated with those popular aliases. 
+The snippets of code used in this book assume these prefix declarations.
+Table <a href="bookHtml008.html#ch010.Namespaces">1.1</a></p><p><a id="hevea_default70"></a> <a id="hevea_default71"></a> <a id="hevea_default72"></a>
+</p></li><li class="li-itemize">A literal denotes resources which have an associated value, for example, an integer or string value. 
+Literals can only appear as objects in triples. 	
+They contain a lexical form and a datatype IRI which are represented as 
+<code>"</code><code>lexicalForm</code><code>"^^</code><code>datatype</code> in Turtle.
+For example: 
+<code>"23"^^</code><code>xsd</code><code>:</code><code>integer</code> represents an integer with value 
+<code>23</code> and 
+<code>"1980-03-01"^^</code><code>xsd</code><code>:</code><code>date</code> represents the March 1, 1980.<p><a id="ch020RDFStringLiterals"></a>
+<a id="hevea_default73"></a>
+<a id="hevea_default74"></a>
+All literals in RDF have an associated datatype. 
+In the case of string literals with no declared datatype, it is assumed the 
+<code>xsd</code><code>:</code><code>string</code> datatype by default. 
+So 
+<code>"</code><code>hi</code><code>"</code> is the same as 
+<code>"</code><code>hi</code><code>"^^</code><code>xsd</code><code>:</code><code>string</code>.
+	</p><p><a id="hevea_default75"></a> <a id="hevea_default76"></a>
+A special type of literals are language-tagged strings, which are literals with datatype 
+<code>rdf</code><code>:</code><code>langString</code> that also contain a language tag [<a href="bookHtml019.html#BCP47">75</a>] to identify a specific language. 
+Language-tagged strings are represented in Turtle as 
+<code>"</code><code>string</code><code>"</code><code>@tag</code>. 
+For example: 
+<code>"</code><code>hola</code><code>"</code><code>@es</code> represents the literal value 
+<code>"</code><code>hola</code><code>"</code> written in Spanish (
+<code>es</code>).</p><p><a id="hevea_default77"></a>
+</p></li><li class="li-itemize">Blank nodes are local identifiers which do not identify specific resources. 
+Blank nodes can be used as subjects or objects of triples.
+They specify that something with the given relationship exists, without explicitly naming it. 
+	
+In Turtle, blank nodes can be denoted by an underscore followed by a colon and a local identifier. 
+For example: 
+<code>_</code><code>:</code><code>id</code> represents a blank node.
+	
+</li></ul><p><a id="hevea_default78"></a> <a id="defn:RDFGraph"></a>	
+An RDF graph is a set of RDF triples. 
+Notice that the edges of RDF graphs can only be IRIs. 
+This is an important feature of RDF that enables to globally identify the predicates asserted by triples. 
+The subjects can only be IRIs or blank nodes, while the objects can be IRIs, blank nodes or literals.</p><div class="example"><div class="theorem"><span class="c013">Example 1</span>  <em>Simple RDF file in Turtle</em><em> 
+</em><a id="ch020.exampleTurtleNotSimplified"></a><p><em>The following code represents an RDF graph in Turtle. 
+The first three lines are prefix declarations and the rest 
+represent a sequence of RDF triples separated by dots.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">ex:</span></span></em><em><span class="c011">     &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">example</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">schema:</span></span></em><em><span class="c011"> &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">dbr:</span></span></em><em><span class="c011">    &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">dbpedia</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">resource</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011">xsd:</span></em><em><span class="c011">    &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">www</span></em><em><span class="c011">.</span></em><em><span class="c011">w3</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/2001/</span></em><em><span class="c011">XMLSchema</span></em><span class="c011"><em><span class="c011">#&gt;</span></em></span><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:alice</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">      </span></em><em><span class="c011">ex:bob</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:bob</span></em><em><span class="c011">   </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">      </span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:bob</span></em><em><span class="c011">   </span></em><em><span class="c011">schema:name</span></em><em><span class="c011">       </span></em><em><span class="c011"><em><span class="c011">"Robert"</span></em></span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:bob</span></em><em><span class="c011">   </span></em><em><span class="c011">schema:birthDate</span></em><em><span class="c011">  </span></em><em><span class="c011"><em><span class="c011">"1980-03-10"</span></em></span></em><em><span class="c011">^^</span></em><em><span class="c011">xsd:date</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:bob</span></em><em><span class="c011">   </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">dbr:Oviedo</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">      </span></em><em><span class="c011">ex:alice</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">      </span></em><em><span class="c011">ex:bob</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">dbr:Oviedo</span></em><em><span class="c011"> .</span></em></td></tr>
+</table></div></div><p>The corresponding RDF graph has been depicted in Figure <a href="#ch020.RDFGraph">2.2</a>. 
+Rounded boxes represent IRIs while orange rectangles represent literals.</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+
+<div class="center">
+<img src="RDFGraph.png">
+</div>
+
+<a id="ch020.RDFGraph"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 2.3: Example of an RDF graph.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote><p><a id="hevea_default79"></a>
+Blank nodes can be used to make assertions about some elements whose IRIs are not known. </p><div class="example"><div class="theorem"><span class="c013">Example 2</span>  <em>Blank nodes in RDF</em><em> 
+</em><a id="ch020BlankNodesExample"></a><p><em>The following RDF Turtle code declares that </em><em>
+</em><code><em>ex</em></code><code><em>:</em></code><code><em>alice</em></code><em> knows someone 
+who knows </em><em>
+</em><code><em>ex</em></code><code><em>:</em></code><code><em>dave</em></code><em>, 
+and that </em><em>
+</em><code><em>ex</em></code><code><em>:</em></code><code><em>carol</em></code><em> knows someone who was born in the same place as </em><em>
+</em><code><em>dave</em></code><em>, whose age is 23. The graph is depicted in figure </em><a href="#ch020.RDFGraphBlankNodes"><em>2</em></a><em>.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">ex:</span></span></em><em><span class="c011">     &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">example</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">schema:</span></span></em><em><span class="c011"> &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">dbr:</span></span></em><em><span class="c011">    &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">dbpedia</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">resource</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:alice</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011"> </span></em><em><span class="c011">_:x</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:x</span></em><em><span class="c011">      </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011"> </span></em><em><span class="c011">ex:dave</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011"> </span></em><em><span class="c011">_:y</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:y</span></em><em><span class="c011">      </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">_:z</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">         </span></em><em><span class="c011">schema:age</span></em><em><span class="c011"> </span></em><em><span class="c011"><em><span class="c011">"23"</span></em></span></em><em><span class="c011">^^</span></em><em><span class="c011">xsd:integer</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:dave</span></em><em><span class="c011">  </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">_:z</span></em><em><span class="c011"> .</span></em></td></tr>
+</table><blockquote class="figure"><div class="center"><hr class="c021"></div><em> 
+
+</em><div class="center"><em>
+<img src="RDFGraphBlankNodes.png">
+</em></div><em>
+
+</em><a id="ch020.RDFGraphBlankNodes"></a><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Figure 2.4: Example of an RDF graph with blank nodes.</em></td></tr>
+</table></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div><p>An important feature of RDF graphs is that two independent RDF graphs can automatically be merged to obtain a larger RDF graph formed by the union on their sets of triples. 
+Given the global nature of IRIs, nodes with the same IRI are automatically unified.
+Using shared IRIs makes the powerful statement the entities and relationships in one graph carry the same intent as they do in the other graphs using the same identifiers.
+In a sense, the use of RDF gets rid of the data merging problem and lets us focus on the hard problems of establishing shared entities and vocabularies.</p><p>For example, the union of the RDF graphs from Figures <a href="#ch020.RDFGraph">2.2</a> 
+and <a href="#ch020.RDFGraphBlankNodes">2</a> is depicted in Figure <a href="#ch020.RDFGraphMerged">2.2</a>.
+<a id="hevea_default80"></a>
+Turtle contains several simplifications to facilitate readability.</p><blockquote class="figure"><div class="center"><hr class="c021"></div> 
+
+<div class="center">
+<img src="RDFGraphMerged.png">
+</div>
+
+<a id="ch020.RDFGraphMerged"></a>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Figure 2.5: Merged RDF graph.</td></tr>
+</table></div>
+<div class="center"><hr class="c021"></div></blockquote><ul class="itemize"><li class="li-itemize"> 
+When the subject is repeated, it is possible to use predicate lists collapsing the triples with the same subject and to omit it separating the different predicates and objects by semicolons (
+<code>;</code>). So, instead of writing <table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">ex:bob</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011">        </span><span class="c011"><span class="c011">"Robert"</span></span><span class="c011"> .</span><span class="c011">
+</span><span class="c011">ex:bob</span><span class="c011"> </span><span class="c011">schema:birthDate</span><span class="c011">   </span><span class="c011"><span class="c011">"1980-03-10"</span></span><span class="c011">^^</span><span class="c011">xsd:date</span><span class="c011"> .</span><span class="c011">
+</span><span class="c011">ex:bob</span><span class="c011"> </span><span class="c011">schema:birthPlace</span><span class="c011">  </span><span class="c011">dbr:Oviedo</span><span class="c011"> .</span><span class="c011">
+</span><span class="c011">ex:bob</span><span class="c011"> </span><span class="c011">schema:knows</span><span class="c011">       </span><span class="c011">ex:carol</span><span class="c011"> .</span></td></tr>
+</table><p>it is possible to write:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">ex:bob</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011">        </span><span class="c011"><span class="c011">"Robert"</span></span><span class="c011"> ;</span><span class="c011">
+</span><span class="c011">       </span><span class="c011">schema:birthDate</span><span class="c011">   </span><span class="c011"><span class="c011">"1980-03-10"</span></span><span class="c011">^^</span><span class="c011">xsd:date</span><span class="c011"> ;</span><span class="c011">
+</span><span class="c011">       </span><span class="c011">schema:birthPlace</span><span class="c011">  </span><span class="c011">dbr:Oviedo</span><span class="c011"> ;</span><span class="c011">
+</span><span class="c011">       </span><span class="c011">schema:knows</span><span class="c011">       </span><span class="c011">ex:carol</span><span class="c011"> .</span></td></tr>
+</table><p><a id="hevea_default81"></a>
+</p></li><li class="li-itemize">When the subject and predicate are the same, it is possible to use object lists collapsing the subjects and predicates and separating the different objects by commas (
+<code>,</code>).<p>Instead of writing </p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">ex:carol</span><span class="c011"> </span><span class="c011">schema:knows</span><span class="c011"> </span><span class="c011">ex:alice</span><span class="c011"> .</span><span class="c011">
+</span><span class="c011">ex:carol</span><span class="c011"> </span><span class="c011">schema:knows</span><span class="c011"> </span><span class="c011">ex:bob</span><span class="c011"> .</span></td></tr>
+</table><p>it is possible to write:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">ex:carol</span><span class="c011"> </span><span class="c011">schema:knows</span><span class="c011"> </span><span class="c011">ex:alice,</span><span class="c011"> </span><span class="c011">ex:bob</span><span class="c011"> .</span></td></tr>
+</table><p>	
+</p><div class="example"><div class="theorem"><span class="c013">Example 3</span>  <em>Turtle simplifications</em><em>
+</em><a id="ch020.exampleTurtleSimplified"></a><p><em>The RDF graph represented in Example </em><a href="#ch020.exampleTurtleNotSimplified"><em>1</em></a><em> can be simplified as:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">schema:</span></span></em><em><span class="c011"> &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">ex:</span></span></em><em><span class="c011">     &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">example</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c013">dbr:</span></span></em><em><span class="c011">    &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">dbpedia</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">resource</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011"><span class="c013">prefix</span></span></em><em><span class="c011"> </span></em><em><span class="c011">xsd:</span></em><em><span class="c011">    &lt;</span></em><em><span class="c011">http:</span></em><em><span class="c011">//</span></em><em><span class="c011">www</span></em><em><span class="c011">.</span></em><em><span class="c011">w3</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/2001/</span></em><em><span class="c011">XMLSchema</span></em><span class="c011"><em><span class="c011">#&gt; </span></em></span><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:alice</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">  </span></em><em><span class="c011">ex:bob</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:bob</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:name</span></em><em><span class="c011">        </span></em><em><span class="c011"><em><span class="c011">"Robert"</span></em></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">       </span></em><em><span class="c011">schema:birthDate</span></em><em><span class="c011">   </span></em><em><span class="c011"><em><span class="c011">"1980-03-10"</span></em></span></em><em><span class="c011">^^</span></em><em><span class="c011">xsd:date</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">       </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011">  </span></em><em><span class="c011">dbr:Oviedo</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">       </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">       </span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">dbr:Oviedo</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">         </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">      </span></em><em><span class="c011">ex:alice,</span></em><em><span class="c011"> </span></em><em><span class="c011">ex:bob</span></em><em><span class="c011"> .</span></em></td></tr>
+</table></div></div></li><li class="li-itemize">Although number and Boolean literals can be defined like other literals with their lexical form and datatype, there is also a shorthand syntax in Turtle to automatically parse some values as literals. 
+Table <a href="#ch020.NumbersBooleansTurtle">2.1</a> shows how some values in shorthand notation are parsed as literals.<blockquote class="table"><div class="center"><hr class="c021"></div>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Table 2.1: Shorthand syntax for numbers and Booleans in Turtle</td></tr>
+</table></div>
+<a id="ch020.NumbersBooleansTurtle"></a> 
+<div class="center">
+<table class="c000 cellpadding1" border=1><tr><td class="c015"> Datatype</td><td class="c016">Shorthand example</td><td class="c016">Lexical example
+</td></tr>
+<tr><td class="c015"> 
+<code>xsd</code><code>:</code><code>integer</code></td><td class="c016">
+<code>-3</code></td><td class="c016">
+<code>"-3"^^</code><code>xsd</code><code>:</code><code>integer</code> 
+</td></tr>
+<tr><td class="c015"> 
+<code>xsd</code><code>:</code><code>decimal</code></td><td class="c016">
+<code>-3.14</code></td><td class="c016">
+<code>"-3.14"^^</code><code>xsd</code><code>:</code><code>decimal</code> 
+</td></tr>
+<tr><td class="c015"> 
+<code>xsd</code><code>:</code><code>double</code></td><td class="c016">
+<code>3.14</code><code>e2</code></td><td class="c016">
+<code>"3.14</code><code>e2</code><code>"^^</code><code>xsd</code><code>:</code><code>double</code>
+</td></tr>
+<tr><td class="c015"> 
+<code>xsd</code><code>:</code><code>boolean</code></td><td class="c016">
+<code>true</code></td><td class="c016">
+<code>"</code><code>true</code><code>"^^</code><code>xsd</code><code>:</code><code>boolean</code> 
+</td></tr>
+</table>
+</div>
+<div class="center"><hr class="c021"></div></blockquote></li><li class="li-itemize"><a id="hevea_default82"></a>
+A triple of the form 
+<code>X</code><code> </code><code>rdf</code><code>:</code><code>type</code><code> </code><code>Y</code> asserts that 
+<code>X</code> has the type 
+represented by 
+<code>Y</code>. 
+In Turtle, 
+<code>rdf</code><code>:</code><code>type</code> can also be represented by the token 
+<code>a</code>, so the previous triple could also be represented as 
+<code>X</code><code> </code><code>a</code><code> </code><code>Y</code>.<p><a id="ch020RDFLists"></a>
+<a id="hevea_default83"></a>
+<a id="hevea_default84"></a>
+<a id="hevea_default85"></a>
+<a id="hevea_default86"></a>
+<a id="hevea_default87"></a>
+</p></li><li class="li-itemize">RDF collections are list structures chained by the 
+<code>rdf</code><code>:</code><code>rest</code> that end with 
+<code>rdf</code><code>:</code><code>nil</code> and whose values are declared by each value of the 
+<code>rdf</code><code>:</code><code>first</code> property. <div class="example"><div class="theorem"><span class="c013">Example 4</span>  <em>RDF collections not simplified</em><em>
+</em><a id="ch020.exampleTurtleCollectionSimple"></a><p><em>The following snippet declares the results of a marathon as an RDF Collection:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:m23</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:name</span></em><em><span class="c011"> </span></em><em><span class="c011"><em><span class="c011">"New York City Marathon"</span></em></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">:results</span></em><em><span class="c011"> </span></em><em><span class="c011">_:1</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:1</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:first</span></em><em><span class="c011"> </span></em><em><span class="c011">:dave</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:1</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:rest</span></em><em><span class="c011">  </span></em><em><span class="c011">_:2</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:2</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:first</span></em><em><span class="c011"> </span></em><em><span class="c011">:alice</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:2</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:rest</span></em><em><span class="c011">  </span></em><em><span class="c011">_:3</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:3</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:first</span></em><em><span class="c011"> </span></em><em><span class="c011">:bob</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">_:3</span></em><em><span class="c011"> </span></em><em><span class="c011">rdf:rest</span></em><em><span class="c011">  </span></em><em><span class="c011">rdf:nil</span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><em>Turtle has a special notation for RDF collections enumerating the values enclosed by round brackets.
+The previous example can also be represented in Turtle as:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:m23</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:name</span></em><em><span class="c011"> </span></em><em><span class="c011"><em><span class="c011">"New York City Marathon"</span></em></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">:results</span></em><em><span class="c011">    (</span></em><em><span class="c011">:dave</span></em><em><span class="c011"> </span></em><em><span class="c011">:alice</span></em><em><span class="c011"> </span></em><em><span class="c011">:bob</span></em><em><span class="c011">) .</span></em></td></tr>
+</table><blockquote class="figure"><div class="center"><hr class="c021"></div><em> 
+
+</em><div class="center"><em>
+<img src="RDFCollections.png">
+</em></div><em>
+
+</em><a id="ch020.RDFCollections"></a><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Figure 2.6: RDF collection example.</em></td></tr>
+</table></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div></li><li class="li-itemize">Fresh blank nodes in Turtle can also be represented by using square brackets (
+<code>[</code> and 
+<code>]</code>). 
+In this way, Example <a href="#ch020BlankNodesExample">2</a> can be rewritten as follows.<div class="example"><div class="theorem"><span class="c013">Example 5</span>  <em>Blank nodes with square brackets</em><em>
+	
+</em><em>
+
+</em><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">ex:carol</span></em><em><span class="c011">  </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">  [ </span></em><em><span class="c011">schema:age</span></em><em><span class="c011">         23 ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">                          </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011">  </span></em><em><span class="c011">_:x</span></em><em><span class="c011">
+</span></em><em><span class="c011">                        ] .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:dave</span></em><em><span class="c011">  </span></em><em><span class="c011">schema:birthPlace</span></em><em><span class="c011">  </span></em><em><span class="c011">_:x</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">ex:alice</span></em><em><span class="c011">  </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">  [ </span></em><em><span class="c011">schema:knows</span></em><em><span class="c011">  </span></em><em><span class="c011">ex:dave</span></em><em><span class="c011"> ] .</span></em></td></tr>
+</table><em>	
+</em></div></div></li></ul><p>The RDF data model is very simple. 
+This simplicity if part of its power as it enables RDF to be used as a data representation language in a lot of scenarios.</p>
+<h2 class="section" id="sec17">2.3  Shared Entites and Vocabularies</h2>
+<p>
+<a id="ch2.sec3"></a>
+<a id="hevea_default88"></a>
+<a id="hevea_default89"></a></p><p>One of RDF strengths is to promote the use of IRIs instead of plain strings to facilitate merging data from heterogeneous sources and 
+to avoid ambiguity. 
+This poses the challenge of agreeing on common entities and relationships. 
+Usually, those sets of entities and relationships are grouped in vocabularies
+which can be general-purpose or domain specific. </p><p><a id="hevea_default90"></a> <a id="hevea_default91"></a> <a id="hevea_default92"></a> <a id="hevea_default93"></a> <a id="hevea_default94"></a>
+There are several well-known vocabularies like 
+<code>schema</code><code>.</code><code>org</code> which is a collaborative, community activity founded by Google, Microsoft, Yahoo, and Yandex that promotes the use of common structured data on the internet. </p><p><a id="hevea_default95"></a>
+An interesting project is the 
+LOV (Linked Open Vocabularies)<sup><a id="text2" href="#note2">1</a></sup> 
+project that collects open vocabularies and provides a vocabulary search engine. </p><p>Shared identifiers are frequently minted by some authority releasing data using those identifiers followed by community uptake of those identifiers.
+<a id="hevea_default96"></a>
+Services like <a href="http://identifiers.org/"><span class="c010">http://identifiers.org/</span></a> publish these identifiers and, in the frequent case where multiple identifiers exist for the same entity, map between them.
+<a id="hevea_default97"></a>
+The property 
+<code>owl</code><code>:</code><code>sameIndividualAs</code> can be used to assert that mapping.</p><p>Consensus on vocabularies is typically by communities producing human-readable specifications, which is accompanied by some descriptions of the terms in the vocabulary using RDF Schema (see Section <a href="#RDFSchema">2.4.2</a>).
+Ontologies take this a step further by providing much more powerful inference and can be used to detect some errors in the conceptual model (for instance, if a vehicle registration conflated a car with its owner).</p><p>As we share more models, we implicitly raise our expectations for the accuracy of these models.
+<a id="hevea_default98"></a>
+George Box stated in 1976 that <em>all models are wrong but some are useful</em> [<a href="bookHtml019.html#Box1976">15</a>].
+Raising the bar for these models means we expect them to be useful in more situations than they were originally designed for.</p><p>Something as apparently simple as schema.org’s 
+<code>schema</code><code>:</code><code>gender</code> offers a simple model for a complex issue.
+For at least 90% of the population, the model’s terms 
+<code>schema</code><code>:</code><code>Male</code> and 
+<code>schema</code><code>:</code><code>Female</code> suffice.
+Extending that to 99% or 99.9% of the population we see these terms are insufficient for the many variations in both identity and biology.
+Schema.org extends the model for these cases by permitting a string value.
+<a id="hevea_default99"></a> <a id="hevea_default100"></a>
+FHIR HL7 (see Section <a href="bookHtml013.html#ch060FHIR">6.2</a>) standards use a concept of <em>administrative gender</em>, which adds two other possibilities.</p><p>For simplicity in this chapter and the next, we will use a notion of 
+<code>gender</code> which is constrained to 
+<code>male</code> and 
+<code>female</code>.
+In later chapters we will use this to show how RDF validation languages can use the extended value set to provide coverage for more use cases.</p>
+<h2 class="section" id="sec18">2.4  Technologies Related with RDF</h2>
+<p>
+<a id="ch2.sec4"></a></p><p>RDF was created as a language on which other technologies could be based on. 
+<a id="hevea_default101"></a>
+The semantic web stack (also called layer cake) illustrates a hierarchy of technologies where RDF plays a central role. 
+Although that stack is still evolving, there are two concepts that are worth mentioning: SPARQL and inference systems.</p>
+<h3 class="subsection" id="sec19">2.4.1  SPARQL</h3>
+<p> 
+<a id="SPARQL"></a>
+<a id="ch2.sec4.1"></a>
+	
+<a id="hevea_default102"></a>
+SPARQL (SPARQL Protocol and RDF Query Language) is an RDF query language which is able to retrieve and manipulate data stored in RDF. 
+SPARQL 1.0 became a recommendation in 2008 [<a href="bookHtml019.html#SPARQL10">79</a>] and SPARQL 1.1 was published in 2013 [<a href="bookHtml019.html#SPARQL11">44</a>]. </p><p><a id="hevea_default103"></a>
+SPARQL is based on the notion of Basic Graph Patterns which are sets of triple patterns. 
+<a id="hevea_default104"></a> <a id="hevea_default105"></a>
+A triple pattern is an extension of an RDF triple where some of the elements can be variables which are denoted by a question mark.</p><p>A Basic Graph Pattern matches a subgraph of the RDF data when RDF terms from that subgraph may be substituted for the variables 
+and the result is an RDF graph equivalent to the subgraph.</p><div class="example"><div class="theorem"><span class="c013">Example 6</span>  <em>Simple SPARQL query</em><p><em>The following SPARQL query retrieves the nodes </em><em>
+</em><code><em>?</em></code><code><em>x</em></code><em> whose birth place is </em><em>
+</em><code><em>dbr</em></code><code><em>:</em></code><code><em>Oviedo</em></code><em> and the nodes </em><em>
+</em><code><em>?</em></code><code><em>y</em></code><em> that are known by them.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">prefix</span></em><em><span class="c011"> :       &lt;</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">example</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">prefix</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">: &lt;</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">prefix</span></em><em><span class="c011"> </span></em><em><span class="c011">dbr</span></em><em><span class="c011">:    &lt;</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">dbpedia</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">resource</span></em><em><span class="c011">/&gt;</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">x</span></em><em><span class="c011"> ?</span></em><em><span class="c011">y</span></em><em><span class="c011"> </span></em><em><span class="c011">WHERE</span></em><em><span class="c011"> {</span></em><em><span class="c011">
+</span></em><em><span class="c011"> ?</span></em><em><span class="c011">x</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">birthPlace</span></em><em><span class="c011"> </span></em><em><span class="c011">dbr</span></em><em><span class="c011">:</span></em><em><span class="c011">Oviedo</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011"> ?</span></em><em><span class="c011">x</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">knows</span></em><em><span class="c011">      ?</span></em><em><span class="c011">y</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table><p><em>Applying the previous SPARQL query to the RDF data defined in 
+Example </em><a href="#ch020.RDFGraph"><em>2.2</em></a><em>, a 
+SPARQL processor would return the results shown in Table </em><a href="#ch020.SPARQLQueryResults"><em>2.2</em></a><em>.</em></p><blockquote class="table"><div class="center"><hr class="c021"></div><em>
+</em><div class="caption"><table class="c002 cellpading0"><tr><td class="c018"><em>Table 2.2: Results of SPARQL query</em></td></tr>
+</table></div><em>
+</em><a id="ch020.SPARQLQueryResults"></a><em> 
+</em><div class="center"><em>
+</em><table class="c000 cellpadding1" border=1><tr><td class="c016"><em> </em><em>
+</em><code><em>?</em></code><code><em>x</em></code></td><td class="c016"><em>
+</em><code><em>?</em></code><code><em>y</em></code><em> 
+</em></td></tr>
+<tr><td class="c016"><em> </em><em>
+</em><code><em>:</em></code><code><em>carol</em></code></td><td class="c016"><em>
+</em><code><em>:</em></code><code><em>alice</em></code><em> 
+</em></td></tr>
+<tr><td class="c016"><em> </em><em>
+</em><code><em>:</em></code><code><em>carol</em></code></td><td class="c016"><em>
+</em><code><em>:</em></code><code><em>bob</em></code><em> 
+</em></td></tr>
+<tr><td class="c016"><em> </em><em>
+</em><code><em>:</em></code><code><em>bob</em></code></td><td class="c016"><em>
+</em><code><em>:</em></code><code><em>carol</em></code><em> 
+</em></td></tr>
+</table><em>
+</em></div><em>
+</em><div class="center"><hr class="c021"></div></blockquote></div></div><p>SPARQL queries consist of three parts [<a href="bookHtml019.html#SemanticsSPARQL09">73</a>]. </p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default106"></a>
+<a id="hevea_default107"></a>
+</p>A pattern matching part which includes operators to operate on graphs like optional parts, union of patterns, 
+nesting, and filtering values. <p><a id="hevea_default108"></a>
+<a id="hevea_default109"></a>
+<a id="hevea_default110"></a>
+</p></li><li class="li-itemize">Solution modifiers, which once the output of the pattern has been computed as a table of variables/values, 
+modify those values applying operators like projection, distinct, order, limit, offset, grouping, etc.</li><li class="li-itemize">The output of SPARQL queries can be of different types like:
+<a id="hevea_default111"></a>
+ASK queries, which return yes/no depending on the existence of matching values,
+<a id="hevea_default112"></a> 
+SELECT queries that return a selection of values for the variables that match a pattern and
+<a id="hevea_default113"></a>
+CONSTRUCT queries, which return the triples generated from the values that match the pattern. 
+</li></ul><div class="example"><div class="theorem"><span class="c013">Example 7</span>  <em>SPARQL query with Filter and Counts</em><p><em>The following SPARQL query returns people who know only one value. </em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">person</span></em><em><span class="c011"> ?</span></em><em><span class="c011">known</span></em><em><span class="c011"> {</span></em><em><span class="c011">
+</span></em><em><span class="c011"> ?</span></em><em><span class="c011">person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">knows</span></em><em><span class="c011"> ?</span></em><em><span class="c011">known</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011"> { </span></em><em><span class="c011">SELECT</span></em><em><span class="c011"> ?</span></em><em><span class="c011">person</span></em><em><span class="c011"> (</span></em><em><span class="c011">count</span></em><em><span class="c011">(*) </span></em><em><span class="c011">as</span></em><em><span class="c011"> ?</span></em><em><span class="c011">countKnown</span></em><em><span class="c011">) {</span></em><em><span class="c011">
+</span></em><em><span class="c011">    ?</span></em><em><span class="c011">person</span></em><em><span class="c011"> </span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">knows</span></em><em><span class="c011"> ?</span></em><em><span class="c011">known</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">  } </span></em><em><span class="c011">GROUP</span></em><em><span class="c011"> </span></em><em><span class="c011">BY</span></em><em><span class="c011"> ?</span></em><em><span class="c011">person</span></em><em><span class="c011">
+</span></em><em><span class="c011"> }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">FILTER</span></em><em><span class="c011"> (?</span></em><em><span class="c011">countKnown</span></em><em><span class="c011"> = 1)</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table><p><em>It contains a nested query (lines 3–5) which groups each element with the number of known entries and a filter (line 8) which removes those elements whose counter is different to one. </em></p></div></div><p>A full introduction to SPARQL is out of the scope of this book.
+For the interested reader, we recommend [<a href="bookHtml019.html#DuCharme2011">33</a>]. </p><p>SPARQL is a very expressive language which can be used to describe very complex queries. 
+It can also be employed to validate the structure of complex RDF graphs [<a href="bookHtml019.html#Labra13">55</a>]. 
+In Section <a href="bookHtml010.html#ch030.ValidatingWithSPARQL">23</a>, we describe how SPARQL can be used to validate RDF.</p>
+<h3 class="subsection" id="sec20">2.4.2  Inference Systems: RDF Schema and OWL</h3>
+<p> 
+<a id="RDFSchema"></a>
+<a id="ch2.sec4.2"></a></p><p>RDF was designed so it could be used as a central piece for knowledge representation in the Web. 
+The goal is that agents can automatically infer new knowledge in the form of new RDF statements from existing RDF graphs.
+To that end, several technologies were proposed to increase RDF expressiveness.
+In this section we will briefly review two of the most popular: RDF Schema and OWL. </p><p><a id="hevea_default114"></a>
+</p>
+<h4 class="subsubsection" id="sec21">RDF Schema</h4>
+<p>
+RDF Schema was proposed as a data-modeling vocabulary for RDF data. 
+The first public working draft of RDF Schema appeared in 1998 [<a href="bookHtml019.html#RDFSchema1998">16</a>] and was accepted as a recommendation in 2004 [<a href="bookHtml019.html#RDFSchema2004">26</a>].</p><p>It is a semantic extension of RDF which provides mechanisms to describe groups of resources and relationships between them. 
+It defines a set of common classes and properties.</p><p>The main classes defined in RDFS are:</p><p><a id="hevea_default115"></a>
+<a id="hevea_default116"></a>
+<a id="hevea_default117"></a>
+<a id="hevea_default118"></a>
+<a id="hevea_default119"></a>
+</p><ul class="itemize"><li class="li-itemize">
+	
+<code>rdfs</code><code>:</code><code>Resource</code>: the class of everything
+	</li><li class="li-itemize">
+<code>rdfs</code><code>:</code><code>Class</code>: the class of all classes
+	</li><li class="li-itemize">
+<code>rdfs</code><code>:</code><code>Literal</code>: the class of all literal values
+	</li><li class="li-itemize">
+<code>rdfs</code><code>:</code><code>Datatype</code>: the class of all datatypes
+	</li><li class="li-itemize">
+<code>rdf</code><code>:</code><code>Property</code>: the class of all properties
+</li></ul><p><a id="hevea_default120"></a>
+<a id="hevea_default121"></a>
+<a id="hevea_default122"></a>
+<a id="hevea_default123"></a>
+<a id="hevea_default124"></a>
+<a id="hevea_default125"></a>
+<a id="hevea_default126"></a>
+RDFS contains several properties like 
+
+<code>rdfs</code><code>:</code><code>label</code>, 
+
+<code>rdfs</code><code>:</code><code>comment</code>, 
+
+<code>rdfs</code><code>:</code><code>domain</code>, 
+
+<code>rdfs</code><code>:</code><code>range</code>,
+
+<code>rdf</code><code>:</code><code>type</code>,
+
+<code>rdfs</code><code>:</code><code>subClassOf</code> and
+
+<code>rdfs</code><code>:</code><code>subPropertyOf</code>. </p><div class="example"><div class="theorem"><span class="c013">Example 8</span>  <em>RDF Schema</em><em>
+</em><a id="ch020exampleRDFSchema"></a><p><em>The following snippet contains some description about teachers and people using RDF Schema terms.
+It declares that </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em> is an </em><em>
+</em><code><em>rdfs</em></code><code><em>:</em></code><code><em>Class</em></code><em>, as well as </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em>.
+It also declares that the </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em> class is a subclass of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em> which could be read as saying that every instance of </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em> is also an instance of </em><em>
+</em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em>.</em></p><p><em>Finally, it declares that </em><em>
+</em><code><em>:</em></code><code><em>teaches</em></code><em> is a property that relates instances of </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em> with instances of </em><em>
+</em><code><em>:</em></code><code><em>Course</em></code><em>, i.e., 
+any two elements related by the property </em><em>
+</em><code><em>:</em></code><code><em>teaches</em></code><em> will satisfy that the first is an </em><em>
+</em><code><em>:</em></code><code><em>Teacher</em></code><em> and the second a </em><em>
+</em><code><em>:</em></code><code><em>Course</em></code><em>.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">schema:Person</span></em><em><span class="c011">  </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">rdfs:Class</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">:Teacher</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">rdfs:Class</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">         </span></em><em><span class="c011">rdfs:subClassOf</span></em><em><span class="c011"> </span></em><em><span class="c011">schema:Person</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">:teaches</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">rdfs:Property</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">         </span></em><em><span class="c011">rdfs:domain</span></em><em><span class="c011"> </span></em><em><span class="c011">:Teacher</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">         </span></em><em><span class="c011">rdfs:range</span></em><em><span class="c011">  </span></em><em><span class="c011">:Course</span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><em>RDF Schema processors contain several rules that enable them to infer new RDF data. </em></p><p><em>For example, for any </em><em>
+</em><code><em>C</em></code><code><em> </em></code><code><em>rdfs</em></code><code><em>:</em></code><code><em>subClassOf</em></code><code><em> </em></code><code><em>D</em></code><em> and </em><em>
+</em><code><em>x</em></code><code><em> </em></code><code><em>a</em></code><code><em> </em></code><code><em>C</em></code><em> they can infer </em><em>
+</em><code><em>x</em></code><code><em> </em></code><code><em>a</em></code><code><em> </em></code><code><em>D</em></code><em>, 
+and for any </em><em>
+</em><code><em>p</em></code><code><em> </em></code><code><em>rdfs</em></code><code><em>:</em></code><code><em>domain</em></code><code><em> </em></code><code><em>C</em></code><em> and </em><em>
+</em><code><em>x</em></code><code><em> </em></code><code><em>p</em></code><code><em> </em></code><code><em>y</em></code><em> they can infer </em><em>
+</em><code><em>x</em></code><code><em> </em></code><code><em>a</em></code><code><em> </em></code><code><em>C</em></code><em>.</em></p><p><em>If we apply those rules to the following data: </em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:alice</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011">        </span></em><em><span class="c011">:Person</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">:bob</span></em><em><span class="c011">   </span></em><em><span class="c011">a</span></em><em><span class="c011">        </span></em><em><span class="c011">:Teacher</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">:carol</span></em><em><span class="c011"> </span></em><em><span class="c011">:teaches</span></em><em><span class="c011"> </span></em><em><span class="c011">:algebra</span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><em>An RDFS processor could infer that </em><em>
+</em><code><em>:</em></code><code><em>bob</em></code><em> and </em><em>
+</em><code><em>:</em></code><code><em>carol</em></code><em> have </em><em>
+</em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><code><em> :</em></code><code><em>Person</em></code><em> and that </em><em>
+</em><code><em>:</em></code><code><em>algebra</em></code><em> has </em><em>
+</em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><code><em> :</em></code><code><em>Course</em></code><em>.</em></p></div></div><p><a id="hevea_default127"></a> 
+</p>
+<h4 class="subsubsection" id="sec22">OWL</h4>
+<p> <a id="OWL"></a></p><p><a id="hevea_default128"></a> <a id="hevea_default129"></a>
+OWL (Web Ontology Language) defines a vocabulary for expressing ontologies based on description logics. 
+It was published as a W3C recommendation in 2004 [<a href="bookHtml019.html#Owl1">29</a>] and a new version, OWL 2, was accepted in 2009 [<a href="bookHtml019.html#OWL2">70</a>]. 
+<a id="hevea_default130"></a>
+<a id="hevea_default131"></a>
+OWL has several syntaxes: an RDF-based syntax, functional-style Syntax, manchester syntax, etc., and a formally defined meaning.
+We will use RDF syntax in the following examples with Turtle notation.</p><p>An ontology can be defined as a vocabulary of terms, usually about a specific domain and shared by a community of users. 
+Ontologies specify the definitions of terms by describing their relationships with other terms in the ontology.</p><p>The main concepts in OWL are as follows. </p><p><a id="hevea_default132"></a>
+<a id="hevea_default133"></a>
+<a id="hevea_default134"></a></p><ul class="itemize"><li class="li-itemize">Classes, which represent sets of individuals.
+Classes can be subclasses of other classes, with two special classes: 
+<code>owl</code><code>:</code><code>Thing</code> that represents the set of all individuals and 
+<code>owl</code><code>:</code><code>Nothing</code> that represents the empty set.<p><a id="hevea_default135"></a>
+</p></li><li class="li-itemize">Individuals, which are elements in the domain.
+Individuals can be members of an OWL class. <p><a id="hevea_default136"></a>
+<a id="hevea_default137"></a>
+<a id="hevea_default138"></a>
+</p></li><li class="li-itemize">Properties, which represent relationships.
+Properties are classified as datatype properties, object properties and annotation properties. 
+Datatype properties relate an individual with a data value such as a string or integer. 
+Object properties relate an individual with another individual. 
+And Annotation properties encode information about the ontology itself 
+(such as the author or the creation date of an ontology).<p><a id="hevea_default139"></a>
+</p></li><li class="li-itemize">Constructors which allow to define complex concepts from other concepts using expressions. </li></ul><div class="example"><div class="theorem"><span class="c013">Example 9</span>  <em>OWL example</em><p><em>In the following example we declare two classes </em><em>
+</em><code><em>:</em></code><code><em>Man</em></code><em> and </em><em>
+</em><code><em>:</em></code><code><em>Woman</em></code><em> that have a property </em><em>
+</em><code><em>:</em></code><code><em>gender</em></code><em> with the value </em><em>
+</em><code><em>:</em></code><code><em>Male</em></code><em> or </em><em>
+</em><code><em>:</em></code><code><em>Female</em></code><em>, respectively. </em></p><p><a id="hevea_default140"></a><em>
+</em><a id="hevea_default141"></a><em>
+</em><a id="hevea_default142"></a><em>
+</em><a id="hevea_default143"></a><em>
+</em><a id="hevea_default144"></a><em>
+</em><a id="hevea_default145"></a></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011">Man</span></em><em><span class="c011">  </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">Class</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">equivalentClass</span></em><em><span class="c011">  [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">intersectionOf</span></em><em><span class="c011"> (</span></em><em><span class="c011">
+</span></em><em><span class="c011">   :</span></em><em><span class="c011">Person</span></em><em><span class="c011">
+</span></em><em><span class="c011">   [ </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">Restriction</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">onProperty</span></em><em><span class="c011">  :</span></em><em><span class="c011">gender</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">hasValue</span></em><em><span class="c011">    :</span></em><em><span class="c011">Male</span></em><em><span class="c011">
+</span></em><em><span class="c011">   ] ) ] .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011">Woman</span></em><em><span class="c011">  </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">Class</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">equivalentClass</span></em><em><span class="c011">  [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">intersectionOf</span></em><em><span class="c011"> (</span></em><em><span class="c011">
+</span></em><em><span class="c011">   :</span></em><em><span class="c011">Person</span></em><em><span class="c011">
+</span></em><em><span class="c011">   [ </span></em><em><span class="c011">a</span></em><em><span class="c011"> </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">Restriction</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">onProperty</span></em><em><span class="c011">  :</span></em><em><span class="c011">gender</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">hasValue</span></em><em><span class="c011">    :</span></em><em><span class="c011">Female</span></em><em><span class="c011">
+</span></em><em><span class="c011">   ] ) ] .</span></em></td></tr>
+</table><p><em>Now, we can define </em><em>
+</em><code><em>:</em></code><code><em>Person</em></code><em> as the union of the </em><em>
+</em><code><em>:</em></code><code><em>Man</em></code><em> and </em><em>
+</em><code><em>:</em></code><code><em>Woman</em></code><em> classes, 
+and to declare that those classes are disjoint.</em></p><p><a id="hevea_default146"></a><em>
+</em><a id="hevea_default147"></a><em>
+</em><a id="hevea_default148"></a><em>
+</em><em>
+</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011">Person</span></em><em><span class="c011">  </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">equivalentClass</span></em><em><span class="c011">  [</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">rdf</span></em><em><span class="c011">:</span></em><em><span class="c011">type</span></em><em><span class="c011">     </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">Class</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">unionOf</span></em><em><span class="c011">  ( :</span></em><em><span class="c011">Woman</span></em><em><span class="c011"> :</span></em><em><span class="c011">Man</span></em><em><span class="c011"> )</span></em><em><span class="c011">
+</span></em><em><span class="c011">] .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">[ </span></em><em><span class="c011">a</span></em><em><span class="c011">            </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">AllDisjointClasses</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">  </span></em><em><span class="c011">owl</span></em><em><span class="c011">:</span></em><em><span class="c011">members</span></em><em><span class="c011">  ( :</span></em><em><span class="c011">Woman</span></em><em><span class="c011">  :</span></em><em><span class="c011">Man</span></em><em><span class="c011"> )</span></em><em><span class="c011">
+</span></em><em><span class="c011">] .</span></em></td></tr>
+</table><p><em>Given the previous declarations, if we add the following instance data:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011">alice</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011">       :</span></em><em><span class="c011">Woman</span></em><em><span class="c011"> ;</span></em><em><span class="c011">
+</span></em><em><span class="c011">       :</span></em><em><span class="c011">gender</span></em><em><span class="c011"> :</span></em><em><span class="c011">Female</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">   </span></em><em><span class="c011">a</span></em><em><span class="c011">       :</span></em><em><span class="c011">Man</span></em><em><span class="c011"> .</span></em></td></tr>
+</table><p><a id="hevea_default149"></a><em>
+An OWL reasoner can infer the following triples:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011">alice</span></em><em><span class="c011"> </span></em><em><span class="c011">a</span></em><em><span class="c011">       :</span></em><em><span class="c011">Person</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">   </span></em><em><span class="c011">a</span></em><em><span class="c011">       :</span></em><em><span class="c011">Person</span></em><em><span class="c011"> .</span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">   :</span></em><em><span class="c011">gender</span></em><em><span class="c011"> :</span></em><em><span class="c011">Male</span></em><em><span class="c011"> .</span></em></td></tr>
+</table></div></div><p>OWL can be used to define ontologies in several domains and there are several tools like the Protégé editor [<a href="bookHtml019.html#Protege2015">66</a>] which provide facilities for the creation and visualization of large ontologies. </p><p><a id="hevea_default150"></a> <a id="hevea_default151"></a> <a id="hevea_default152"></a>
+</p>
+<h3 class="subsection" id="sec23">2.4.3  Linked Data, JSON-LD, Microdata, and RDFa</h3>
+<p>
+<a id="ch2.sec4.3"></a></p><p>As we mentioned in Section <a href="bookHtml008.html#LinkedDataPrinciples">1.1</a>, one of the principles of linked data is to provide useful information when dereferencing a URI, using standards 
+such as RDF. 
+<a id="hevea_default153"></a>
+The goal is to return not only human-readable content like HTML that a machine can only represent in a browser, 
+but also some machine understandable content in RDF which can be automatically processed.</p><p>There are two main possibilities: 
+return different representations of the same resource using content negotiation, 
+or return the same representation with RDF embedded. </p><p><a id="hevea_default154"></a>
+The first approach can be easier to implement because developers have several mechanisms to transform a resource to different representations on the fly. 
+A popular format nowadays is JSON-LD which is a JSON-based representation of RDF. </p><div class="example"><div class="theorem"><span class="c013">Example 10</span>  <em>JSON-LD example</em><p><em>The Turtle Example </em><a href="#ch020.exampleTurtleNotSimplified"><em>1</em></a><em> can be represented in JSON-LD as:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">{"</span></em><em><span class="c011">@context</span></em><em><span class="c011">": {</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">ex</span></em><em><span class="c011">": "</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">example</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/",</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">schema</span></em><em><span class="c011">": "</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">schema</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/",</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">dbr</span></em><em><span class="c011">": "</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">dbpedia</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/</span></em><em><span class="c011">resource</span></em><em><span class="c011">/",</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">xsd</span></em><em><span class="c011">": "</span></em><em><span class="c011">http</span></em><em><span class="c011">://</span></em><em><span class="c011">www</span></em><em><span class="c011">.</span></em><em><span class="c011">w3</span></em><em><span class="c011">.</span></em><em><span class="c011">org</span></em><em><span class="c011">/2001/</span></em><em><span class="c011">XMLSchema</span></em><em><span class="c011">#",</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">name</span></em><em><span class="c011">":       { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">name</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">birthDate</span></em><em><span class="c011">":  { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">birthDate</span></em><em><span class="c011">", "</span></em><em><span class="c011">@type</span></em><em><span class="c011">": "</span></em><em><span class="c011">xsd</span></em><em><span class="c011">:</span></em><em><span class="c011">date</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">birthPlace</span></em><em><span class="c011">": { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">birthPlace</span></em><em><span class="c011">" },</span></em><em><span class="c011">
+</span></em><em><span class="c011">   "</span></em><em><span class="c011">knows</span></em><em><span class="c011">":      { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">schema</span></em><em><span class="c011">:</span></em><em><span class="c011">knows</span></em><em><span class="c011">" }</span></em><em><span class="c011">
+</span></em><em><span class="c011">  },</span></em><em><span class="c011">
+</span></em><em><span class="c011"> "</span></em><em><span class="c011">@graph</span></em><em><span class="c011">": [</span></em><em><span class="c011">
+</span></em><em><span class="c011">    { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">alice</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">knows</span></em><em><span class="c011">": {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">" }</span></em><em><span class="c011">
+</span></em><em><span class="c011">    },</span></em><em><span class="c011">
+</span></em><em><span class="c011">    {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">name</span></em><em><span class="c011">": "</span></em><em><span class="c011">Robert</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">knows</span></em><em><span class="c011">": {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">carol</span></em><em><span class="c011">"},</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">birthDate</span></em><em><span class="c011">": "1980-03-10",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">birthPlace</span></em><em><span class="c011">": {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">dbr</span></em><em><span class="c011">:</span></em><em><span class="c011">Oviedo</span></em><em><span class="c011">" }</span></em><em><span class="c011">
+</span></em><em><span class="c011">    },</span></em><em><span class="c011">
+</span></em><em><span class="c011">    { "</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">carol</span></em><em><span class="c011">",</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">knows</span></em><em><span class="c011">": [{"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">alice</span></em><em><span class="c011">" }, {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">ex</span></em><em><span class="c011">:</span></em><em><span class="c011">bob</span></em><em><span class="c011">"}],</span></em><em><span class="c011">
+</span></em><em><span class="c011">     "</span></em><em><span class="c011">birthPlace</span></em><em><span class="c011">": {"</span></em><em><span class="c011">@id</span></em><em><span class="c011">": "</span></em><em><span class="c011">dbr</span></em><em><span class="c011">:</span></em><em><span class="c011">Oviedo</span></em><em><span class="c011">" }</span></em><em><span class="c011">
+</span></em><em><span class="c011">    }</span></em><em><span class="c011">
+</span></em><em><span class="c011"> ]</span></em><em><span class="c011">
+</span></em><em><span class="c011">}</span></em></td></tr>
+</table></div></div><p><a id="hevea_default155"></a>
+An alternative approach is to embed RDF content in HTML. </p><p><a id="hevea_default156"></a>
+RDFa can be used to embed RDF in HTML attributes.</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;</span><span class="c011"><span class="c007">div</span></span><span class="c011"> </span><span class="c011"><span class="c007">xmlns</span></span><span class="c011">:</span><span class="c011"><span class="c007">schema</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://schema.org/"</span></span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">xmlns</span></span><span class="c011">:</span><span class="c011"><span class="c007">ex</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://example.org/"</span></span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">xmlns</span></span><span class="c011">:</span><span class="c011"><span class="c007">xsd</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://www.w3.org/2001/XMLSchema#"</span></span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">typeof</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:Person"</span></span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">about</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"[ex:alice]"</span></span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011"><span class="c007">My</span></span><span class="c011"> </span><span class="c011"><span class="c007">name</span></span><span class="c011"> </span><span class="c011"><span class="c007">is</span></span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">property</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:name"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">Alice</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;.</span><span class="c011">
+</span><span class="c011">&lt;</span><span class="c011"><span class="c007">p</span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">I</span></span><span class="c011"> </span><span class="c011"><span class="c007">was</span></span><span class="c011"> </span><span class="c011"><span class="c007">born</span></span><span class="c011"> </span><span class="c011"><span class="c007">on</span></span><span class="c011">
+</span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">property</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:birthDate"</span></span></span><span class="c011">
+</span><span class="c011">       </span><span class="c011"><span class="c007">content</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"1974-12-01"</span></span></span><span class="c011">
+</span><span class="c011">       </span><span class="c011"><span class="c007">datatype</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"xsd:date"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">a</span></span><span class="c011"> </span><span class="c011"><span class="c007">Sunday</span></span><span class="c011">, </span><span class="c011"><span class="c007">some</span></span><span class="c011"> </span><span class="c011"><span class="c007">time</span></span><span class="c011"> </span><span class="c011"><span class="c007">ago</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;,</span><span class="c011">
+</span><span class="c011">   </span><span class="c011"><span class="c007">and</span></span><span class="c011"> </span><span class="c011"><span class="c007">I</span></span><span class="c011"> </span><span class="c011"><span class="c007">am</span></span><span class="c011"> </span><span class="c011"><span class="c007">a</span></span><span class="c011"> </span><span class="c011"><span class="c007">professor</span></span><span class="c011"> </span><span class="c011"><span class="c007">at</span></span><span class="c011"> </span><span class="c011"><span class="c007">the</span></span><span class="c011">
+</span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">about</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"[ex:uniovi]"</span></span></span><span class="c011">
+</span><span class="c011">  </span><span class="c011"><span class="c007">typeof</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:Organization"</span></span></span><span class="c011">
+</span><span class="c011">    </span><span class="c011"><span class="c007">property</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:name"</span></span></span><span class="c011">
+</span><span class="c011">    </span><span class="c011"><span class="c007">rel</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"schema:member"</span></span></span><span class="c011">
+</span><span class="c011">    </span><span class="c011"><span class="c007">resource</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"[ex:alice]"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">University</span></span><span class="c011"> </span><span class="c011"><span class="c007">of</span></span><span class="c011"> </span><span class="c011"><span class="c007">Oviedo</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">p</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">div</span></span><span class="c011">&gt;</span></td></tr>
+</table><p>An HTML browser visualizes the information:</p><blockquote class="quote">
+<span class="c012">My name is Alice.
+I was born on a Sunday, some time ago, and I am a professor at the University of Oviedo</span>
+</blockquote><p>while an RDFa processor obtains the following RDF data:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">ex:alice</span><span class="c011"> </span><span class="c011">a</span><span class="c011"> </span><span class="c011">schema:Person</span><span class="c011">;</span><span class="c011">
+</span><span class="c011">   </span><span class="c011">schema:birthDate</span><span class="c011"> </span><span class="c011"><span class="c011">"1974-12-01"</span></span><span class="c011">^^</span><span class="c011">xsd:date</span><span class="c011">;</span><span class="c011">
+</span><span class="c011">   </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"Alice"</span></span><span class="c011"> .</span><span class="c011">
+</span><span class="c011">
+</span><span class="c011">ex:uniovi</span><span class="c011"> </span><span class="c011">a</span><span class="c011"> </span><span class="c011">schema:Organization</span><span class="c011">;</span><span class="c011">
+</span><span class="c011">   </span><span class="c011">schema:member</span><span class="c011"> </span><span class="c011">ex:alice</span><span class="c011">;</span><span class="c011">
+</span><span class="c011">   </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"University of Oviedo"</span></span><span class="c011"> .</span></td></tr>
+</table><p><a id="hevea_default157"></a>
+Another alternative is to use microdata:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">&lt;</span><span class="c011"><span class="c007">div</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemscope</span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">itemtype</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://schema.org/Person"</span></span></span><span class="c011">
+</span><span class="c011">     </span><span class="c011"><span class="c007">itemid</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://example.org/alice"</span></span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011"><span class="c007">Home</span></span><span class="c011"> </span><span class="c011"><span class="c007">page</span></span><span class="c011"> </span><span class="c011"><span class="c007">of</span></span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemprop</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"name"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">Alice</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;.</span><span class="c011">
+</span><span class="c011">&lt;</span><span class="c011"><span class="c007">p</span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">I</span></span><span class="c011"> </span><span class="c011"><span class="c007">was</span></span><span class="c011"> </span><span class="c011"><span class="c007">born</span></span><span class="c011"> </span><span class="c011"><span class="c007">on</span></span><span class="c011">
+</span><span class="c011"> &lt;</span><span class="c011"><span class="c007">time</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemprop</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"birthDate"</span></span></span><span class="c011">
+</span><span class="c011">       </span><span class="c011"><span class="c007">datetime</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"1974-12-01"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">a</span></span><span class="c011"> </span><span class="c011"><span class="c007">Sunday</span></span><span class="c011">,</span><span class="c011">
+</span><span class="c011">         </span><span class="c011"><span class="c007">some</span></span><span class="c011"> </span><span class="c011"><span class="c007">time</span></span><span class="c011"> </span><span class="c011"><span class="c007">ago</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">time</span></span><span class="c011">&gt;,</span><span class="c011">
+</span><span class="c011"> </span><span class="c011"><span class="c007">and</span></span><span class="c011"> </span><span class="c011"><span class="c007">I</span></span><span class="c011"> </span><span class="c011"><span class="c007">am</span></span><span class="c011"> </span><span class="c011"><span class="c007">a</span></span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemprop</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"jobTitle"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">Professor</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011"> </span><span class="c011"><span class="c007">at</span></span><span class="c011"> </span><span class="c011"><span class="c007">the</span></span><span class="c011"> &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemscope</span></span><span class="c011">
+</span><span class="c011">         </span><span class="c011"><span class="c007">itemprop</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"affiliation"</span></span></span><span class="c011">
+</span><span class="c011">         </span><span class="c011"><span class="c007">itemtype</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://schema.org/Organization"</span></span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">         </span><span class="c011"><span class="c007">itemid</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"http://example.org/uniovi"</span></span></span><span class="c011">
+</span><span class="c011">  &lt;</span><span class="c011"><span class="c007">span</span></span><span class="c011"> </span><span class="c011"><span class="c007">itemprop</span></span><span class="c011">=</span><span class="c011"><span class="c004"><span class="c011">"name"</span></span></span><span class="c011">&gt;</span><span class="c011"><span class="c007">University</span></span><span class="c011"> </span><span class="c011"><span class="c007">of</span></span><span class="c011"> </span><span class="c011"><span class="c007">Oviedo</span></span><span class="c011">&lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011"> &lt;/</span><span class="c011"><span class="c007">span</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">p</span></span><span class="c011">&gt;</span><span class="c011">
+</span><span class="c011">&lt;/</span><span class="c011"><span class="c007">div</span></span><span class="c011">&gt;</span></td></tr>
+</table><p>Which represents the same information as the RDFa example.</p>
+<h2 class="section" id="sec24">2.5  Summary</h2>
+<p>
+<a id="ch2.sec5"></a></p><ul class="itemize"><li class="li-itemize">
+RDF defines a simple and powerful data model based on directed graphs.
+</li><li class="li-itemize">There are several syntaxes for RDF: Turtle, N-Triples, JSON-LD, RDF/XML, etc.
+</li><li class="li-itemize">The edges of the graph are predicate IRIs.
+</li><li class="li-itemize">RDF is the basis for the semantic web stack.
+</li><li class="li-itemize">RDF enables the integration of heterogeneous data.
+</li><li class="li-itemize">SPARQL is a query language for RDF.
+</li><li class="li-itemize">RDFS and OWL offer inference capabilities over RDF data.
+</li><li class="li-itemize">JSON-LD is a popular syntax for RDF based on JSON.
+</li><li class="li-itemize">Two alternatives to embed metadata in HTML content are RDFa and microdata.
+</li></ul>
+<h2 class="section" id="sec25">2.6  Suggested Reading</h2>
+<p>
+<a id="ch2.sec6"></a></p><p>Official online documents:</p><ul class="itemize"><li class="li-itemize">
+<a href="bookHtml019.html#RDF11">Cyganiak, Wood, and Lanthaler</a>,<a href="bookHtml019.html#RDF11">2014</a> [<a href="bookHtml019.html#RDF11">25</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#SPARQL11">Harris and Seaborne</a>,<a href="bookHtml019.html#SPARQL11">2013</a> [<a href="bookHtml019.html#SPARQL11">44</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#RDFSchema11">Dan Brickley and R. V. Guha</a>,<a href="bookHtml019.html#RDFSchema11">2014</a> [<a href="bookHtml019.html#RDFSchema11">27</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#OWL2">OWL Working Group</a>,<a href="bookHtml019.html#OWL2">27 October 2009</a> [<a href="bookHtml019.html#OWL2">70</a>]
+</li></ul><p>There are several books introducing the concepts of RDF and Semantic Web in general like:</p><ul class="itemize"><li class="li-itemize">
+<a href="bookHtml019.html#Hjelm2001">Hjelm</a>,<a href="bookHtml019.html#Hjelm2001">2001</a> [<a href="bookHtml019.html#Hjelm2001">49</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Powers2003">Powers</a>,<a href="bookHtml019.html#Powers2003">2003</a> [<a href="bookHtml019.html#Powers2003">76</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Passin2004">Passin</a>,<a href="bookHtml019.html#Passin2004">2004</a> [<a href="bookHtml019.html#Passin2004">71</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Segaran2009">Segaran, Evans, Taylor, Toby, Colin, and
+Jamie</a>,<a href="bookHtml019.html#Segaran2009">2009</a> [<a href="bookHtml019.html#Segaran2009">88</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Hebeler2009">Hebeler, Fisher, Blace, and
+Perez-Lopez</a>,<a href="bookHtml019.html#Hebeler2009">2009</a> [<a href="bookHtml019.html#Hebeler2009">47</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Hitzler09">Hitzler, Krötzsch, and Rudolph</a>,<a href="bookHtml019.html#Hitzler09">2009</a> [<a href="bookHtml019.html#Hitzler09">48</a>]
+</li><li class="li-itemize"><a href="bookHtml019.html#Antoniou2012">Antoniou, Groth, Harmelen, and
+Hoekstra</a>,<a href="bookHtml019.html#Antoniou2012">2012</a> [<a href="bookHtml019.html#Antoniou2012">4</a>]
+</li></ul><p>And about particular topics: </p><ul class="itemize"><li class="li-itemize"><em>Linked data</em>: <a href="bookHtml019.html#Heath_2011">Heath and Bizer</a>,<a href="bookHtml019.html#Heath_2011">2011</a> [<a href="bookHtml019.html#Heath_2011">46</a>]</li><li class="li-itemize"><em>SPARQL</em>: <a href="bookHtml019.html#DuCharme2011">DuCharme</a>,<a href="bookHtml019.html#DuCharme2011">2011</a> [<a href="bookHtml019.html#DuCharme2011">33</a>]
+</li><li class="li-itemize"><em>OWL and semantic modeling</em>: <a href="bookHtml019.html#Allemang2011">Allemang and Hendler</a>,<a href="bookHtml019.html#Allemang2011">2011</a> [<a href="bookHtml019.html#Allemang2011">3</a>]
+</li></ul>
+<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note2" href="#text2">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://lov.okfn.org/"><span class="c010">http://lov.okfn.org/</span></a></div></dd></dl>
+<hr>
+<a href="bookHtml008.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml010.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>

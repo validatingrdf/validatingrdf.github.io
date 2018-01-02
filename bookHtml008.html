@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.23">
+<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<title>Introduction</title>
+</head>
+<body>
+<a href="bookHtml007.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml009.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h1 class="chapter" id="sec8">Chapter 1  Introduction</h1>
+<p>
+<a id="ch1"></a>
+<a id="ch010intro"></a></p><p><a id="hevea_default0"></a> <a id="hevea_default1"></a>
+</p>
+<h2 class="section" id="sec9">1.1  RDF and the Web of Data</h2>
+<p>
+<a id="ch1.sec1"></a></p><p>These days more and more devices generate data automatically and
+it is relatively easy to develop applications in different domains backed by databases and exposing data to the Web. 
+The amount and diversity of data produced clearly exceeds our capacity to consume it.</p><p><a id="hevea_default2"></a>
+The term <em>big data</em> has emerged to name data that is so large and complex that traditional data processing applications can’t handle it. 
+Big data has been described by at least three words starting by V: 
+volume, velocity, variety. 
+Although volume and velocity are the most visible features, 
+variety is a key concern which prevents data integration and generates lots of interoperability problems.</p><p>RDF was proposed as a graph-based data model which became part of the 
+Semantic Web vision. 
+Its reliance on the global nature of URIs offered a solution to the data integration problem as 
+RDF datasets produced by different means can seamlessly be integrated with other data. 
+Data integration using RDF is faster and more robust than traditional solutions in the face of schema changes.</p><p><a id="hevea_default3"></a> 
+<a id="LinkedDataPrinciples"></a>
+RDF is also a key enabler of linked data. 
+Linked data [<a href="bookHtml019.html#Heath_2011">46</a>] was proposed as a set of best practices to publish data on the Web.
+It was introduced by Tim Berners-Lee [<a href="bookHtml019.html#bernerslee06">8</a>] and was based on four main principles.
+RDF is mentioned in the third principle as one of the standards that provides useful information. 
+The goal is that information must be useful not only for humans navigating through browsers (for which HTML would be enough) 
+but also for other agents that may automatically process that data.</p><p>The linked data principles became popular and several initiatives were created to publish data portals. 
+The size of data on the Web increased significantly in the last years. 
+For example, the LODStats project [<a href="bookHtml019.html#iermilov-2016-lodstats-iswc">36</a>] aggregates around 150 billion triples from 2,973 datasets.</p>
+<h2 class="section" id="sec10">1.2  RDF: The Good Parts</h2>
+<p>
+<a id="ch1.sec2"></a></p><p><a id="hevea_default4"></a> <a id="hevea_default5"></a>
+RDF has been acknowledged as the language for the Web of Data and it has several advantages like the following. </p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default6"></a> <a id="hevea_default7"></a>	
+</p><em>Disambiguation</em>. 
+The use of IRIs to identify predicates and to make assertions about resources enables the user to globally identify the property that is being asserted as well as the resources involved in the statement.
+Those global properties can be identified by automated agents which can recognize the data that they must understand in a non-ambiguous way.<p><a id="hevea_default8"></a>
+<a id="hevea_default9"></a>
+</p></li><li class="li-itemize"><em>RDF as an integration language</em>. 
+RDF is <em>compositional</em> in the sense that two RDF graphs obtained from independent sources can automatically be merged to obtain a larger graph. 
+This property facilitates the integration of data from heterogeneous sources.<p>One of the biggest challenges of the current era related with computer science is how to solve the interoperability problem between different applications that manipulate data that comes from heterogeneous sources.
+RDF is a step forward to partially solve this problem as RDF data can automatically be integrated even if it has been produced by different parties.</p><p><a id="hevea_default10"></a>
+<a id="hevea_default11"></a>
+<a id="hevea_default12"></a>
+</p></li><li class="li-itemize"><em>RDF as a </em>lingua franca<em> for semantic web and linked data</em>. 
+The simplicity and generality of the RDF data model enables its use to model any kind of data that can be easily integrated with other data. <p>RDF is at the core of the semantic web stack or layer cake and is mentioned in the linked data principles and in the five-star model.</p><p><a id="hevea_default13"></a> <a id="hevea_default14"></a>
+</p></li><li class="li-itemize"><em>RDF data stores and SPARQL</em>. 
+SPARQL was proposed as a query language for RDF in 2008. 
+The language met an overwhelming acceptance and adoption by the RDF community.
+The ability to query led to the development of many new applications as well as databases and libraries. 
+RDF data stores began to popularize and some companies started using RDF internally to represent their data. 
+Some of those applications chose RDF just for practical reasons, even without reference to the semantic web. 
+Storing RDF and querying it using SPARQL offers a very flexible model which can adapt very quickly to data model changes.
+RDF data stores can be seen as part of the NoSQL movement and there are solutions for RDF data stores with high capabilities that can work with very large 
+databases [<a href="bookHtml019.html#Neumann09">67</a>]. </li><li class="li-itemize"><em>Extensibility</em>. 
+When one starts to develop an application to solve some problem, 
+it is necessary to record information in a format with <em>room to grow</em>, 
+which enables the data model to evolve and increasingly adapt to new needs.
+The extensible graph model of RDF makes it very easy to add more statements to any graph. </li><li class="li-itemize"><em>Flexibility</em>. 
+While a change in a relational database may be difficult to accomplish.
+RDF embraces flexibility and these changes are usually a matter of updating the triples. <p><a id="hevea_default15"></a> <a id="hevea_default16"></a>
+<a id="hevea_default17"></a> <a id="hevea_default18"></a>
+</p></li><li class="li-itemize"><em>Open by default</em>. 
+The semantic web approach to knowledge representation promoted what is called Open World Assumption (OWA) instead of the Closed World Assumption (CWA) which was popular in previous knowledge representation systems. 
+The CWA considers that what is not known to be true must be false, while the OWA considers that what is not known is just <em>unknown</em>. <p>The CWA is usually applied in systems that have complete information while the OWA is more natural for incomplete information systems like the Web. </p><p>Given that RDF was applied for the semantic web, most of the applications based on RDF also adopt the Open World Assumption adapting to the appearance of new data. </p><p>Although RDF and related technologies employ the Open World Assumption by default, this does not mean that every application must adopt that assumption.
+In some contexts, it may be necessary to take the opposite view and consider that a system contains all the information on some topic in order to operate. </p></li></ul>
+<h2 class="section" id="sec11">1.3  Challenges for RDF Adoption</h2>
+<p>
+<a id="ch1.sec3"></a></p><p>In spite of all the advantages of RDF, its widespread adoption is not yet a reality.
+Some reasons for this can be guessed.</p><ul class="itemize"><li class="li-itemize"><em>RDF is mistakenly identified as a complex language</em>. 
+Some people consider RDF as a theoretical, knowledge representation language which does not appeal to practical web developers.
+However, the RDF data model is very simple and can be understood by almost any person in less than an hour. 
+In its simplicity lies its power and the advantages that we enumerated in previous sections. 
+It is true that some of the technologies built on top of RDF, like OWL, have a more theoretical foundation based on 
+description logics which diverge from this simplicity. <p>We consider that it is necessary to separate the RDF data model from its more powerful and complex relatives. 
+This is not to say that these technologies are not useful or practical, 
+but that the people who will manage them are different than the people who develop applications. 
+Web developers are not so much interested in ontological discussions, 
+they have more mundane concerns like what are the arcs expected to have for some node, 
+what datatypes are allowed, 
+which data structures can be used to represent some nodes, etc.</p><p><a id="hevea_default19"></a> <a id="hevea_default20"></a> <a id="hevea_default21"></a>
+</p></li><li class="li-itemize"><em>Ugly syntax</em>.
+The RDF data model was defined along with an XML syntax in 1999. 
+At that time XML was a popular syntax and that decision made sense.
+RDF/XML syntax was not human-friendly (it was difficult to write RDF/XML by hand) and it was also difficult to process (it needed specialized libraries and parsers). 
+The difference between the hierarchical, tree-based XML model and the graph-based RDF data model makes necessary to serialize the RDF graph to be represented in XML. 
+The same RDF graph could be serialized in many ways making very difficult to use standard XML tools like XSLT or XPath to process RDF.<p><a id="hevea_default22"></a>
+There were several attempts to define a more human-friendly syntax. 
+Notation3 was proposed as a human-friendly language that was able to extend RDF and express other logical operations and rules. 
+<a id="hevea_default23"></a>
+Turtle was later proposed as a subset of Notation3 for only expressing RDF.
+Turtle became popular in the semantic web community although not so much between web developers.
+Given that it is a special format, it requires a separate parser and tools.</p><p><a id="hevea_default24"></a> <a id="hevea_default25"></a> <a id="hevea_default26"></a>
+In 2013, RDF 1.1 promotes also JSON-LD for developers who are familiar with JSON and RDFa which enables to embed RDF annotations along HTML content.</p><p>Although these efforts can help popularize RDF adoption between the developer community, some extra work is still needed to better understand the role of RDF in the Web development and publishing pipeline.</p></li><li class="li-itemize"><em>RDF production/consumption dilemma</em>.
+It is necessary to find ways that data producers can generate their data so it can be handled by potential consumers. 
+The return of inversion for data producers comes when there are agents consuming their data.<p>There is some structure of the data that publishers have and want to transmit.
+For example, they may want to declare that some nodes have some properties with some specific values.
+Data consumers need to know that structure to develop applications to consume the data.</p><p>Although RDF is a very flexible schema-less language, enterprise and industrial applications may require an extra level of validation before processing for several reasons like security, performance, etc.</p></li></ul><p><a id="hevea_default27"></a>
+Veteran users of RDF and SPARQL have confronted the problem of composing or consuming data 
+with some expectations about the structure of that data. 
+They may have described that structure in a schema or ontology, 
+or in some human-readable documentation, 
+or maybe expected users to learn the structure by example. 
+Ultimately, users of that application need to understand the graph structure that the application expects.</p><p>While it can be trivial to synchronize data production and consumption within a single application, consuming foreign data frequently involves a lot of defensive programming, usually in the form of SPARQL queries that search out data in different structures. 
+Given lots of potential representations of that data, it is difficult to be confident that we have addressed all of the intended ways our application may encounter its information.</p><p><a id="hevea_default28"></a>
+Grammars are a common tool for defining data structures and the languages that convey them.
+Every data structure with sufficient complexity and precision relies on some formal convention for enumerating groups of properties and expressing data types, 
+cardinalities, and relationships between structures.
+The need for such a representation grows with the complexity of the language.</p><p>To illustrate this, consider the specifications for RDF and SPARQL.
+RDF is a simple data model consisting of graphs made of triples composed from three types of nodes.
+Because of this simplicity, it does not need a defining grammar (though most academic papers about RDF include one).
+By contrast, the SPARQL language would be enormously complicated or impossible to define without a systematic grammar.</p><p>This book describes two languages for implementing constraints on RDF data.
+They can enumerate RDF properties and identify permissible data types, cardinalities, and groups of properties.
+These languages can be used for documentation, user interface generation, or validation during data production or consumption.</p><p>Shape Expressions (ShEx) were proposed as a user-friendly and high-level language for RDF validation.
+Initially proposed as a human-readable syntax for OSLC Resource 
+Shapes [<a href="bookHtml019.html#OSLCResourceShapes">86</a>], 
+ShEx grew to embrace more complex user requirements coming from clinical and library use cases.
+ShEx now has a rigorous semantics and interchangeable representations: JSON-LD, RDF, and the one meant for human eyes.</p><p>Another technology, SPIN, was used for RDF validation, principally in TopQuadrant’s TopBraid Composer.
+This technology, influenced from OSLC Resource Shapes as well, evolved into both an implementation and definition of the Shapes Constraint Language (SHACL), 
+which was adopted by the W3C Data Shapes Working Group.</p><p>Although both ShEx and SHACL have similar goals and share some similarities they solve the problem from different perspectives and formalisms. 
+At the time of this writing the W3C Data Shapes Working Group has been unable to obtain a compromise solution that brings together both proposals so it seems that they will evolve as different technologies in the future.</p><p>This book describes the main features of both ShEx and SHACL from a user perspective and also offers a comparison of the technologies.
+Throughout this book, we develop a small number of examples that typify validation requirements and demonstrate how they can be met with ShEx and SHACL. 
+The book is not intended as a formal specification of the languages, for which the interested reader can consult the corresponding documents, but as an introduction to the technologies with some background about the rationale of their design and some comparison between them. </p>
+<h2 class="section" id="sec12">1.4  Structure of the Book</h2>
+<p> 
+<a id="ch1.sec4"></a></p><p>Chapter <a href="bookHtml009.html#ch020RDF">2</a> presents a short overview of the RDF data model and RDF-related technologies. 
+This chapter could be skipped by any reader who already knows RDF or Turtle.</p><p>Chapter <a href="bookHtml010.html#ch030DataQuality">3</a> helps us understand what to expect from data validation. 
+It describes the problem of RDF validation and some approaches that have been proposed. 
+In this book, we will further review two of them: Shape Expressions (ShEx) and SHACL.</p><p>The next two chapters focus on two proposals: Shape Expressions (Chapter <a href="bookHtml011.html#ch040ShEx">4</a>) 
+and Shapes Constraint Language (Chapter <a href="bookHtml012.html#ch050SHACL">5</a>).
+The description of both languages is more intended to be a practical introduction to them using examples than a formal specification. 
+Once we present both languages, Chapter <a href="bookHtml013.html#ch060Applications">6</a> presents some applications using either ShEx, SHACL or both.
+Finally, Chapter <a href="bookHtml014.html#ch070Comparing">7</a> compares ShEx and SHACL and presents some conclusions.</p><p>The goal of this book is to serve as a practical introduction to ShEx and SHACL using examples. 
+We omitted formal definitions or specifications and just added a section at the end of each chapter with references to further reading.</p><p>The intended audience is anyone interested in data representation and quality. 
+We give a quick overview of some background and related technologies so readers without RDF knowledge can follow the book contents.
+Also, it is not necessary to have any prior knowledge on programming or ontologies to understand RDF validation technologies. </p>
+<h2 class="section" id="sec13">1.5  Conventions and Notation</h2>
+<p>We provide a short introduction to RDF and Turtle in Chapter <a href="bookHtml009.html#ch020RDF">2</a> and from that point on, 
+we use Turtle for the rest of the book. </p><p>Once a prefix declaration is presented in Turtle and ShEx, it is omitted thereafter to simplify the examples unless needed for clarity.
+The prefix declarations and namespaces used are shown in 
+Table <a href="#ch010.Namespaces">1.1</a>.
+Most examples in the book will need to be prepended with prefix declarations in order to run correctly.</p><blockquote class="table"><div class="center"><hr class="c021"></div>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Table 1.1: Common prefix declarations</td></tr>
+</table></div>
+<a id="ch010.Namespaces"></a>
+<div class="center">
+<table class="c000 cellpadding1" border=1><tr><td class="c016"> Alias</td><td class="c016">Namespace 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> :</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>cex</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>weso</code><code>/</code><code>computex</code><code>/</code><code>ontology</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>cdt</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>customDataTypes</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>dbr</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>dbpedia</code><code>.</code><code>org</code><code>/</code><code>resource</code><code>/&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>ex</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>qb</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>linked</code><code>-</code><code>data</code><code>/</code><code>cube</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>org</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>org</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>owl</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2002/07/</code><code>owl</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>rdf</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/1999/02/22-</code><code>rdf</code><code>-</code><code>syntax</code><code>-</code><code>ns</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>rdfs</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2000/01/</code><code>rdf</code><code>-</code><code>schema</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>schema</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>schema</code><code>.</code><code>org</code><code>/&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>sh</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>shacl</code><code>#&gt;</code> 
+</td></tr>
+<tr><td class="c016">
+<code>prefix</code><code> </code><code>sx</code><code>:</code></td><td class="c016">
+<code>&lt;</code><code>http</code><code>://</code><code>shex</code><code>.</code><code>io</code><code>/</code><code>ns</code><code>/</code><code>shex</code><code>#&gt;</code> 
+</td></tr>
+</table>
+</div>
+<div class="center"><hr class="c021"></div></blockquote><p>RDF is being applied to lots of domains, some of them highly specialized. 
+We opted to present examples using concepts from familiar domains like people, courses, companies, etc. that we think will be familiar to any reader. 
+Most of the examples use properties borrowed from 
+<code>schema.org</code>,<sup><a id="text1" href="#note1">1</a></sup> 
+which provides lots of concepts from familiar domains. 
+The examples are just for illustration purposes and do not pretend to 
+check <code>schema.org</code> rules. 
+Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:good</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"Valid node"</span></span><span class="c011"> . </span><span class="c011"><em><span class="c011">#\Passes{:Shape}*)</span></em></span><span class="c011">
+</span><span class="c011">
+</span><span class="c011">:bad</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"Bad node"</span></span><span class="c011"> .    </span><span class="c011"><em><span class="c011">#\Fails{:Shape}*)  </span></em></span></td></tr>
+</table><p>which means that node 
+<code>:</code><code>good</code> validates against shape 
+<code>:</code><code>Shape</code>, while node 
+<code>:</code><code>bad</code> does not.</p><p>The examples have been tested using the different tools available. 
+We maintain a public repository where we keep the examples used in this book. 
+The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c010">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
+<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c010">http://schema.org</span></a></div></dd></dl>
+<hr>
+<a href="bookHtml007.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="bookHtml009.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>
