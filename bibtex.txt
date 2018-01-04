@@ -1,0 +1,13 @@
+@book{Labra2017,
+  doi = {10.2200/s00786ed1v01y201707wbe016},
+  url = {https://doi.org/10.2200/s00786ed1v01y201707wbe016},
+  year  = {2017},
+  month = {sep},
+  publisher = {Morgan {\&} Claypool Publishers {LLC}},
+  volume = {7},
+  number = {1},
+  pages = {1--328},
+  author = {Labra Gayo, Jose Emilio and Prud{\textquotesingle}hommeaux, Eric and Boneva, Iovka and Kontokostas, Dimitris},
+  title = {Validating {RDF} Data},
+  series = {Synthesis Lectures on the Semantic Web: Theory and Technology}
+}

@@ -11,12 +11,12 @@
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
 <a href="bookHtml009.html"><img src="next_motif.gif" alt="Next"></a>
 <hr>
-<h1 class="chapter" id="sec8">Chapter 1  Introduction</h1>
+<h1 class="chapter" id="sec11">Chapter 1  Introduction</h1>
 <p>
 <a id="ch1"></a>
 <a id="ch010intro"></a></p><p><a id="hevea_default0"></a> <a id="hevea_default1"></a>
 </p>
-<h2 class="section" id="sec9">1.1  RDF and the Web of Data</h2>
+<h2 class="section" id="sec12">1.1  RDF and the Web of Data</h2>
 <p>
 <a id="ch1.sec1"></a></p><p>These days more and more devices generate data automatically and
 it is relatively easy to develop applications in different domains backed by databases and exposing data to the Web. 
@@ -39,7 +39,7 @@ The goal is that information must be useful not only for humans navigating throu
 but also for other agents that may automatically process that data.</p><p>The linked data principles became popular and several initiatives were created to publish data portals. 
 The size of data on the Web increased significantly in the last years. 
 For example, the LODStats project [<a href="bookHtml019.html#iermilov-2016-lodstats-iswc">36</a>] aggregates around 150 billion triples from 2,973 datasets.</p>
-<h2 class="section" id="sec10">1.2  RDF: The Good Parts</h2>
+<h2 class="section" id="sec13">1.2  RDF: The Good Parts</h2>
 <p>
 <a id="ch1.sec2"></a></p><p><a id="hevea_default4"></a> <a id="hevea_default5"></a>
 RDF has been acknowledged as the language for the Web of Data and it has several advantages like the following. </p><ul class="itemize"><li class="li-itemize"><p><a id="hevea_default6"></a> <a id="hevea_default7"></a>	
@@ -75,7 +75,7 @@ RDF embraces flexibility and these changes are usually a matter of updating the 
 The semantic web approach to knowledge representation promoted what is called Open World Assumption (OWA) instead of the Closed World Assumption (CWA) which was popular in previous knowledge representation systems. 
 The CWA considers that what is not known to be true must be false, while the OWA considers that what is not known is just <em>unknown</em>. <p>The CWA is usually applied in systems that have complete information while the OWA is more natural for incomplete information systems like the Web. </p><p>Given that RDF was applied for the semantic web, most of the applications based on RDF also adopt the Open World Assumption adapting to the appearance of new data. </p><p>Although RDF and related technologies employ the Open World Assumption by default, this does not mean that every application must adopt that assumption.
 In some contexts, it may be necessary to take the opposite view and consider that a system contains all the information on some topic in order to operate. </p></li></ul>
-<h2 class="section" id="sec11">1.3  Challenges for RDF Adoption</h2>
+<h2 class="section" id="sec14">1.3  Challenges for RDF Adoption</h2>
 <p>
 <a id="ch1.sec3"></a></p><p>In spite of all the advantages of RDF, its widespread adoption is not yet a reality.
 Some reasons for this can be guessed.</p><ul class="itemize"><li class="li-itemize"><em>RDF is mistakenly identified as a complex language</em>. 
@@ -132,7 +132,7 @@ which was adopted by the W3C Data Shapes Working Group.</p><p>Although both ShEx
 At the time of this writing the W3C Data Shapes Working Group has been unable to obtain a compromise solution that brings together both proposals so it seems that they will evolve as different technologies in the future.</p><p>This book describes the main features of both ShEx and SHACL from a user perspective and also offers a comparison of the technologies.
 Throughout this book, we develop a small number of examples that typify validation requirements and demonstrate how they can be met with ShEx and SHACL. 
 The book is not intended as a formal specification of the languages, for which the interested reader can consult the corresponding documents, but as an introduction to the technologies with some background about the rationale of their design and some comparison between them. </p>
-<h2 class="section" id="sec12">1.4  Structure of the Book</h2>
+<h2 class="section" id="sec15">1.4  Structure of the Book</h2>
 <p> 
 <a id="ch1.sec4"></a></p><p>Chapter <a href="bookHtml009.html#ch020RDF">2</a> presents a short overview of the RDF data model and RDF-related technologies. 
 This chapter could be skipped by any reader who already knows RDF or Turtle.</p><p>Chapter <a href="bookHtml010.html#ch030DataQuality">3</a> helps us understand what to expect from data validation. 
@@ -145,90 +145,90 @@ Finally, Chapter <a href="bookHtml014.html#ch070Comparing">7</a> compares ShEx 
 We omitted formal definitions or specifications and just added a section at the end of each chapter with references to further reading.</p><p>The intended audience is anyone interested in data representation and quality. 
 We give a quick overview of some background and related technologies so readers without RDF knowledge can follow the book contents.
 Also, it is not necessary to have any prior knowledge on programming or ontologies to understand RDF validation technologies. </p>
-<h2 class="section" id="sec13">1.5  Conventions and Notation</h2>
+<h2 class="section" id="sec16">1.5  Conventions and Notation</h2>
 <p>We provide a short introduction to RDF and Turtle in Chapter <a href="bookHtml009.html#ch020RDF">2</a> and from that point on, 
 we use Turtle for the rest of the book. </p><p>Once a prefix declaration is presented in Turtle and ShEx, it is omitted thereafter to simplify the examples unless needed for clarity.
 The prefix declarations and namespaces used are shown in 
 Table <a href="#ch010.Namespaces">1.1</a>.
-Most examples in the book will need to be prepended with prefix declarations in order to run correctly.</p><blockquote class="table"><div class="center"><hr class="c021"></div>
-<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Table 1.1: Common prefix declarations</td></tr>
+Most examples in the book will need to be prepended with prefix declarations in order to run correctly.</p><blockquote class="table"><div class="center"><hr class="c022"></div>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c019">Table 1.1: Common prefix declarations</td></tr>
 </table></div>
 <a id="ch010.Namespaces"></a>
 <div class="center">
-<table class="c000 cellpadding1" border=1><tr><td class="c016"> Alias</td><td class="c016">Namespace 
-</td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> :</code></td><td class="c016">
+<table class="c000 cellpadding1" border=1><tr><td class="c017"> <span class="c014">Alias</span></td><td class="c017"><span class="c014">Namespace 
+</span></td></tr>
+<tr><td class="c017">
+<code>prefix</code><code> :</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>cex</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>cex</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>weso</code><code>/</code><code>computex</code><code>/</code><code>ontology</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>cdt</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>cdt</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>customDataTypes</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>dbr</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>dbr</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>dbpedia</code><code>.</code><code>org</code><code>/</code><code>resource</code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>ex</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>ex</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>qb</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>qb</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>linked</code><code>-</code><code>data</code><code>/</code><code>cube</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>org</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>org</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>org</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>owl</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>owl</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2002/07/</code><code>owl</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>rdf</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>rdf</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/1999/02/22-</code><code>rdf</code><code>-</code><code>syntax</code><code>-</code><code>ns</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>rdfs</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>rdfs</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2000/01/</code><code>rdf</code><code>-</code><code>schema</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>schema</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>schema</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>schema</code><code>.</code><code>org</code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>sh</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>sh</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>shacl</code><code>#&gt;</code> 
 </td></tr>
-<tr><td class="c016">
-<code>prefix</code><code> </code><code>sx</code><code>:</code></td><td class="c016">
+<tr><td class="c017">
+<code>prefix</code><code> </code><code>sx</code><code>:</code></td><td class="c017">
 <code>&lt;</code><code>http</code><code>://</code><code>shex</code><code>.</code><code>io</code><code>/</code><code>ns</code><code>/</code><code>shex</code><code>#&gt;</code> 
 </td></tr>
 </table>
 </div>
-<div class="center"><hr class="c021"></div></blockquote><p>RDF is being applied to lots of domains, some of them highly specialized. 
+<div class="center"><hr class="c022"></div></blockquote><p>RDF is being applied to lots of domains, some of them highly specialized. 
 We opted to present examples using concepts from familiar domains like people, courses, companies, etc. that we think will be familiar to any reader. 
 Most of the examples use properties borrowed from 
 <code>schema.org</code>,<sup><a id="text1" href="#note1">1</a></sup> 
 which provides lots of concepts from familiar domains. 
 The examples are just for illustration purposes and do not pretend to 
 check <code>schema.org</code> rules. 
-Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:good</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"Valid node"</span></span><span class="c011"> . </span><span class="c011"><em><span class="c011">#\Passes{:Shape}*)</span></em></span><span class="c011">
-</span><span class="c011">
-</span><span class="c011">:bad</span><span class="c011"> </span><span class="c011">schema:name</span><span class="c011"> </span><span class="c011"><span class="c011">"Bad node"</span></span><span class="c011"> .    </span><span class="c011"><em><span class="c011">#\Fails{:Shape}*)  </span></em></span></td></tr>
+Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012">:good</span><span class="c012"> </span><span class="c012">schema:name</span><span class="c012"> </span><span class="c012"><span class="c012">"Valid node"</span></span><span class="c012"> . </span><span class="c012"><em><span class="c012">#\Passes{:Shape}*)</span></em></span><span class="c012">
+</span><span class="c012">
+</span><span class="c012">:bad</span><span class="c012"> </span><span class="c012">schema:name</span><span class="c012"> </span><span class="c012"><span class="c012">"Bad node"</span></span><span class="c012"> .    </span><span class="c012"><em><span class="c012">#\Fails{:Shape}*)  </span></em></span></td></tr>
 </table><p>which means that node 
 <code>:</code><code>good</code> validates against shape 
 <code>:</code><code>Shape</code>, while node 
 <code>:</code><code>bad</code> does not.</p><p>The examples have been tested using the different tools available. 
 We maintain a public repository where we keep the examples used in this book. 
-The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c010">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
+The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c011">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
 <hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
-<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c010">http://schema.org</span></a></div></dd></dl>
+<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c011">http://schema.org</span></a></div></dd></dl>
 <hr>
 <a href="bookHtml007.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
