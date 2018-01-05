@@ -4,170 +4,239 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="generator" content="hevea 2.23">
 <link rel="stylesheet" type="text/css" href="bookHtml.css">
-<title>ShEx in ShEx</title>
+<title>SHACL in SHACL</title>
 </head>
 <body>
 <a href="bookHtml016.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
 <a href="bookHtml018.html"><img src="next_motif.gif" alt="Next"></a>
 <hr>
-<h1 class="chapter" id="sec220">Appendix C  ShEx in ShEx</h1>
+<h1 class="chapter" id="sec221">Appendix D  SHACL in SHACL</h1>
 <p> 
-<a id="AnnexShExInShEx"></a>
-<a id="appc"></a></p><p>In this annex we include the full code of a ShEx schema that validates ShEx schemas represented in RDF syntax (ShExR). 
-This code has been adapted from the ShEx 
-specification [<a href="bookHtml019.html#ShExSpec">81</a>].<sup><a id="text62" href="#note62">1</a></sup> </p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012"> </span><span class="c012"><span class="c007">PREFIX</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:</span></span><span class="c012"> &lt;</span><span class="c012"><span class="c007">http:</span></span><span class="c012">//</span><span class="c012"><span class="c007">www</span></span><span class="c012">.</span><span class="c012"><span class="c007">w3</span></span><span class="c012">.</span><span class="c012"><span class="c007">org</span></span><span class="c012">/2001/</span><span class="c012"><span class="c007">XMLSchema</span></span><span class="c012">#&gt;</span><span class="c012">
- </span><span class="c012"><span class="c007">PREFIX</span></span><span class="c012"> </span><span class="c012"><span class="c007">rdf:</span></span><span class="c012"> &lt;</span><span class="c012"><span class="c007">http:</span></span><span class="c012">//</span><span class="c012"><span class="c007">www</span></span><span class="c012">.</span><span class="c012"><span class="c007">w3</span></span><span class="c012">.</span><span class="c012"><span class="c007">org</span></span><span class="c012">/1999/02/22-</span><span class="c012"><span class="c007">rdf</span></span><span class="c012">-</span><span class="c012"><span class="c007">syntax</span></span><span class="c012">-</span><span class="c012"><span class="c007">ns</span></span><span class="c012">#&gt;</span><span class="c012">
- </span><span class="c012"><span class="c007">BASE</span></span><span class="c012"> &lt;</span><span class="c012"><span class="c007">http:</span></span><span class="c012">//</span><span class="c012"><span class="c007">www</span></span><span class="c012">.</span><span class="c012"><span class="c007">w3</span></span><span class="c012">.</span><span class="c012"><span class="c007">org</span></span><span class="c012">/</span><span class="c012"><span class="c007">ns</span></span><span class="c012">/</span><span class="c012"><span class="c007">shex</span></span><span class="c012">#&gt;</span><span class="c012">
+<a id="annexSHACLinSHACL"></a>
+<a id="appd"></a></p><p>In this Appendix we include the definition of SHACL to validate SHACL Core Shapes graphs. 
+The version we include here has been edited from the original 
+one<sup><a id="text63" href="#note63">1</a></sup>
+in an attempt to improve readability (we changed the 
+<code>shsh</code> prefix by the empty one and omitted 
+<code>rdfs:seeAlso</code> declarations and some comments). 
+It is described in Section <a href="bookHtml012.html#ch070ShaclInShacl">6.6</a>.</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012"> </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">rdfs:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/2000/01/</span><span class="c012">rdf</span><span class="c012">-</span><span class="c012">schema</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
+ </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">sh:</span><span class="c012">   &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">ns</span><span class="c012">/</span><span class="c012">shacl</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
+ </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">xsd:</span><span class="c012">  &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/2001/</span><span class="c012">XMLSchema</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
+ </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">:</span><span class="c012">     &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">ns</span><span class="c012">/</span><span class="c012">shacl</span><span class="c012">-</span><span class="c012">shacl</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
  </span><span class="c012">
- </span><span class="c012"><span class="c007">start</span></span><span class="c012">=</span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Schema</span></span><span class="c012">&gt;</span><span class="c012">
+ </span><span class="c012">:</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> </span><span class="c012"><span class="c012">"SHACL for SHACL"</span></span><span class="c012">@en</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:declare</span><span class="c012"> [ </span><span class="c012">sh:prefix</span><span class="c012"> </span><span class="c012"><span class="c012">""</span></span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:namespace</span><span class="c012"> </span><span class="c012"><span class="c012">"http://www.w3.org/ns/shacl-shacl#"</span></span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] .</span><span class="c012">
  </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">Schema</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:Schema</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:startActs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:start</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt;?;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:shapes</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeOr</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeAnd</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeNot</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">NodeConstraint</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Shape</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeExternal</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeOr</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:ShapeOr</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:shapeExprs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList2Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeAnd</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:ShapeAnd</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:shapeExprs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList2Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeNot</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:ShapeNot</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:shapeExpr</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">NodeConstraint</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:NodeConstraint</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:nodeKind</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:iri</span></span><span class="c012"> </span><span class="c012"><span class="c007">sx:bnode</span></span><span class="c012"> </span><span class="c012"><span class="c007">sx:literal</span></span><span class="c012"> </span><span class="c012"><span class="c007">sx:nonliteral</span></span><span class="c012">]?;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:datatype</span></span><span class="c012"> </span><span class="c012"><span class="c007">IRI</span></span><span class="c012"> ? ;</span><span class="c012">
- </span><span class="c012">  &amp;&lt;</span><span class="c012"><span class="c007">xsFacets</span></span><span class="c012">&gt;  ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:values</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">valueSetValueList1Plus</span></span><span class="c012">&gt;?</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">Shape</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:Shape</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:closed</span></span><span class="c012"> [</span><span class="c012"><span class="c007">true</span></span><span class="c012"> </span><span class="c012"><span class="c007">false</span></span><span class="c012">]? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:extra</span></span><span class="c012"> </span><span class="c012"><span class="c007">IRI</span></span><span class="c012">* ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:expression</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpression</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:semActs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">ShapeExternal</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:ShapeExternal</span></span><span class="c012">] }</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemAct</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:SemAct</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:name</span></span><span class="c012"> </span><span class="c012"><span class="c007">IRI</span></span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:code</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012">?</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">Annotation</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:Annotation</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:predicate</span></span><span class="c012"> </span><span class="c012"><span class="c007">IRI</span></span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:object</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">facet_holder</span></span><span class="c012">&gt; { # </span><span class="c012"><span class="c007">holds</span></span><span class="c012"> </span><span class="c012"><span class="c007">labeled</span></span><span class="c012"> </span><span class="c012"><span class="c007">productions</span></span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">$</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">xsFacets</span></span><span class="c012">&gt; ( &amp;&lt;</span><span class="c012"><span class="c007">stringFacet</span></span><span class="c012">&gt; | &amp;&lt;</span><span class="c012"><span class="c007">numericFacet</span></span><span class="c012">&gt; )* ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">$</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">stringFacet</span></span><span class="c012">&gt; (</span><span class="c012">
- </span><span class="c012">      </span><span class="c012"><span class="c007">sx:length</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:minlength</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:maxlength</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:pattern</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012"> ; </span><span class="c012"><span class="c007">sx:flags</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012">?</span><span class="c012">
- </span><span class="c012">  );</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">$</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericFacet</span></span><span class="c012">&gt; (</span><span class="c012">
- </span><span class="c012">      </span><span class="c012"><span class="c007">sx:mininclusive</span></span><span class="c012">   </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericLiteral</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:minexclusive</span></span><span class="c012">   </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericLiteral</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:maxinclusive</span></span><span class="c012">   </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericLiteral</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:maxexclusive</span></span><span class="c012">   </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericLiteral</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:totaldigits</span></span><span class="c012">    </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">
- </span><span class="c012">    | </span><span class="c012"><span class="c007">sx:fractiondigits</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">
- </span><span class="c012">  )</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">numericLiteral</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:decimal</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:double</span></span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">valueSetValue</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">IriStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">IriStemRange</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LiteralStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LiteralStemRange</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LanguageStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LanguageStemRange</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">IRI</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">LITERAL</span></span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">IriStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:IriStem</span></span><span class="c012">]; </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:anyUri</span></span><span class="c012"> }</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">IriStemRange</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:IriStemRange</span></span><span class="c012">];</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:anyUri</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Wildcard</span></span><span class="c012">&gt;;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:exclusion</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">IriStem</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">LiteralStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:LiteralStem</span></span><span class="c012">]; </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012"> }</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">LiteralStemRange</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:LiteralStemRange</span></span><span class="c012">];</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Wildcard</span></span><span class="c012">&gt;;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:exclusion</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LiteralStem</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">LanguageStem</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:LanguageStem</span></span><span class="c012">]; </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012"> }</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">LanguageStemRange</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:LanguageStemRange</span></span><span class="c012">];</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:stem</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:string</span></span><span class="c012"> </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Wildcard</span></span><span class="c012">&gt;;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:exclusion</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">objectValue</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">LanguageStem</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">Wildcard</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">BNODE</span></span><span class="c012"> </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:Wildcard</span></span><span class="c012">]</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpression</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">TripleConstraint</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">OneOf</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">EachOf</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">OneOf</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:OneOf</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:min</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:max</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:expressions</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList2Plus</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:semActs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:annotation</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Annotation</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">EachOf</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:EachOf</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:min</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:max</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:expressions</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList2Plus</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:semActs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:annotation</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Annotation</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList2Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpression</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList1Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpression</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012">  [</span><span class="c012"><span class="c007">rdf:nil</span></span><span class="c012">] </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">tripleExpressionList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">TripleConstraint</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> { </span><span class="c012"><span class="c007">a</span></span><span class="c012"> [</span><span class="c012"><span class="c007">sx:TripleConstraint</span></span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:inverse</span></span><span class="c012"> [</span><span class="c012"><span class="c007">true</span></span><span class="c012"> </span><span class="c012"><span class="c007">false</span></span><span class="c012">]? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:negated</span></span><span class="c012"> [</span><span class="c012"><span class="c007">true</span></span><span class="c012"> </span><span class="c012"><span class="c007">false</span></span><span class="c012">]? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:min</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:max</span></span><span class="c012"> </span><span class="c012"><span class="c007">xsd:integer</span></span><span class="c012">? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:predicate</span></span><span class="c012"> </span><span class="c012"><span class="c007">IRI</span></span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:valueExpr</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:semActs</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;? ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">sx:annotation</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">Annotation</span></span><span class="c012">&gt;*</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemAct</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012">  [</span><span class="c012"><span class="c007">rdf:nil</span></span><span class="c012">] </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">SemActList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList2Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012">  </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList1Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExpr</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012">  [</span><span class="c012"><span class="c007">rdf:nil</span></span><span class="c012">] </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">shapeExprList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span><span class="c012">
- </span><span class="c012">&lt;</span><span class="c012"><span class="c007">valueSetValueList1Plus</span></span><span class="c012">&gt; </span><span class="c012"><span class="c007">CLOSED</span></span><span class="c012"> {</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:first</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">valueSetValue</span></span><span class="c012">&gt; ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012"><span class="c007">rdf:rest</span></span><span class="c012">  [</span><span class="c012"><span class="c007">rdf:nil</span></span><span class="c012">] </span><span class="c012"><span class="c007">OR</span></span><span class="c012"> </span><span class="c012"><span class="c007">@</span></span><span class="c012">&lt;</span><span class="c012"><span class="c007">valueSetValueList1Plus</span></span><span class="c012">&gt;</span><span class="c012">
- </span><span class="c012">}</span></td></tr>
-</table>
-<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
-<a id="note62" href="#text62">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://shex.io/shex-semantics/#shexr</div></dd></dl>
+ </span><span class="c012">:ShapeShape</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:targetClass</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:targetClass</span><span class="c012"> </span><span class="c012">sh:PropertyShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:targetSubjectsOf</span><span class="c012"> </span><span class="c012">sh:targetClass,</span><span class="c012"> </span><span class="c012">sh:targetNode,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:targetObjectsOf,</span><span class="c012"> </span><span class="c012">sh:targetSubjectsOf,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:and,</span><span class="c012"> </span><span class="c012">sh:class,</span><span class="c012"> </span><span class="c012">sh:closed,</span><span class="c012"> </span><span class="c012">sh:datatype,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:disjoint,</span><span class="c012"> </span><span class="c012">sh:equals,</span><span class="c012"> </span><span class="c012">sh:flags,</span><span class="c012"> </span><span class="c012">sh:hasValue,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:ignoredProperties,</span><span class="c012"> </span><span class="c012">sh:in,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:languageIn,</span><span class="c012"> </span><span class="c012">sh:lessThan,</span><span class="c012"> </span><span class="c012">sh:lessThanOrEquals,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:maxCount,</span><span class="c012"> </span><span class="c012">sh:maxExclusive,</span><span class="c012"> </span><span class="c012">sh:maxInclusive,</span><span class="c012"> </span><span class="c012">sh:maxLength,</span><span class="c012"> </span><span class="c012">sh:minCount,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:minExclusive,</span><span class="c012"> </span><span class="c012">sh:minInclusive,</span><span class="c012"> </span><span class="c012">sh:minLength,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:node,</span><span class="c012"> </span><span class="c012">sh:nodeKind,</span><span class="c012"> </span><span class="c012">sh:not,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:or,</span><span class="c012"> </span><span class="c012">sh:pattern,</span><span class="c012"> </span><span class="c012">sh:property,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:qualifiedMaxCount,</span><span class="c012"> </span><span class="c012">sh:qualifiedMinCount,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:qualifiedValueShape,</span><span class="c012"> </span><span class="c012">sh:qualifiedValueShapesDisjoint,</span><span class="c012">
+ </span><span class="c012">   </span><span class="c012">sh:sparql,</span><span class="c012"> </span><span class="c012">sh:uniqueLang,</span><span class="c012"> </span><span class="c012">sh:xone</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:targetObjectsOf</span><span class="c012"> </span><span class="c012">sh:node,</span><span class="c012"> </span><span class="c012">sh:not,</span><span class="c012"> </span><span class="c012">sh:property,</span><span class="c012"> </span><span class="c012">sh:qualifiedValueShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:xone</span><span class="c012"> ( </span><span class="c012">:NodeShapeShape</span><span class="c012"> </span><span class="c012">:PropertyShapeShape</span><span class="c012"> ) ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:targetNode</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012">   </span><span class="c012">sh:IRIOrLiteral</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:targetClass</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:targetSubjectsOf</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:targetObjectsOf</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:or</span><span class="c012"> (</span><span class="c012">
+ </span><span class="c012">  [ </span><span class="c012">sh:not</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">     </span><span class="c012">sh:class</span><span class="c012"> </span><span class="c012">rdfs:Class</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">     </span><span class="c012">sh:or</span><span class="c012"> ( [ </span><span class="c012">sh:class</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012">             [ </span><span class="c012">sh:class</span><span class="c012"> </span><span class="c012">sh:PropertyShape</span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012">           )</span><span class="c012">
+ </span><span class="c012">    ]</span><span class="c012">
+ </span><span class="c012">  ]</span><span class="c012">
+ </span><span class="c012">  [ </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012"> );</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:severity</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:message</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:or</span><span class="c012"> ( [ </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012">          [ </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">rdf:langString</span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012">  ) ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:deactivated</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:in</span><span class="c012"> ( </span><span class="c012">true</span><span class="c012"> </span><span class="c012">false</span><span class="c012"> ) ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:and</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:class</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:closed</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:boolean</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:ignoredProperties</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> ( </span><span class="c012">sh:ignoredProperties</span><span class="c012"> [ </span><span class="c012">sh:zeroOrMorePath</span><span class="c012"> </span><span class="c012">rdf:rest</span><span class="c012"> ] </span><span class="c012">rdf:first</span><span class="c012"> ) ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:datatype</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:disjoint</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:equals</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:in</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:languageIn</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> ( </span><span class="c012">sh:languageIn</span><span class="c012"> [ </span><span class="c012">sh:zeroOrMorePath</span><span class="c012"> </span><span class="c012">rdf:rest</span><span class="c012"> ] </span><span class="c012">rdf:first</span><span class="c012">) ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:lessThan</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:lessThanOrEquals</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:maxCount</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:maxExclusive</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:Literal</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:maxInclusive</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:Literal</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:maxLength</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:minCount</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:minExclusive</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:Literal</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:minInclusive</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:Literal</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:minLength</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:nodeKind</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:in</span><span class="c012"> ( </span><span class="c012">sh:BlankNode</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> </span><span class="c012">sh:Literal</span><span class="c012">
+ </span><span class="c012">          </span><span class="c012">sh:BlankNodeOrIRI</span><span class="c012"> </span><span class="c012">sh:BlankNodeOrLiteral</span><span class="c012"> </span><span class="c012">sh:IRIOrLiteral</span><span class="c012"> ) ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:or</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:pattern</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:flags</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:qualifiedMaxCount</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:qualifiedMinCount</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:integer</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:qualifiedValueShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:qualifiedValueShapesDisjoint</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:boolean</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:uniqueLang</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:boolean</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
+ </span><span class="c012"> ] ;</span><span class="c012">
+ </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">sh:xone</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:ListShape</span><span class="c012"> ;</span><span class="c012">
+ </span><span class="c012"> ]</span><span class="c012">
+ </span><span class="c012">.</span></td></tr>
+</table><p>	</p><hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note63" href="#text63">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See Appendix C in <a href="https://www.w3.org/TR/shacl/"><span class="c011">https://www.w3.org/TR/shacl/</span></a></div></dd></dl>
 <hr>
 <a href="bookHtml016.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>

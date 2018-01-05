@@ -126,32 +126,9 @@ from <a href="http://www.morganclaypoolpublishers.com/catalog_Orig/product_info
 <h5 class="paragraph" id="sec3">Living publication</h5><!--SEC END --><p>The HTML version allows a dynamic publication process where we intend to correct the errata that we find in the book.</p><ul class="itemize"><li class="li-itemize">
 <a href="https://github.com/validatingrdf/book/issues/1">List of errata found in the published book.</a>
 </li><li class="li-itemize"><a href="https://github.com/validatingrdf/book/issues">List of issues</a>. If you find some issues or suggestions in the HTML version, you can add them here also.
-</li></ul>
-<!--TOC section id="sec4" Abstract-->
-<h2 class="section" id="sec4">0.1  Abstract</h2><!--SEC END --><p>RDF and Linked Data have broad applicability across many fields, 
-from aircraft manufacturing to zoology. Requirements for detecting 
-bad data differ across communities, fields, and tasks, but nearly 
-all involve some form of data validation. This book introduces 
-data validation and describes its practical use in day-to-day data exchange.</p><p>The Semantic Web offers a bold, new take on how to organize, distribute, 
-index, and share data.
-Using Web addresses (URIs) as identifiers for data elements enables the 
-construction of distributed databases on a global scale. Like the Web, 
-the Semantic Web is heralded as an information revolution, and also like the Web, 
-it is encumbered by data quality issues. The quality of Semantic Web data is 
-compromised by the lack of resources for data curation, for maintenance, and 
-for developing globally applicable data models.</p><p>At the enterprise scale, these problems have conventional solutions. 
-Master data management provides an enterprise-wide vocabulary, while constraint 
-languages capture and enforce data structures. Filling a need long recognized 
-by Semantic Web users, shapes languages provide models and vocabularies for 
-expressing such structural constraints.</p><p>This book describes two technologies for RDF validation: 
-Shape Expressions (ShEx) and Shapes Constraint Language (SHACL), 
-the rationales for their designs, a comparison of the two,
-and some example applications.
-</p><p><span class="c014">Keywords</span>: RDF, ShEx, SHACL, shape expressions, shapes constraint language, data quality,
-web of data, Semantic Web, linked data
-</p><!--TOC chapter id="sec5" Contents-->
-<h1 class="chapter" id="sec5">Contents</h1><!--SEC END --><ul class="toc"><li class="li-toc">
-<a href="#sec4">0.1  Abstract</a>
+</li></ul><hr style="height:2"><!--TOC chapter id="sec4" Contents-->
+<h1 class="chapter" id="sec4">Contents</h1><!--SEC END --><ul class="toc"><li class="li-toc">
+<a href="#sec5">0.1  Abstract</a>
 </li></ul><ul class="toc"><li class="li-toc">
 
 </li><li class="li-toc">
@@ -393,7 +370,30 @@ web of data, Semantic Web, linked data
 </li><li class="li-toc"><a href="#sec221">Appendix D  SHACL in SHACL</a>
 </li><li class="li-toc">
 </li><li class="li-toc">
-</li></ul><!--TOC chapter id="sec6" Preface-->
+</li></ul>
+<!--TOC section id="sec5" Abstract-->
+<h2 class="section" id="sec5">0.1  Abstract</h2><!--SEC END --><p>RDF and Linked Data have broad applicability across many fields, 
+from aircraft manufacturing to zoology. Requirements for detecting 
+bad data differ across communities, fields, and tasks, but nearly 
+all involve some form of data validation. This book introduces 
+data validation and describes its practical use in day-to-day data exchange.</p><p>The Semantic Web offers a bold, new take on how to organize, distribute, 
+index, and share data.
+Using Web addresses (URIs) as identifiers for data elements enables the 
+construction of distributed databases on a global scale. Like the Web, 
+the Semantic Web is heralded as an information revolution, and also like the Web, 
+it is encumbered by data quality issues. The quality of Semantic Web data is 
+compromised by the lack of resources for data curation, for maintenance, and 
+for developing globally applicable data models.</p><p>At the enterprise scale, these problems have conventional solutions. 
+Master data management provides an enterprise-wide vocabulary, while constraint 
+languages capture and enforce data structures. Filling a need long recognized 
+by Semantic Web users, shapes languages provide models and vocabularies for 
+expressing such structural constraints.</p><p>This book describes two technologies for RDF validation: 
+Shape Expressions (ShEx) and Shapes Constraint Language (SHACL), 
+the rationales for their designs, a comparison of the two,
+and some example applications.
+</p><p><span class="c014">Keywords</span>: RDF, ShEx, SHACL, shape expressions, shapes constraint language, data quality,
+web of data, Semantic Web, linked data
+</p><!--TOC chapter id="sec6" Preface-->
 <h1 class="chapter" id="sec6">Preface</h1><!--SEC END --><p>This book describes two languages for implementing constraints on RDF
 data, describing the main features of both Shape Expressions (ShEx) and
 Shapes Constraint Language (SHACL) from a user perspective, and also
@@ -2810,7 +2810,7 @@ They can contain the value
 </em><code><em>schema</em></code><code><em>:</em></code><code><em>knows</em></code><em> and nodes that have </em><em>
 </em><code><em>rdf</em></code><code><em>:</em></code><code><em>type</em></code><em> with value </em><em>
 </em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em>.</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">{</span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">name</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012">}</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
-</span></em><em><span class="c012">{</span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">knows</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012">}</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">
+</span></em><em><span class="c012">{</span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">knows</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012">}</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">{</span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">rdf</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">type</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Person</span></span></em><em><span class="c012">}</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em></td></tr>
 </table></div></div><p>Section <a href="#ch040ShapeMaps">4.9</a> describes fixed shape maps and query shape maps in greater detail.</p><p>In the previous example, validating 
 <code>:</code><code>alice</code> as a 
@@ -2935,11 +2935,11 @@ The first one declares that nodes must be </em><em>
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">CanVoteAge</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">xsd</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">integer</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">MinInclusive</span></span></em><em><span class="c012"> 18</span></em></td></tr>
 </table><p><em>If we provide a ShEx processor the shape map </em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">&lt;</span></em><em><span class="c012"><span class="c007">http</span></span></em><em><span class="c012">://</span></em><em><span class="c012"><span class="c007">example</span></span></em><em><span class="c012">.</span></em><em><span class="c012"><span class="c007">org</span></span></em><em><span class="c012">/</span></em><em><span class="c012"><span class="c007">alice</span></span></em><em><span class="c012">&gt;</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">HomePage</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
-</span></em><em><span class="c012">23</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">VotingAge</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
+</span></em><em><span class="c012">23</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">CanVoteAge</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">45</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">HomePage</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
-</span></em><em><span class="c012">14</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">VotingAge</span></span></em></td></tr>
+</span></em><em><span class="c012">14</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">CanVoteAge</span></span></em></td></tr>
 </table><p><em>The result would be that the first two nodes are conformant while the last 
-two nodes are non-conformant.</em></p></div></div><p>It is also possible to combine top-level node constraints with more complex shapes.</p><div class="example"><div class="theorem"><span class="c014">Example 33</span>  <em>Node constraint as top-level shape</em><p><em>The following declaration of shape </em><em>
+two nodes are non-conformant.</em></p></div></div><p>It is also possible to combine top-level node constraints with more complex shapes.</p><div class="example"><div class="theorem"><span class="c014">Example 33</span>  <em>Node constraint as top-level shape combined with complex shape</em><p><em>The following declaration of shape </em><em>
 </em><code><em>:</em></code><code><em>User</em></code><em> says that nodes conforming to shape 
 </em><em>
 </em><code><em>:</em></code><code><em>User</em></code><em> must be </em><em>
@@ -3115,7 +3115,7 @@ The datatype </em><em>
 </em><code><em>rdf</em></code><code><em>:</em></code><code><em>langString</em></code><em> identifies language-tagged literals (see </em><em>[</em><a href="#RDF11"><em>25, Section 3.3</em></a><em>]</em><em>), i.e., RDF literals that have a language tag.</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Country</span></span></em><em><span class="c012"> {</span></em><em><span class="c012">
 </span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">name</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">rdf</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">langString</span></span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">}</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:spain</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"España"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012">#\Passes{:Country}*)</span></em></span><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:italy</span></em><em><span class="c012">  </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Italia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> . </span></em><span class="c012"><em><span class="c012">#\Passes{:Country}*)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:france</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012"> .    </span></em><span class="c012"><em><span class="c012">#\Fails{:Country}*)  </span></em></span></td></tr>
 </table></div></div>
@@ -3290,7 +3290,7 @@ with
 </span></em><em><span class="c012">:product2</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:name</span></em><em><span class="c012">   </span></em><em><span class="c012"><em><span class="c012">"Product 2"</span></em></span></em><em><span class="c012"> ;         </span></em><span class="c012"><em><span class="c012">#\Fails{:Product} *)    </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">          </span></em><em><span class="c012">schema:weight</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"245.5"</span></em></span></em><em><span class="c012">^^</span></em><em><span class="c012">xsd:decimal</span></em><em><span class="c012"> ;</span></em><span class="c012"><em><span class="c012"># schema:weight &gt; 200 *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">          </span></em><em><span class="c012">schema:sku</span></em><em><span class="c012">    </span></em><em><span class="c012"><em><span class="c012">"ABC"</span></em></span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012"># schema:sku fails regex *)</span></em></span></td></tr>
-</table></div></div><p><a id="hevea_default382"></a> 
+</table><p><a href="https://goo.gl/bBrjbH"><em>Try example in Shaclex</em></a></p></div></div><p><a id="hevea_default382"></a> 
 <a id="hevea_default383"></a> <a id="RegularExpressions"></a>
 The pattern constraint (‘
 <code>/</code><code>regex</code><code>/</code>’) is based on the XPath regular expression function 
@@ -3495,9 +3495,9 @@ They can also be language tags, which match any literal with the given language 
 </span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">SpanishProduct</span></span></em><em><span class="c012"> {</span></em><em><span class="c012">
 </span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">label</span></span></em><em><span class="c012"> [ </span></em><em><span class="c012"><span class="c007">@es</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@es</span></span></em><em><span class="c012">-</span></em><em><span class="c012"><span class="c007">AR</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@es</span></span></em><em><span class="c012">-</span></em><em><span class="c012"><span class="c007">ES</span></span></em><em><span class="c012"> ]</span></em><em><span class="c012">
 </span></em><em><span class="c012">}</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:car1</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"voiture"</span></em></span></em><em><span class="c012">@fr</span></em><em><span class="c012"> .    </span></em><span class="c012"><em><span class="c012"># \Passes{:FrenchProduct} *)</span></em></span><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:car1</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Voiture"</span></em></span></em><em><span class="c012">@fr</span></em><em><span class="c012"> .    </span></em><span class="c012"><em><span class="c012"># \Passes{:FrenchProduct} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:car2</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Autom\'ovil"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .    </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:car2</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Auto"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .    </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:car3</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Carro"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012">-</span></em><em><span class="c012">AR</span></em><em><span class="c012"> . </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
@@ -3517,7 +3517,7 @@ For example, Argentinian, Chilean, and other region codes for Spain could be acc
 language-tagged literal in Spanish or any variant.</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">SpanishProduct</span></span></em><em><span class="c012"> {</span></em><em><span class="c012">
 </span></em><em><span class="c012">  </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">label</span></span></em><em><span class="c012"> [ </span></em><em><span class="c012"><span class="c007">@es</span></span></em><em><span class="c012">~ ]</span></em><em><span class="c012">
 </span></em><em><span class="c012">}</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:car1</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Autom\'ovil"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> . </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:car1</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Auto"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .      </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:car2</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Carro"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012">-</span></em><em><span class="c012">AR</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012"># \Passes{:SpanishProduct} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
@@ -3620,11 +3620,11 @@ Given that the exclusion is an IRI, the status must be an IRI.</em></p><table cl
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:p1</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012">codes:good</span></em><em><span class="c012"> . </span></em><span class="c012"><em><span class="c012"># \Passes{:Product} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:p1</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012">other:bad</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012"># \Passes{:Product} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:p2</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012">other:bad</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012"># \Passes{:Product} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:p2</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012">codes:bad</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012"># \Fails{:Product} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:p3</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012">codes:bad</span></em><em><span class="c012"> .  </span></em><span class="c012"><em><span class="c012"># \Fails{:Product} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:p2</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"good"</span></em></span></em><em><span class="c012"> .     </span></em><span class="c012"><em><span class="c012"># \Fails{:Product} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:p4</span></em><em><span class="c012"> </span></em><em><span class="c012">:status</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"good"</span></em></span></em><em><span class="c012"> .     </span></em><span class="c012"><em><span class="c012"># \Fails{:Product} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">                         </span></em><span class="c012"><em><span class="c012"># "good" must be a IRI *) </span></em></span></td></tr>
 </table></div></div>
 <!--TOC paragraph id="sec80" Value set expressivity-->
@@ -3928,7 +3928,7 @@ and that they can contain between 0 or two combinations of </em><em>
 </span></em><em><span class="c012">    </span></em><em><span class="c012">schema:isRelatedTo</span></em><em><span class="c012"> </span></em><em><span class="c012">:p1</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">    </span></em><em><span class="c012">schema:isSimilarTo</span></em><em><span class="c012"> </span></em><em><span class="c012">:p2</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:p4</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:productId</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"P4"</span></em></span></em><em><span class="c012"> ;           </span></em><span class="c012"><em><span class="c012">#\Passes{:Product} *) </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:p4</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:productId</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"P4"</span></em></span></em><em><span class="c012"> ;           </span></em><span class="c012"><em><span class="c012">#\Fails{:Product} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">    </span></em><em><span class="c012">schema:isRelatedTo</span></em><em><span class="c012"> </span></em><em><span class="c012">:p1,</span></em><em><span class="c012"> </span></em><em><span class="c012">:p2,</span></em><em><span class="c012"> </span></em><em><span class="c012">:p3</span></em><em><span class="c012"> .</span></em></td></tr>
 </table></div></div>
 <!--TOC subsection id="sec88" Nested Shapes-->
@@ -4198,10 +4198,10 @@ A common pattern is to combine
 </span></em><em><span class="c012">       </span></em><em><span class="c012">schema:affiliation</span></em><em><span class="c012"> </span></em><em><span class="c012">:ACompany</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">       </span></em><em><span class="c012">schema:knows</span></em><em><span class="c012">       </span></em><em><span class="c012">:alice,</span></em><em><span class="c012"> </span></em><em><span class="c012">:bob</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:dave</span></em><em><span class="c012">  </span></em><em><span class="c012">schema:name</span></em><em><span class="c012">  </span></em><em><span class="c012"><em><span class="c012">"Dave"</span></em></span></em><em><span class="c012"> ;           </span></em><span class="c012"><em><span class="c012">#\Passes{:KnowsW3CPeople} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:dave</span></em><em><span class="c012">  </span></em><em><span class="c012">schema:name</span></em><em><span class="c012">  </span></em><em><span class="c012"><em><span class="c012">"Dave"</span></em></span></em><em><span class="c012"> ;           </span></em><span class="c012"><em><span class="c012">#\Fails{:KnowsW3CPeople} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">       </span></em><em><span class="c012">schema:knows</span></em><em><span class="c012"> </span></em><em><span class="c012">:alice,</span></em><em><span class="c012"> </span></em><em><span class="c012">:bob</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">       </span></em><em><span class="c012">schema:age</span></em><em><span class="c012">   23 .               </span></em><span class="c012"><em><span class="c012"># schema:age not allowed*)</span></em></span></td></tr>
-</table></div></div>
+</table><p><a href="https://goo.gl/mdkMWQ"><em>Try example in Shaclex</em></a></p></div></div>
 <!--TOC section id="sec94" References-->
 <h2 class="section" id="sec94">4.7  References</h2><!--SEC END --><p>
 <a id="ch4.sec6"></a></p>
@@ -4633,11 +4633,11 @@ The following example declares that nodes conforming to shape </em><em>
 </em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em>.</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Person</span></span></em><em><span class="c012"> { </span></em><em><span class="c012"><span class="c007">a</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">PersonShape</span></span></em><em><span class="c012"> }</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">PersonShape</span></span></em><em><span class="c012"> [ </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Person</span></span></em><em><span class="c012"> ] </span></em><em><span class="c012"><span class="c007">OR</span></span></em><em><span class="c012"> { </span></em><em><span class="c012"><span class="c007">rdfs</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">subClassOf</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">PersonShape</span></span></em><em><span class="c012"> }</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:alice</span></em><em><span class="c012">     </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:Person</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Passes{:PersonInstance} *)</span></em></span><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:alice</span></em><em><span class="c012">     </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:Person</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Passes{:Person} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:bob</span></em><em><span class="c012">       </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Teacher</span></em><em><span class="c012"> .                    </span></em><span class="c012"><em><span class="c012">#\Passes{:PersonInstance} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:bob</span></em><em><span class="c012">       </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Teacher</span></em><em><span class="c012"> .                    </span></em><span class="c012"><em><span class="c012">#\Passes{:Person} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:carol</span></em><em><span class="c012">     </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Assistant</span></em><em><span class="c012"> .                  </span></em><span class="c012"><em><span class="c012">#\Passes{:PersonInstance} *)</span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:carol</span></em><em><span class="c012">     </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Assistant</span></em><em><span class="c012"> .                  </span></em><span class="c012"><em><span class="c012">#\Passes{:Person} *)</span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:Teacher</span></em><em><span class="c012">   </span></em><em><span class="c012">rdfs:subClassOf</span></em><em><span class="c012"> </span></em><em><span class="c012">schema:Person</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">:Assistant</span></em><em><span class="c012"> </span></em><em><span class="c012">rdfs:subClassOf</span></em><em><span class="c012"> </span></em><em><span class="c012">:Teacher</span></em><em><span class="c012"> .</span></em></td></tr>
@@ -4680,7 +4680,7 @@ and check whether they satisfy it or not.</p><div class="example"><div class="th
 </span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">birthDate</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">xsd</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">date</span></span></em><em><span class="c012">? ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">}</span></em><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">NoUser</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">Not</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012"> .</span></em></td></tr>
+</span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">NoUser</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">Not</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em></td></tr>
 </table><p><em>Both nodes </em><em>
 </em><code><em>:</em></code><code><em>alice</em></code><em> and </em><em>
 </em><code><em>:</em></code><code><em>bob</em></code><em> conform to one of the shapes, </em><em>
@@ -4893,7 +4893,7 @@ This can be useful for testing membership in a value set or verifying the form o
 This is done by permitting the node selectors to be either an RDF node as in a fixed map or a triple pattern.
 <a id="hevea_default438"></a> <a id="hevea_default439"></a> <a id="hevea_default440"></a>
 A triple pattern can have a focus keyword to represent the nodes that will be validated and a node or wildcard (represented by the underscore character 
-<code>_</code>). </p><div class="example"><div class="theorem"><span class="c014">Example 86</span>  <em>Query shape map example</em><p><em>The shape map:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">{ </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">worksFor</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012">            }</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">
+<code>_</code>). </p><div class="example"><div class="theorem"><span class="c014">Example 86</span>  <em>Query shape map example</em><p><em>The shape map:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">{ </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">worksFor</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012">            }</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">{ </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">rdf</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">type</span></span></em><em><span class="c012">        </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Person</span></span></em><em><span class="c012">}</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">User</span></span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">{ </span></em><em><span class="c012"><span class="c007">_</span></span></em><em><span class="c012">     </span></em><em><span class="c012"><span class="c007">schema</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">worksFor</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">FOCUS</span></span></em><em><span class="c012">        }</span></em><em><span class="c012"><span class="c007">@</span></span></em><em><span class="c012">:</span></em><em><span class="c012"><span class="c007">Company</span></span></em></td></tr>
 </table><p><em>associates all subjects of property </em><em>
@@ -4906,7 +4906,7 @@ and all objects of property </em><em>
 </em><code><em>schema</em></code><code><em>:</em></code><code><em>Person</em></code><em> and the subject of a </em><em>
 </em><code><em>schema</em></code><code><em>:</em></code><code><em>worksFor</em></code><em> triple would be selected by both triple patterns and associated with </em><em>
 </em><code><em>:</em></code><code><em>User</em></code><em> in the fixed map.
-Such duplicates are eliminated in accordance with the rule that a shape map can have no duplicate pairs of nodeSelector and shapeLabel.</em></p><blockquote class="figure"><div class="center"><hr class="c022"></div><em> 
+Such duplicates are eliminated in accordance with the rule that a shape map can have no duplicate pairs of node selector and shape label.</em></p><blockquote class="figure"><div class="center"><hr class="c022"></div><em> 
 </em><div class="center"><em>
 <img src="ShEx_QueryShapeMap.png">
 </em></div><em>
@@ -4915,7 +4915,7 @@ Such duplicates are eliminated in accordance with the rule that a shape map can 
 </em><div class="caption"><table class="c002 cellpading0"><tr><td class="c019"><em>Figure 4.10: Shape map resolution which accepts a query shape map and emits 
 a fixed shape map.</em></td></tr>
 </table></div><em>
-</em><div class="center"><hr class="c022"></div></blockquote></div></div><p>While the nodeSelector may be a triple pattern, it may also be an RDF node as we would see in a fixed shape map.
+</em><div class="center"><hr class="c022"></div></blockquote></div></div><p>While the node selector may be a triple pattern, it may also be an RDF node as we would see in a fixed shape map.
 Common idioms of query map can do the following. </p><ul class="itemize"><li class="li-itemize">
 Explicitly bind nodes to shapes. 
 This effectively adds one nodeSelector/shapeLabel pair to the shape map.
@@ -5004,23 +5004,23 @@ of conformance in case of success.</p><div class="example"><div class="theorem">
 <!--TOC subsection id="sec114" JSON Representation-->
 <h3 class="subsection" id="sec114">4.9.4  JSON Representation</h3><!--SEC END --><p> 
 <a id="ch040jsonShapeMaps"></a>
-<a id="ch4.sec8.4"></a></p><p>The fixed shape map from Figure <a href="#ch040.ShExValidatorProcessFull">87</a> can be represented as:<sup><a id="text9" href="#note9">2</a></sup> </p><div class="example"><div class="theorem"><span class="c014">Example 88</span>  <em>JSON representation of shape maps</em><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">[ { "</span></em><em><span class="c012">nodeSelector</span></em><em><span class="c012">": ":</span></em><em><span class="c012">alice</span></em><em><span class="c012">",</span></em><em><span class="c012">
-</span></em><em><span class="c012">    "</span></em><em><span class="c012">shapeLabel</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">"</span></em><em><span class="c012">
+<a id="ch4.sec8.4"></a></p><p>The fixed shape map from Figure <a href="#ch040.ShExValidatorProcessFull">87</a> can be represented as:<sup><a id="text9" href="#note9">2</a></sup> </p><div class="example"><div class="theorem"><span class="c014">Example 88</span>  <em>JSON representation of shape maps</em><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">[ { "</span></em><em><span class="c012">node</span></em><em><span class="c012">": ":</span></em><em><span class="c012">alice</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">    "</span></em><em><span class="c012">shape</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">"</span></em><em><span class="c012">
 </span></em><em><span class="c012">  },</span></em><em><span class="c012">
-</span></em><em><span class="c012">  { "</span></em><em><span class="c012">nodeSelector</span></em><em><span class="c012">": ":</span></em><em><span class="c012">bob</span></em><em><span class="c012">",</span></em><em><span class="c012">
-</span></em><em><span class="c012">    "</span></em><em><span class="c012">shapeLabel</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">"</span></em><em><span class="c012">
+</span></em><em><span class="c012">  { "</span></em><em><span class="c012">node</span></em><em><span class="c012">": ":</span></em><em><span class="c012">bob</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">    "</span></em><em><span class="c012">shape</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">"</span></em><em><span class="c012">
 </span></em><em><span class="c012">  }</span></em><em><span class="c012">
 </span></em><em><span class="c012">]</span></em></td></tr>
-</table><p><em>The output shape map would be:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">[ { "</span></em><em><span class="c012">nodeSelector</span></em><em><span class="c012">": ":</span></em><em><span class="c012">alice</span></em><em><span class="c012">",</span></em><em><span class="c012">
-</span></em><em><span class="c012">    "</span></em><em><span class="c012">shapeLabel</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</table><p><em>The output shape map would be:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">[ { "</span></em><em><span class="c012">node</span></em><em><span class="c012">": ":</span></em><em><span class="c012">alice</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">    "</span></em><em><span class="c012">shape</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
 </span></em><em><span class="c012">    "</span></em><em><span class="c012">status</span></em><em><span class="c012">": "</span></em><em><span class="c012">conformant</span></em><em><span class="c012">"</span></em><em><span class="c012">
 </span></em><em><span class="c012">  },</span></em><em><span class="c012">
-</span></em><em><span class="c012">  { "</span></em><em><span class="c012">nodeSelector</span></em><em><span class="c012">": ":</span></em><em><span class="c012">bob</span></em><em><span class="c012">",</span></em><em><span class="c012">
-</span></em><em><span class="c012">    "</span></em><em><span class="c012">shapeLabel</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">  { "</span></em><em><span class="c012">node</span></em><em><span class="c012">": ":</span></em><em><span class="c012">bob</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">    "</span></em><em><span class="c012">shape</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
 </span></em><em><span class="c012">    "</span></em><em><span class="c012">status</span></em><em><span class="c012">": "</span></em><em><span class="c012">conformant</span></em><em><span class="c012">"</span></em><em><span class="c012">
 </span></em><em><span class="c012">  },</span></em><em><span class="c012">
-</span></em><em><span class="c012">  { "</span></em><em><span class="c012">nodeSelector</span></em><em><span class="c012">": ":</span></em><em><span class="c012">carol</span></em><em><span class="c012">",</span></em><em><span class="c012">
-</span></em><em><span class="c012">    "</span></em><em><span class="c012">shapeLabel</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">  { "</span></em><em><span class="c012">node</span></em><em><span class="c012">": ":</span></em><em><span class="c012">carol</span></em><em><span class="c012">",</span></em><em><span class="c012">
+</span></em><em><span class="c012">    "</span></em><em><span class="c012">shape</span></em><em><span class="c012">": ":</span></em><em><span class="c012">User</span></em><em><span class="c012">",</span></em><em><span class="c012">
 </span></em><em><span class="c012">    "</span></em><em><span class="c012">status</span></em><em><span class="c012">": "</span></em><em><span class="c012">conformant</span></em><em><span class="c012">"</span></em><em><span class="c012">
 </span></em><em><span class="c012">  }</span></em><em><span class="c012">
 </span></em><em><span class="c012">]</span></em></td></tr>
@@ -6548,8 +6548,8 @@ A common use case is to declare that some literals must be language-tagged strin
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:path</span></em><em><span class="c012">     </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:datatype</span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c010">rdf:langString</span></span></em><em><span class="c012">
 </span></em><em><span class="c012">  ] .</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:spain</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> ;               </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape}*)   </span></em></span><em><span class="c012">
-</span></em><em><span class="c012">       </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"España"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:italy</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> ;               </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape}*)   </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">       </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Italia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:france</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> ;              </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape}*)  </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">        </span></em><em><span class="c012">schema:name</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012"> .</span></em></td></tr>
@@ -6901,14 +6901,14 @@ Although that section was for ShEx, the concept is the same. </em></p><table cla
 </span></em><em><span class="c012">    </span></em><em><span class="c012"><span class="c010">sh:languageIn</span></span></em><em><span class="c012"> (</span></em><em><span class="c012"><em><span class="c012">"es"</span></em></span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"en"</span></em></span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"fr"</span></em></span></em><em><span class="c012">)</span></em><em><span class="c012">
 </span></em><em><span class="c012">] .</span></em></td></tr>
 </table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:p234</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Product</span></em><em><span class="c012"> ;              </span></em><span class="c012"><em><span class="c012">#\Passes{:ProductShape} *) </span></em></span><em><span class="c012">
-</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"jamón"</span></em></span></em><em><span class="c012">@es,</span></em><em><span class="c012">
-</span></em><em><span class="c012">                 </span></em><em><span class="c012"><em><span class="c012">"ham"</span></em></span></em><em><span class="c012">@en</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"leche"</span></em></span></em><em><span class="c012">@es,</span></em><em><span class="c012">
+</span></em><em><span class="c012">                 </span></em><em><span class="c012"><em><span class="c012">"milk"</span></em></span></em><em><span class="c012">@en</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:p235</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Product</span></em><em><span class="c012"> ;              </span></em><span class="c012"><em><span class="c012">#\Passes{:ProductShape} *)  </span></em></span><em><span class="c012">
-</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"milk"</span></em></span></em><em><span class="c012">@en</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"ham"</span></em></span></em><em><span class="c012">@en</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:p236</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Product</span></em><em><span class="c012"> ;              </span></em><span class="c012"><em><span class="c012">#\Fails{:ProductShape} *)</span></em></span><em><span class="c012">
-</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Käse"</span></em></span></em><em><span class="c012">@de</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"tomaten"</span></em></span></em><em><span class="c012">@de</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:p237</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Product</span></em><em><span class="c012"> ;              </span></em><span class="c012"><em><span class="c012">#\Fails{:ProductShape} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">      </span></em><em><span class="c012">rdfs:label</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"patatas"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> </span></em><em><span class="c012">,</span></em><em><span class="c012">
@@ -6922,16 +6922,16 @@ Although that section was for ShEx, the concept is the same. </em></p><table cla
 </span></em><em><span class="c012">    </span></em><em><span class="c012">sh:path</span></em><em><span class="c012">       </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">    </span></em><em><span class="c012"><span class="c010">sh:uniqueLang</span></span></em><em><span class="c012"> </span></em><em><span class="c012">true</span></em><em><span class="c012">
 </span></em><em><span class="c012">] .</span></em></td></tr>
-</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:spain</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *) </span></em></span><em><span class="c012">
-</span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Spain"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
-</span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"España"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</table><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:italy</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *) </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Italy"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
+</span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"Italia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:france</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
 </span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"Francia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:italy</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *)     </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:spain</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *)     </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:usa</span></em><em><span class="c012">    </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"USA"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
@@ -6941,7 +6941,7 @@ Although that section was for ShEx, the concept is the same. </em></p><table cla
 </em><code><em>skos:prefLabel</em></code><em>.
 </em></li></ul></div></div><p>In the previous example, a node without 
 <code>skos:prefLabel</code> (e.g., 
-<code>:italy</code>) also conforms to 
+<code>:spain</code>) also conforms to 
 <code>:CountryShape</code>.</p><div class="example"><div class="theorem"><span class="c014">Example 125</span>  <em>Example with one language tag in a list of languages</em><p><em>A typical situation is to require exactly one literal per language from a list of allowed languages. 
 For example, declaring that nodes of shape </em><em>
 </em><code><em>:CountryShape</em></code><em> have at least one </em><em>
@@ -6954,22 +6954,22 @@ For example, declaring that nodes of shape </em><em>
 </span></em><em><span class="c012">    </span></em><em><span class="c012"><span class="c010">sh:uniqueLang</span></span></em><em><span class="c012"> </span></em><em><span class="c012">true</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">    </span></em><em><span class="c012">sh:languageIn</span></em><em><span class="c012"> (</span></em><em><span class="c012"><em><span class="c012">"en"</span></em></span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"es"</span></em></span></em><em><span class="c012">) ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">  ] .</span></em></td></tr>
-</table><p><em>Given the following data:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:spain</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *) </span></em></span><em><span class="c012">
-</span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Spain"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
-</span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"España"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
+</table><p><em>Given the following data:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012">:italy</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Passes{:CountryShape} *) </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"Italy"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
+</span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"Italia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:france</span></em><em><span class="c012"> </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012"> </span></em><em><span class="c012">,</span></em><em><span class="c012">
 </span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"France"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
 </span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"Francia"</span></em></span></em><em><span class="c012">@es</span></em><em><span class="c012"> .</span></em><em><span class="c012">
 </span></em><em><span class="c012">
-</span></em><em><span class="c012">:italy</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape} *)     </span></em></span><em><span class="c012">
+</span></em><em><span class="c012">:spain</span></em><em><span class="c012">  </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012"> .               </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape} *)     </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">
 </span></em><em><span class="c012">:usa</span></em><em><span class="c012">    </span></em><em><span class="c012">a</span></em><em><span class="c012"> </span></em><em><span class="c012">:Country</span></em><em><span class="c012">;                </span></em><span class="c012"><em><span class="c012">#\Fails{:CountryShape} *) </span></em></span><em><span class="c012">
 </span></em><em><span class="c012">        </span></em><em><span class="c012">skos:prefLabel</span></em><em><span class="c012"> </span></em><em><span class="c012"><em><span class="c012">"USA"</span></em></span></em><em><span class="c012">@en,</span></em><em><span class="c012">
 </span></em><em><span class="c012">                       </span></em><em><span class="c012"><em><span class="c012">"United States"</span></em></span></em><em><span class="c012">@en</span></em><em><span class="c012">.</span></em></td></tr>
 </table><p><em>In this case, </em><em>
-</em><code><em>:italy</em></code><em> fails because it has no </em><em>
+</em><code><em>:spain</em></code><em> fails because it has no </em><em>
 </em><code><em>skos:prefLabel</em></code><em>, </em><em>
 </em><code><em>:france</em></code><em> fails because if has one value that is not in English or Spanish, and </em><em>
 </em><code><em>:usa</em></code><em> fails because it has more than one value in English.</em></p></div></div>
@@ -10767,7 +10767,7 @@ Section <a href="#ch040ReusingShapesShEx">4.8.1</a>
 (ShEx) and Section <a href="#ch050ExtendingShapesSHACL">127</a> (SHACL). </p><div class="example"><div class="theorem"><span class="c014">Example 167</span>  <em>Extending shapes in ShEx and SHACL</em><p><em>As a simple example, the following ShEx schema declares a </em><em>
 </em><code><em>:Product</em></code><em> shape and a </em><em>
 </em><code><em>:SoldProduct</em></code><em> shape:</em></p><table class="lstframe c015"><tr><td class="lstlisting"><em><span class="c012"><span class="c007">:Product</span></span></em><em><span class="c012"> {</span></em><em><span class="c012">
-</span></em><em><span class="c012">  </span></em><em><span class="c012"><span class="c007">schema:productId</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">xsd:string</span></span></em><em><span class="c012">
+</span></em><em><span class="c012">  </span></em><em><span class="c012"><span class="c007">schema:productId</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">xsd:string</span></span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">  </span></em><em><span class="c012"><span class="c007">schema:price</span></span></em><em><span class="c012"> </span></em><em><span class="c012"><span class="c007">xsd:decimal</span></span></em><em><span class="c012">
 </span></em><em><span class="c012">}</span></em><em><span class="c012">
 </span></em><em><span class="c012">
@@ -11098,7 +11098,7 @@ though this possibility is being studied to be included in future versions.</p><
 </span></em><em><span class="c012"> </span></em><em><span class="c012">sh:property</span></em><em><span class="c012"> [</span></em><em><span class="c012">
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:path</span></em><em><span class="c012">     </span></em><em><span class="c012">schema:birthDate</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:datatype</span></em><em><span class="c012"> </span></em><em><span class="c012">xsd:date</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
-</span></em><em><span class="c012">   </span></em><em><span class="c012">sh:lessThan</span></em><em><span class="c012"> </span></em><em><span class="c012">:loginDate</span></em><em><span class="c012">
+</span></em><em><span class="c012">   </span></em><em><span class="c012">sh:lessThan</span></em><em><span class="c012"> </span></em><em><span class="c012">:loginDate</span></em><em><span class="c012"> ;</span></em><em><span class="c012">
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:minCount</span></em><em><span class="c012"> 1;</span></em><em><span class="c012">
 </span></em><em><span class="c012">   </span></em><em><span class="c012">sh:maxCount</span></em><em><span class="c012"> 1;</span></em><em><span class="c012">
 </span></em><em><span class="c012"> ] .</span></em></td></tr>
@@ -11461,7 +11461,7 @@ A solution in this case is to enumerate the properties that we allow using
 In this case, one should add:</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012">:UserShape</span><span class="c012">
 </span><span class="c012">  </span><span class="c012">sh:ignoredProperties</span><span class="c012"> (</span><span class="c012">schema:name</span><span class="c012">
 </span><span class="c012">                        </span><span class="c012">schema:birthDate</span><span class="c012">
-</span><span class="c012">  )</span></td></tr>
+</span><span class="c012">  ) .</span></td></tr>
 </table><p>A similar situation could happen if we use more complex property paths. </p><p>For example, we may want to declare that users can have either 
 <code>schema:name</code> or 
 <code>foaf:name</code> using an alternative property path as:</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012">:UserShape</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
