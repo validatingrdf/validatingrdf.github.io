@@ -150,85 +150,85 @@ Also, it is not necessary to have any prior knowledge on programming or ontologi
 we use Turtle for the rest of the book. </p><p>Once a prefix declaration is presented in Turtle and ShEx, it is omitted thereafter to simplify the examples unless needed for clarity.
 The prefix declarations and namespaces used are shown in 
 Table <a href="#ch010.Namespaces">1.1</a>.
-Most examples in the book will need to be prepended with prefix declarations in order to run correctly.</p><blockquote class="table"><div class="center"><hr class="c022"></div>
-<div class="caption"><table class="c002 cellpading0"><tr><td class="c019">Table 1.1: Common prefix declarations</td></tr>
+Most examples in the book will need to be prepended with prefix declarations in order to run correctly.</p><blockquote class="table"><div class="center"><hr class="c021"></div>
+<div class="caption"><table class="c002 cellpading0"><tr><td class="c018">Table 1.1: Common prefix declarations</td></tr>
 </table></div>
 <a id="ch010.Namespaces"></a>
 <div class="center">
-<table class="c000 cellpadding1" border=1><tr><td class="c017"> <span class="c014">Alias</span></td><td class="c017"><span class="c014">Namespace 
+<table class="c000 cellpadding1" border=1><tr><td class="c016"> <span class="c013">Alias</span></td><td class="c016"><span class="c013">Namespace 
 </span></td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> :</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> :</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">example</span></code><code>.</code><code><span class="c004">org</span></code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>cex</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>weso</code><code>/</code><code>computex</code><code>/</code><code>ontology</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">cex</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">purl</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">weso</span></code><code>/</code><code><span class="c006">computex</span></code><code>/</code><code><span class="c006">ontology</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>cdt</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/</code><code>customDataTypes</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">cdt</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">example</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">customDataTypes</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>dbr</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>dbpedia</code><code>.</code><code>org</code><code>/</code><code>resource</code><code>/&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">dbr</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">dbpedia</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">resource</span></code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>ex</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>example</code><code>.</code><code>org</code><code>/&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">ex</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">example</span></code><code>.</code><code><span class="c004">org</span></code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>qb</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>purl</code><code>.</code><code>org</code><code>/</code><code>linked</code><code>-</code><code>data</code><code>/</code><code>cube</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">qb</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">purl</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">linked</span></code><code>-</code><code><span class="c006">data</span></code><code>/</code><code><span class="c006">cube</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>org</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>org</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">org</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">www</span></code><code>.</code><code><span class="c006">w3</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">ns</span></code><code>/</code><code><span class="c004">org</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>owl</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2002/07/</code><code>owl</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">owl</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">www</span></code><code>.</code><code><span class="c006">w3</span></code><code>.</code><code><span class="c004">org</span></code><code>/2002/07/</code><code><span class="c004">owl</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>rdf</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/1999/02/22-</code><code>rdf</code><code>-</code><code>syntax</code><code>-</code><code>ns</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">rdf</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">www</span></code><code>.</code><code><span class="c006">w3</span></code><code>.</code><code><span class="c004">org</span></code><code>/1999/02/22-</code><code><span class="c004">rdf</span></code><code>-</code><code><span class="c006">syntax</span></code><code>-</code><code><span class="c006">ns</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>rdfs</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/2000/01/</code><code>rdf</code><code>-</code><code>schema</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">rdfs</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">www</span></code><code>.</code><code><span class="c006">w3</span></code><code>.</code><code><span class="c004">org</span></code><code>/2000/01/</code><code><span class="c004">rdf</span></code><code>-</code><code><span class="c004">schema</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>schema</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>schema</code><code>.</code><code>org</code><code>/&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">schema</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c004">schema</span></code><code>.</code><code><span class="c004">org</span></code><code>/&gt;</code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>sh</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>www</code><code>.</code><code>w3</code><code>.</code><code>org</code><code>/</code><code>ns</code><code>/</code><code>shacl</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">sh</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">www</span></code><code>.</code><code><span class="c006">w3</span></code><code>.</code><code><span class="c004">org</span></code><code>/</code><code><span class="c006">ns</span></code><code>/</code><code><span class="c006">shacl</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
-<tr><td class="c017">
-<code>prefix</code><code> </code><code>sx</code><code>:</code></td><td class="c017">
-<code>&lt;</code><code>http</code><code>://</code><code>shex</code><code>.</code><code>io</code><code>/</code><code>ns</code><code>/</code><code>shex</code><code>#&gt;</code> 
+<tr><td class="c016">
+<code><span class="c003">prefix</span></code><code> </code><code><span class="c004">sx</span></code><code>:</code></td><td class="c016">
+<code>&lt;</code><code><span class="c006">http</span></code><code>://</code><code><span class="c006">shex</span></code><code>.</code><code><span class="c006">io</span></code><code>/</code><code><span class="c006">ns</span></code><code>/</code><code><span class="c006">shex</span></code><code><span class="c008"><code>#&gt;</code></span></code> 
 </td></tr>
 </table>
 </div>
-<div class="center"><hr class="c022"></div></blockquote><p>RDF is being applied to lots of domains, some of them highly specialized. 
+<div class="center"><hr class="c021"></div></blockquote><p>RDF is being applied to lots of domains, some of them highly specialized. 
 We opted to present examples using concepts from familiar domains like people, courses, companies, etc. that we think will be familiar to any reader. 
 Most of the examples use properties borrowed from 
 <code>schema.org</code>,<sup><a id="text1" href="#note1">1</a></sup> 
 which provides lots of concepts from familiar domains. 
 The examples are just for illustration purposes and do not pretend to 
 check <code>schema.org</code> rules. 
-Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012">:good</span><span class="c012"> </span><span class="c012">schema:name</span><span class="c012"> </span><span class="c012"><span class="c012">"Valid node"</span></span><span class="c012"> . </span><span class="c012"><em><span class="c012">#\Passes{:Shape}*)</span></em></span><span class="c012">
-</span><span class="c012">
-</span><span class="c012">:bad</span><span class="c012"> </span><span class="c012">schema:name</span><span class="c012"> </span><span class="c012"><span class="c012">"Bad node"</span></span><span class="c012"> .    </span><span class="c012"><em><span class="c012">#\Fails{:Shape}*)  </span></em></span></td></tr>
+Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:</span><span class="c011"><span class="c006">good</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Valid node"</span></span></span><span class="c011"> . </span><span class="c011"><span class="c008"><span class="c011">#\Passes{:Shape}*)</span></span></span><span class="c011">
+</span><span class="c011">
+</span><span class="c011">:</span><span class="c011"><span class="c006">bad</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Bad node"</span></span></span><span class="c011"> .    </span><span class="c011"><span class="c008"><span class="c011">#\Fails{:Shape}*)  </span></span></span></td></tr>
 </table><p>which means that node 
 <code>:</code><code>good</code> validates against shape 
 <code>:</code><code>Shape</code>, while node 
 <code>:</code><code>bad</code> does not.</p><p>The examples have been tested using the different tools available. 
 We maintain a public repository where we keep the examples used in this book. 
-The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c011">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
+The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c010">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
 <hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
-<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c011">http://schema.org</span></a></div></dd></dl>
+<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c010">http://schema.org</span></a></div></dd></dl>
 <hr>
 <a href="bookHtml006.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>

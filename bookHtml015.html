@@ -17,220 +17,220 @@
 <a id="appb"></a></p><p>The following code contains the full version of the WebIndex data in SHACL that was described in Section <a href="bookHtml012.html#ch070WebIndexSHACL">6.1.2</a>.
 
 
-</p><table class="lstframe c015"><tr><td class="lstlisting"><span class="c012"> </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">example</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/&gt; .</span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">sh:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">ns</span><span class="c012">/</span><span class="c012">shacl</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">xsd:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/2001/</span><span class="c012">XMLSchema</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">rdf:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/1999/02/22-</span><span class="c012">rdf</span><span class="c012">-</span><span class="c012">syntax</span><span class="c012">-</span><span class="c012">ns</span><span class="c012"><em><span class="c012">#&gt;.</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">wf:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">data</span><span class="c012">.</span><span class="c012">webfoundation</span><span class="c012">.</span><span class="c012">org</span><span class="c012"><em><span class="c012">#&gt;.</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">rdfs:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/2000/01/</span><span class="c012">rdf</span><span class="c012">-</span><span class="c012">schema</span><span class="c012"><em><span class="c012">#&gt;.</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">qb:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">purl</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">linked</span><span class="c012">-</span><span class="c012">data</span><span class="c012">/</span><span class="c012">cube</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">cex:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">purl</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">weso</span><span class="c012">/</span><span class="c012">ontology</span><span class="c012">/</span><span class="c012">computex</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">dct:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">purl</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">dc</span><span class="c012">/</span><span class="c012">terms</span><span class="c012">/&gt;.</span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">skos:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/2004/02/</span><span class="c012">skos</span><span class="c012">/</span><span class="c012">core</span><span class="c012"><em><span class="c012">#&gt;.</span></em></span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">foaf:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">xmlns</span><span class="c012">.</span><span class="c012">com</span><span class="c012">/</span><span class="c012">foaf</span><span class="c012">/0.1/&gt; .</span><span class="c012">
- </span><span class="c012">@prefix</span><span class="c012"> </span><span class="c012">org:</span><span class="c012"> &lt;</span><span class="c012">http:</span><span class="c012">//</span><span class="c012">www</span><span class="c012">.</span><span class="c012">w3</span><span class="c012">.</span><span class="c012">org</span><span class="c012">/</span><span class="c012">ns</span><span class="c012">/</span><span class="c012">org</span><span class="c012"><em><span class="c012">#&gt; .</span></em></span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Country</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">wf:iso2</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:length</span><span class="c012"> 2 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ]</span><span class="c012">
- </span><span class="c012">.</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:DataSet</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">qb:DataSet</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">qb:structure</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">wf:DSD</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">qb:slice</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Slice</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">dct:publisher</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Organization</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ]</span><span class="c012">
- </span><span class="c012">.</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Slice</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">qb:Slice</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">qb:sliceStructure</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">wf:sliceByYear</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">qb:observation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Observation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:indicator</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Indicator</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ]</span><span class="c012">
- </span><span class="c012">.</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Observation</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">   </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">        </span><span class="c012">sh:in</span><span class="c012"> (</span><span class="c012">qb:Observation</span><span class="c012"> </span><span class="c012">wf:Observation</span><span class="c012">);</span><span class="c012">
- </span><span class="c012">        </span><span class="c012">sh:minCount</span><span class="c012"> 2</span><span class="c012">
- </span><span class="c012">  ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [ </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">   </span><span class="c012">sh:minCount</span><span class="c012"> 2 ;</span><span class="c012">
- </span><span class="c012">   </span><span class="c012">sh:maxCount</span><span class="c012"> 2</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:value</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:float</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">dct:issued</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:dateTime</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:or</span><span class="c012"> (</span><span class="c012">
- </span><span class="c012">  [ </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">dct:publisher</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">wf:WebFoundation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">    ]</span><span class="c012">
- </span><span class="c012">  ]</span><span class="c012">
- </span><span class="c012">  [ </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">dct:publisher</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:maxCount</span><span class="c012"> 0</span><span class="c012">
- </span><span class="c012">    ]</span><span class="c012">
- </span><span class="c012">  ]</span><span class="c012">
- </span><span class="c012"> ) ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">qb:dataSet</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:DataSet</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:ref</span><span class="c012">-</span><span class="c012">area</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Country</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:indicator</span><span class="c012">;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Indicator</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:or</span><span class="c012"> (</span><span class="c012">
- </span><span class="c012">  [ </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">wf:source</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">         </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">         </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012">    ] ;</span><span class="c012">
- </span><span class="c012">   </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:computation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">sh:maxCount</span><span class="c012"> 0</span><span class="c012">
- </span><span class="c012">   ]</span><span class="c012">
- </span><span class="c012"> ]</span><span class="c012">
- </span><span class="c012"> [ </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">    </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">cex:computation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">    </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Computation</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">        </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">        </span><span class="c012">sh:maxCount</span><span class="c012"> 1</span><span class="c012">
- </span><span class="c012">   ] ;</span><span class="c012">
- </span><span class="c012">   </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">    </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">wf:source</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">    </span><span class="c012">sh:maxCount</span><span class="c012"> 0</span><span class="c012">
- </span><span class="c012">   ]</span><span class="c012">
- </span><span class="c012"> ]</span><span class="c012">
- </span><span class="c012">)</span><span class="c012">
- </span><span class="c012">.</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Computation</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">cex:Computation</span><span class="c012">
- </span><span class="c012"> ] .</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Indicator</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:in</span><span class="c012"> (</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">wf:PrimaryIndicator</span><span class="c012">
- </span><span class="c012">     </span><span class="c012">wf:SecondaryIndicator</span><span class="c012">
- </span><span class="c012">  ) ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">wf:provider</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:node</span><span class="c012"> </span><span class="c012">:Organization</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">.</span><span class="c012">
- </span><span class="c012">
- </span><span class="c012">:Organization</span><span class="c012"> </span><span class="c012">a</span><span class="c012"> </span><span class="c012">sh:NodeShape</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:closed</span><span class="c012"> </span><span class="c012">true</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:ignoredProperties</span><span class="c012"> (</span><span class="c012">rdf:type</span><span class="c012">) ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdf:type</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:hasValue</span><span class="c012"> </span><span class="c012">org:Organization</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">rdfs:label</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:datatype</span><span class="c012"> </span><span class="c012">xsd:string</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012"> ] ;</span><span class="c012">
- </span><span class="c012"> </span><span class="c012">sh:property</span><span class="c012"> [</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:path</span><span class="c012"> </span><span class="c012">foaf:homepage</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:nodeKind</span><span class="c012"> </span><span class="c012">sh:IRI</span><span class="c012"> ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:minCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">  </span><span class="c012">sh:maxCount</span><span class="c012"> 1 ;</span><span class="c012">
- </span><span class="c012">] ;</span><span class="c012">
- </span><span class="c012">.</span></td></tr>
+</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011"> </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> : </span><span class="c011"><span class="c008"><span class="c011">&lt;http://example.org/&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/ns/shacl#&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/2001/XMLSchema#&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span></span></span><span class="c011">.</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://data.webfoundation.org#&gt;</span></span></span><span class="c011">.</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span></span></span><span class="c011">.</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://purl.org/linked-data/cube#&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://purl.org/weso/ontology/computex#&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">dct</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://purl.org/dc/terms/&gt;</span></span></span><span class="c011">.</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">skos</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/2004/02/skos/core#&gt;</span></span></span><span class="c011">.</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">foaf</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://xmlns.com/foaf/0.1/&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011"><span class="c006">@prefix</span></span><span class="c011"> </span><span class="c011"><span class="c004">org</span></span><span class="c011">: </span><span class="c011"><span class="c008"><span class="c011">&lt;http://www.w3.org/ns/org#&gt;</span></span></span><span class="c011"> .</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Country</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">:</span><span class="c011"><span class="c006">label</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">iso2</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">length</span></span><span class="c011"> 2 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ]</span><span class="c011">
+ </span><span class="c011">.</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">DataSet</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">DataSet</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">structure</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">DSD</span></span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">:</span><span class="c011"><span class="c006">label</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">slice</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Slice</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">dct</span></span><span class="c011">:</span><span class="c011"><span class="c006">publisher</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Organization</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ]</span><span class="c011">
+ </span><span class="c011">.</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Slice</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">Slice</span></span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">sliceStructure</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">sliceByYear</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">observation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Observation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">indicator</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Indicator</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ]</span><span class="c011">
+ </span><span class="c011">.</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Observation</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">   </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">        </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">in</span></span><span class="c011"> (</span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">Observation</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">Observation</span></span><span class="c011">);</span><span class="c011">
+ </span><span class="c011">        </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 2</span><span class="c011">
+ </span><span class="c011">  ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [ </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">   </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 2 ;</span><span class="c011">
+ </span><span class="c011">   </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 2</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">value</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">float</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">:</span><span class="c011"><span class="c006">label</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">dct</span></span><span class="c011">:</span><span class="c011"><span class="c006">issued</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">dateTime</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">or</span></span><span class="c011"> (</span><span class="c011">
+ </span><span class="c011">  [ </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">dct</span></span><span class="c011">:</span><span class="c011"><span class="c006">publisher</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">WebFoundation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">    ]</span><span class="c011">
+ </span><span class="c011">  ]</span><span class="c011">
+ </span><span class="c011">  [ </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">dct</span></span><span class="c011">:</span><span class="c011"><span class="c006">publisher</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 0</span><span class="c011">
+ </span><span class="c011">    ]</span><span class="c011">
+ </span><span class="c011">  ]</span><span class="c011">
+ </span><span class="c011"> ) ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">qb</span></span><span class="c011">:</span><span class="c011"><span class="c006">dataSet</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">DataSet</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">ref</span></span><span class="c011">-</span><span class="c011"><span class="c006">area</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Country</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">indicator</span></span><span class="c011">;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Indicator</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">or</span></span><span class="c011"> (</span><span class="c011">
+ </span><span class="c011">  [ </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">source</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">         </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">nodeKind</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">IRI</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">         </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011">    ] ;</span><span class="c011">
+ </span><span class="c011">   </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">computation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 0</span><span class="c011">
+ </span><span class="c011">   ]</span><span class="c011">
+ </span><span class="c011"> ]</span><span class="c011">
+ </span><span class="c011"> [ </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">    </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">computation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">    </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Computation</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">        </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">        </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1</span><span class="c011">
+ </span><span class="c011">   ] ;</span><span class="c011">
+ </span><span class="c011">   </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">    </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">source</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">    </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 0</span><span class="c011">
+ </span><span class="c011">   ]</span><span class="c011">
+ </span><span class="c011"> ]</span><span class="c011">
+ </span><span class="c011">)</span><span class="c011">
+ </span><span class="c011">.</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Computation</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">cex</span></span><span class="c011">:</span><span class="c011"><span class="c006">Computation</span></span><span class="c011">
+ </span><span class="c011"> ] .</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Indicator</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">in</span></span><span class="c011"> (</span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">PrimaryIndicator</span></span><span class="c011">
+ </span><span class="c011">     </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">SecondaryIndicator</span></span><span class="c011">
+ </span><span class="c011">  ) ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">:</span><span class="c011"><span class="c006">label</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">wf</span></span><span class="c011">:</span><span class="c011"><span class="c006">provider</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">node</span></span><span class="c011"> :</span><span class="c011"><span class="c006">Organization</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">] ;</span><span class="c011">
+ </span><span class="c011">.</span><span class="c011">
+ </span><span class="c011">
+ </span><span class="c011">:</span><span class="c011"><span class="c006">Organization</span></span><span class="c011"> </span><span class="c011"><span class="c003">a</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">NodeShape</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">closed</span></span><span class="c011"> </span><span class="c011"><span class="c003">true</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">ignoredProperties</span></span><span class="c011"> (</span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011">) ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdf</span></span><span class="c011">:</span><span class="c011"><span class="c006">type</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">hasValue</span></span><span class="c011"> </span><span class="c011"><span class="c004">org</span></span><span class="c011">:</span><span class="c011"><span class="c006">Organization</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">rdfs</span></span><span class="c011">:</span><span class="c011"><span class="c006">label</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">datatype</span></span><span class="c011"> </span><span class="c011"><span class="c004">xsd</span></span><span class="c011">:</span><span class="c011"><span class="c006">string</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011"> ] ;</span><span class="c011">
+ </span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">property</span></span><span class="c011"> [</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">path</span></span><span class="c011"> </span><span class="c011"><span class="c004">foaf</span></span><span class="c011">:</span><span class="c011"><span class="c006">homepage</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">nodeKind</span></span><span class="c011"> </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">IRI</span></span><span class="c011"> ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">minCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">  </span><span class="c011"><span class="c004">sh</span></span><span class="c011">:</span><span class="c011"><span class="c006">maxCount</span></span><span class="c011"> 1 ;</span><span class="c011">
+ </span><span class="c011">] ;</span><span class="c011">
+ </span><span class="c011">.</span></td></tr>
 </table>
 <hr>
 <a href="bookHtml014.html"><img src="previous_motif.gif" alt="Previous"></a>
