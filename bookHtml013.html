@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="generator" content="hevea 2.23">
-<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<link rel="stylesheet" type="text/css" href="book.css"><link rel="stylesheet" type="text/css" href="bookHtml.css">
 <title>Comparing ShEx and SHACL</title>
 </head>
 <body>
@@ -11,6 +11,19 @@
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
 <a href="bookHtml014.html"><img src="next_motif.gif" alt="Next"></a>
 <hr>
+<header>
+  <a href="http://book.validatingrdf.com">Validating RDF data</a>
+  <img src="cover.jpg"></img>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112019120-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112019120-1');
+</script>
+</header>     
 <h1 class="chapter" id="sec196">Chapter 7  Comparing ShEx and SHACL</h1>
 <p> 
 <a id="ch070Comparing"></a>
@@ -585,14 +598,14 @@ with shapes (either validated or non-validated) while SHACL has no comparable fe
 </span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c004">sh</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">path</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
 </span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c004">sh</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">datatype</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">xsd</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">string</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
 </span></em><em><span class="c011"> ] .</span></em></td></tr>
-</table><p><em>Given the following data:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">alice</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011">      </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Alice Cooper"</span></em></span></span></em><em><span class="c011">; </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Passes{:UserShape - ShEx}*)</span></em></span></span></em><em><span class="c011">
-</span></em><em><span class="c011">       </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Alice"</span></em></span></span></em><em><span class="c011"> .       </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Passes{:UserShape - SHACL}*)</span></em></span></span></em><em><span class="c011">
+</table><p><em>Given the following data:</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">alice</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011">      </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Alice Cooper"</span></em></span></span></em><em><span class="c011">; </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Passes as a :UserShape - ShEx</span></em></span></span></em><em><span class="c011">
+</span></em><em><span class="c011">       </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Alice"</span></em></span></span></em><em><span class="c011"> .       </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Passes as a :UserShape - SHACL</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">
-</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">bob</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Robert"</span></em></span></span></em><em><span class="c011"> ;      </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Fails{:UserShape  - ShEx}*)</span></em></span></span></em><em><span class="c011">
-</span></em><em><span class="c011">     </span></em><em><span class="c011"><span class="c004">foaf</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">age</span></span></em><em><span class="c011">           23 .            </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Passes{:UserShape - SHACL}*)</span></em></span></span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">bob</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Robert"</span></em></span></span></em><em><span class="c011"> ;      </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :UserShape  - ShEx</span></em></span></span></em><em><span class="c011">
+</span></em><em><span class="c011">     </span></em><em><span class="c011"><span class="c004">foaf</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">age</span></span></em><em><span class="c011">           23 .            </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Passes as a :UserShape - SHACL</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">
-</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">carol</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> 345 ;                </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Fails{:UserShape - ShEx}*)</span></em></span></span></em><em><span class="c011">
-</span></em><em><span class="c011">       </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011"> 346 .           </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Fails{:UserShape - SHACL}*)</span></em></span></span></em></td></tr>
+</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">carol</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> 345 ;                </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :UserShape - ShEx</span></em></span></span></em><em><span class="c011">
+</span></em><em><span class="c011">       </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">givenName</span></span></em><em><span class="c011"> 346 .           </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :UserShape - SHACL</span></em></span></span></em></td></tr>
 </table></div></div><p>
 The difference in results is based on the difference between the ShEx and SHACL points of view.
 In ShEx, a triple expression makes explicit which triples involving the focus node should be found in the graph, and specifying a cardinality may require several such triples.
@@ -1318,6 +1331,18 @@ Eckert</a>,<a href="bookHtml018.html#Hartmann16">2016</a> [<a href="bookHtml018.
 </p>
 <hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
 <a id="note57" href="#text57">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">The complete list of rules is defined in <a href="https://www.w3.org/TR/shacl/\#syntax-rules"><span class="c010">https://www.w3.org/TR/shacl/\#syntax-rules</span></a>.</div></dd><dt class="dt-thefootnotes"><a id="note58" href="#text58">2</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://shex.io/shex-primer/</div></dd><dt class="dt-thefootnotes"><a id="note59" href="#text59">3</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: https://www.w3.org/2011/gld/validator/datacube.shapes.ttl</div></dd><dt class="dt-thefootnotes"><a id="note60" href="#text60">4</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://shex.io/extensions/Map/</div></dd><dt class="dt-thefootnotes"><a id="note61" href="#text61">5</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://labra.github.io/shaclex/</div></dd></dl>
+<footer>
+
+<iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fbook.validatingrdf.com%2F&width=100&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=8170400788" width="100" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+<a class="twitter-share-button" text="Validating RDF data book" href="https://twitter.com/intent/tweet?text=Validating%20RDF%20data%20book&?via=jelabra&hastags=shex,shacl,validatingrdfbook" data-size="large">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a51d2b6b0d22f0a"></script>
+
+
+</footer>  
 <hr>
 <a href="bookHtml012.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>

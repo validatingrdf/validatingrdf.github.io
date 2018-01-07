@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="generator" content="hevea 2.23">
-<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<link rel="stylesheet" type="text/css" href="book.css"><link rel="stylesheet" type="text/css" href="bookHtml.css">
 <title>Introduction</title>
 </head>
 <body>
@@ -11,6 +11,19 @@
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
 <a href="bookHtml008.html"><img src="next_motif.gif" alt="Next"></a>
 <hr>
+<header>
+  <a href="http://book.validatingrdf.com">Validating RDF data</a>
+  <img src="cover.jpg"></img>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112019120-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112019120-1');
+</script>
+</header>     
 <h1 class="chapter" id="sec11">Chapter 1  Introduction</h1>
 <p>
 <a id="ch1"></a>
@@ -218,9 +231,9 @@ Most of the examples use properties borrowed from
 which provides lots of concepts from familiar domains. 
 The examples are just for illustration purposes and do not pretend to 
 check <code>schema.org</code> rules. 
-Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:</span><span class="c011"><span class="c006">good</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Valid node"</span></span></span><span class="c011"> . </span><span class="c011"><span class="c008"><span class="c011">#\Passes{:Shape}*)</span></span></span><span class="c011">
+Nevertheless, validating <code>schema.org</code> using ShEx or SHACL can be an interesting exercise for readers.</p><p>For examples that involve validation of a node against a shape, we use the following notation:</p><table class="lstframe c014"><tr><td class="lstlisting"><span class="c011">:</span><span class="c011"><span class="c006">good</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Valid node"</span></span></span><span class="c011"> . </span><span class="c011"><span class="c008"><span class="c011">#Passes as a :Shape</span></span></span><span class="c011">
 </span><span class="c011">
-</span><span class="c011">:</span><span class="c011"><span class="c006">bad</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Bad node"</span></span></span><span class="c011"> .    </span><span class="c011"><span class="c008"><span class="c011">#\Fails{:Shape}*)  </span></span></span></td></tr>
+</span><span class="c011">:</span><span class="c011"><span class="c006">bad</span></span><span class="c011"> </span><span class="c011"><span class="c004">schema</span></span><span class="c011">:</span><span class="c011"><span class="c006">name</span></span><span class="c011"> </span><span class="c011"><span class="c005"><span class="c011">"Bad node"</span></span></span><span class="c011"> .    </span><span class="c011"><span class="c008"><span class="c011">#Fails as a :Shape  </span></span></span></td></tr>
 </table><p>which means that node 
 <code>:</code><code>good</code> validates against shape 
 <code>:</code><code>Shape</code>, while node 
@@ -229,6 +242,18 @@ We maintain a public repository where we keep the examples used in this book.
 The URL is: <a href="https://github.com/labra/validatingRDFBookExamples"><span class="c010">https://github.com/labra/validatingRDFBookExamples</span></a>.</p>
 <hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
 <a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext"><a href="http://schema.org"><span class="c010">http://schema.org</span></a></div></dd></dl>
+<footer>
+
+<iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fbook.validatingrdf.com%2F&width=100&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=8170400788" width="100" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+<a class="twitter-share-button" text="Validating RDF data book" href="https://twitter.com/intent/tweet?text=Validating%20RDF%20data%20book&?via=jelabra&hastags=shex,shacl,validatingrdfbook" data-size="large">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a51d2b6b0d22f0a"></script>
+
+
+</footer>  
 <hr>
 <a href="bookHtml006.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="generator" content="hevea 2.23">
-<link rel="stylesheet" type="text/css" href="bookHtml.css">
+<link rel="stylesheet" type="text/css" href="book.css"><link rel="stylesheet" type="text/css" href="bookHtml.css">
 <title>Shape Expressions</title>
 </head>
 <body>
@@ -11,6 +11,19 @@
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
 <a href="bookHtml011.html"><img src="next_motif.gif" alt="Next"></a>
 <hr>
+<header>
+  <a href="http://book.validatingrdf.com">Validating RDF data</a>
+  <img src="cover.jpg"></img>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112019120-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112019120-1');
+</script>
+</header>     
 <h1 class="chapter" id="sec60">Chapter 4  Shape Expressions</h1>
 <p> 
 <a id="ch040ShEx"></a>
@@ -672,9 +685,9 @@ The datatype </em><em>
 </em><code><em><span class="c004">rdf</span></em></code><code><em>:</em></code><code><em><span class="c006">langString</span></em></code><em> identifies language-tagged literals (see </em><em>[</em><a href="bookHtml018.html#RDF11"><em>25, Section 3.3</em></a><em>]</em><em>), i.e., RDF literals that have a language tag.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">Country</span></span></em><em><span class="c011"> {</span></em><em><span class="c011">
 </span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">rdf</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">langString</span></span></em><em><span class="c011"> ;</span></em><em><span class="c011">
 </span></em><em><span class="c011">}</span></em></td></tr>
-</table><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">italy</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Italia"</span></em></span></span></em><em><span class="c011"><span class="c006">@es</span></span></em><em><span class="c011"> . </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Passes{:Country}*)</span></em></span></span></em><em><span class="c011">
+</table><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">italy</span></span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Italia"</span></em></span></span></em><em><span class="c011"><span class="c006">@es</span></span></em><em><span class="c011"> . </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Passes as a :Country</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">
-</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">france</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"France"</span></em></span></span></em><em><span class="c011"> .    </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Fails{:Country}*)  </span></em></span></span></em></td></tr>
+</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">france</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"France"</span></em></span></span></em><em><span class="c011"> .    </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :Country  </span></em></span></span></em></td></tr>
 </table></div></div>
 <h3 class="subsection" id="sec72">4.5.3  Facets on Literals</h3>
 <p> 
@@ -1090,7 +1103,7 @@ IRIs, e.g., ‘
 </span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">telephone</span></span></em><em><span class="c011"> [ </span></em><em><span class="c011"><em><span class="c011">"+34"</span></em></span></em><em><span class="c011">~ ] ;</span></em><em><span class="c011">
 </span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">url</span></span></em><em><span class="c011">       [ </span></em><em><span class="c011"><span class="c008"><em><span class="c011">&lt;http://www.W3C.es/Personal&gt;</span></em></span></span></em><em><span class="c011">~ ]</span></em><em><span class="c011">
 </span></em><em><span class="c011">}</span></em></td></tr>
-</table><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">alice</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">telephone</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"+34 123 456 789"</span></em></span></span></em><em><span class="c011">; </span></em><em><span class="c011"><span class="c008"><em><span class="c011"># \Passes{:SpanishW3CPeople}*)</span></em></span></span></em><em><span class="c011">
+</table><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">alice</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">telephone</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"+34 123 456 789"</span></em></span></span></em><em><span class="c011">; </span></em><em><span class="c011"><span class="c008"><em><span class="c011"># Passes as a :SpanishW3CPeople</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">  </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">url</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c008"><em><span class="c011">&lt;http://www.W3C.es/Personal/Alice&gt;</span></em></span></span></em><em><span class="c011"> .</span></em><em><span class="c011">
 </span></em><em><span class="c011">
 </span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">bob</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">telephone</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"123 456 789"</span></em></span></span></em><em><span class="c011"> ;    </span></em><em><span class="c011"><span class="c008"><em><span class="c011"># Fails as a :SpanishW3CPeople</span></em></span></span></em><em><span class="c011">
@@ -2286,7 +2299,7 @@ However, notice that </em><em>
 </em><code><em>{</em></code><code><em><span class="c004">schema</span></em></code><code><em>:</em></code><code><em><span class="c006">name</span></em></code><code><em> </em></code><code><em><span class="c004">xsd</span></em></code><code><em>:</em></code><code><em><span class="c006">string</span></em></code><code><em>}</em></code><em> and thus, conforms to </em><em>
 </em><code><em>:</em></code><code><em><span class="c006">NoName2</span></em></code><em>.</em></p><table class="lstframe c014"><tr><td class="lstlisting"><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">alice</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c005"><em><span class="c011">"Alice"</span></em></span></span></em><em><span class="c011">. </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :NoName1 and :NoName2</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">
-</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">bob</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> 23 .     </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#\Fails{:NoName1}*) Passes as a :NoName2</span></em></span></span></em><em><span class="c011">
+</span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">bob</span></span></em><em><span class="c011">   </span></em><em><span class="c011"><span class="c004">schema</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">name</span></span></em><em><span class="c011"> 23 .     </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Fails as a :NoName1 Passes as a :NoName2</span></em></span></span></em><em><span class="c011">
 </span></em><em><span class="c011">
 </span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">carol</span></span></em><em><span class="c011"> </span></em><em><span class="c011"><span class="c004">foaf</span></span></em><em><span class="c011">:</span></em><em><span class="c011"><span class="c006">age</span></span></em><em><span class="c011"> 34 .        </span></em><em><span class="c011"><span class="c008"><em><span class="c011">#Passes as a :NoName1}*) \Passes{:NoName2</span></em></span></span></em></td></tr>
 </table></div></div>
@@ -2857,6 +2870,18 @@ and Solbrig</a>,<a href="bookHtml018.html#Slawek2015">2015</a> [<a href="bookHtm
 It is not related to the semantic web.</div></dd><dt class="dt-thefootnotes"><a id="note11" href="#text11">4</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://shex.io/extensions/Map/</div></dd><dt class="dt-thefootnotes"><a id="note12" href="#text12">5</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">See: http://shexspec.github.io/extensions/Test/</div></dd><dt class="dt-thefootnotes"><a id="note13" href="#text13">6</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Note that a value of 
 <code>-1</code> in 
 <code><span class="c006">max</span></code> means unbounded.</div></dd></dl>
+<footer>
+
+<iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fbook.validatingrdf.com%2F&width=100&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=8170400788" width="100" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+<a class="twitter-share-button" text="Validating RDF data book" href="https://twitter.com/intent/tweet?text=Validating%20RDF%20data%20book&?via=jelabra&hastags=shex,shacl,validatingrdfbook" data-size="large">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a51d2b6b0d22f0a"></script>
+
+
+</footer>  
 <hr>
 <a href="bookHtml009.html"><img src="previous_motif.gif" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
