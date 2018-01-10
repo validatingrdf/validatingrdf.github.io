@@ -1,9 +1,0 @@
-CHANGELOG
-==========
-
-08/01/2017 Repaired wrong link in info about the book.
-	   The right HTML link is http://book.validatingrdf.com
-05/01/2017 Changed code listings with non-ascii characters:
-            /España/Italy/, /Jamón/Leche/, /Automóvil/Auto/, /Käse/Tomaten/
-05/01/2017 Repaired errata found in printed book
-05/01/2017 Published first version of HTML book
